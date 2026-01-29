@@ -48,6 +48,8 @@ function App() {
   if (error) return <p style={{ color: 'red' }}>Erreur : {error}</p>;
 
   return (
+   <h1>Accueil</h1> 
+  )
     <div className="App" style={{ padding: '20px' }}>
       <h1>Liste des Films</h1>
       
