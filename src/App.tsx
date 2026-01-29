@@ -48,8 +48,9 @@ function App() {
   if (error) return <p style={{ color: 'red' }}>Erreur : {error}</p>;
 
   return (
+    <>
    <h1>Accueil</h1> 
-  )
+  
     <div className="App" style={{ padding: '20px' }}>
       <h1>Liste des Films</h1>
       
@@ -75,7 +76,8 @@ function App() {
       </div>
       
       {movies.length === 0 && <p>Aucun film trouvé dans la base de données.</p>}
-    </div>
+      </div>
+      </>
   );
 }
 
