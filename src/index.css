@@ -43,7 +43,7 @@ html, body {
 /* 4. Styles globaux (Titres, Liens, Boutons) */
 a {
   font-weight: 500;
-  color: white;
+  /* color: white; */
   text-decoration: inherit;
   transition: color 0.3s;
 }
