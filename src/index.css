@@ -1,49 +1,46 @@
 @import "tailwindcss";
 
-/* 1. Tes variables de couleurs (Thème)  */
+/* 1. Tes variables de couleurs (Thème) */
 @theme {
-  --color-deep-space: #050A14;  
+  --color-deep-space: #050A14;  /* Ton bleu très foncé principal */
   --color-mars-orange: #FF6600;
   --color-cyber-teal: #00C2CB;
-  --color-midnight: #07091D;   
-
+  --color-midnight: #07091D;    /* Ton bleu nuit (Footer) */
+  
   --font-sans: system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
-/* / 2. Le fond global "Bleu Partout" / */
+/* 2. Le fond global "Bleu Partout" */
 html, body {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100%;
-   /* / Important pour couvrir tout l'écran / */
+  height: 100%; /* Important pour couvrir tout l'écran */
   overflow-x: hidden;
-
-  /* / 👇 C'est ICI qu'on force le bleu partout / */
+  
+  /* 👇 C'est ICI qu'on force le bleu partout */
   background-color: var(--color-deep-space); 
-  color: white;
-   /* / Texte blanc par défaut pour qu'on puisse lire / */
-
+  color: white; /* Texte blanc par défaut pour qu'on puisse lire */
+  
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
 
-/* / 3. Configuration de React (#root) pour prendre toute la place / */
+/* 3. Configuration de React (#root) pour prendre toute la place */
 #root {
   width: 100% !important;
   max-width: 100% !important;
-  min-height: 100vh; 
-  /* / Toute la hauteur de la fenêtre / */
+  min-height: 100vh; /* Toute la hauteur de la fenêtre */
   display: flex;
   flex-direction: column;
   margin: 0 !important;
   padding: 0 !important;
-
-  /* / On s'assure que React hérite bien du fond bleu / */
+  
+  /* On s'assure que React hérite bien du fond bleu */
   background-color: var(--color-midnight);
 }
 
-/* / 4. Styles globaux (Titres, Liens, Boutons) / */
+/* 4. Styles globaux (Titres, Liens, Boutons) */
 a {
   font-weight: 500;
   color: white;
@@ -55,8 +52,7 @@ a:hover {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: white; 
-  /* / Tous les titres en blanc  */
+  color: white; /* Tous les titres en blanc */
 }
 
 button {

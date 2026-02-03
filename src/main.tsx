@@ -8,11 +8,13 @@ import { About } from './page/About.tsx'
 import Movie from './page/Movie.tsx'
 import Jury from './page/Jury.tsx'
 import Contact from './page/Contact.tsx'
+import { Footer } from './components/Footer.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
-    <Header/>
+      <Header />
+      
     <Routes>
         <Route path="/"element={<App />}/>
         <Route path='/about' element={<About/>}/>
@@ -21,5 +23,6 @@ createRoot(document.getElementById('root')!).render(
         <Route path='/contact' element={<Contact/>}/>
         </Routes>
     </BrowserRouter>
+    <Footer/>
   </StrictMode>,
 )
