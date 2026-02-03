@@ -5,7 +5,7 @@ import Contact from './page/Contact.tsx'
 import { Footer } from './components/Footer.tsx'
 import Movie from './page/Movie.tsx'
 import { Route, Routes } from 'react-router-dom'
-import Homepage from './page/Homepage.tsx'
+import HomePage from './page/HomePage.tsx'
 import './index.css'
   
   
@@ -16,7 +16,7 @@ import './index.css'
         <Header />
 
       <Routes>
-        <Route path="/" element={<Homepage/>} />
+        <Route path="/" element={<HomePage/>} />
         <Route path='/about' element={<About />} />
         <Route path='/movie' element={<Movie />} />
         <Route path='/jury' element={<Jury />} />
