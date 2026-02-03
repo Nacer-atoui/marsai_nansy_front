@@ -47,8 +47,7 @@ function App() {
   if (loading) return <p>Chargement des films...</p>;
   if (error) return <p style={{ color: 'red' }}>Erreur : {error}</p>;
 
-  return (
-    <>
+  return (<>
    <h1>Accueil</h1> 
   
     <div className="App" style={{ padding: '20px' }}>
@@ -76,9 +75,8 @@ function App() {
       </div>
       
       {movies.length === 0 && <p>Aucun film trouvé dans la base de données.</p>}
-      </div>
-      </>
-  );
+    </div>
+  </>);
 }
 
 export default App;

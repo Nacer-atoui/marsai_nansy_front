@@ -8,6 +8,7 @@ import { About } from './page/About.tsx'
 import Movie from './page/Movie.tsx'
 import Jury from './page/Jury.tsx'
 import Contact from './page/Contact.tsx'
+import HomePage from './page/HomePage.tsx'
 import { Footer } from './components/Footer.tsx'
 
 createRoot(document.getElementById('root')!).render(
