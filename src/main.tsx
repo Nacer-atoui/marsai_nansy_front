@@ -8,18 +8,19 @@ import { About } from './page/About.tsx'
 import Movie from './page/Movie.tsx'
 import Jury from './page/Jury.tsx'
 import Contact from './page/Contact.tsx'
+import HomePage from './page/HomePage.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
     <Header/>
     <Routes>
-        <Route path="/"element={<App />}/>
+        <Route path="/"element={<HomePage />}/>
         <Route path='/about' element={<About/>}/>
         <Route path='/movie' element={<Movie/>}/>
         <Route path='/jury' element={<Jury/>}/>
         <Route path='/contact' element={<Contact/>}/>
-        </Routes>
+      </Routes>
     </BrowserRouter>
   </StrictMode>,
 )
