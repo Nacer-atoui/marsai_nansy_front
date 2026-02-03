@@ -9,7 +9,7 @@ export function Header() {
   const closeMenu = () => setIsOpen(false);
 
   return (
-    <header className="m-7 relative z-50">
+    <header className="ml-7 mr-7 mt-3 relative z-50">
       <nav className="mb-5 flex items-center justify-between h-12">
         {/* --- 1. GAUCHE : LOGO --- */}
         <div
