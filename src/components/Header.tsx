@@ -5,22 +5,38 @@ export function Header() {
 
   return (
     <>
-      <header>
-        <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
+      <header className="m-7">
+        <nav className="mb-5">
           <ul className="flex lg:flex-1">
             <li>
-              <a className="m-10" onClick={() => Navigate('/')}>
-                
-                LOGO
-              </a>
+              <p
+                onClick={() => Navigate('/')}
+                className="cursor-pointer font-bold text-xl "
+              >
+                Mars<span className="text-mars-orange font-bold">AI</span>
+              </p>
             </li>
-            <li>
-              <NavLink to="/">Accueil</NavLink>
-              <NavLink to="/about">A propos</NavLink>
-              <NavLink to="/movie">Films</NavLink>
-              <NavLink to="/jury">Jury</NavLink>
-              <NavLink to="/contact">Contact</NavLink>
+            <li className="mx-auto">
+              <NavLink className="m-3" to="/">
+                Accueil
+              </NavLink>
+              <NavLink className="m-3" to="/about">
+                A propos
+              </NavLink>
+              <NavLink className="m-3" to="/movie">
+                Films
+              </NavLink>
+              <NavLink className="m-3" to="/jury">
+                Jury
+              </NavLink>
+              <NavLink className="m-3" to="/contact">
+                Contact
+              </NavLink>
             </li>
+            <select className="bg-midnight ">
+              <option value="Fr">🌐FR</option>
+              <option value="En">🌐EN</option>
+            </select>
           </ul>
         </nav>
       </header>
