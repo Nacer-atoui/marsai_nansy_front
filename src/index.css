@@ -2,10 +2,10 @@
 
 /* 1. Tes variables de couleurs (Thème) */
 @theme {
-  --color-deep-space: #050A14;  /* Ton bleu très foncé principal */
+  --color-deep-space: #050A14;  
   --color-mars-orange: #FF6600;
   --color-cyber-teal: #00C2CB;
-  --color-midnight: #07091D;    /* Ton bleu nuit (Footer) */
+  --color-midnight: #07091D;    
   
   --font-sans: system-ui, Avenir, Helvetica, Arial, sans-serif;
 }

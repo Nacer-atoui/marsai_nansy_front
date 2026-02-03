@@ -1,47 +1,69 @@
-import React from 'react';
-// Assure-toi d'importer useNavigate si tu utilises react-router
-// import { useNavigate } from 'react-router-dom'; 
+import { useNavigate, NavLink } from 'react-router-dom';
 
 export const Footer = () => {
-  // const navigate = useNavigate(); // Décommente si nécessaire
+  const navigate = useNavigate();
+
+ 
+  const getLinkClass = ({ isActive }: { isActive: boolean }) => {
+    return `text-sm transition-colors ${
+      isActive 
+        ? 'text-[#FF6600] font-medium'  
+        : 'text-gray-400 hover:text-[#FF6600]' 
+    }`;
+  };
 
   return (
-    // AJOUT DE 'w-full' ici pour forcer la largeur maximale
     <footer className="w-full bg-[#07091D] text-white py-12 border-t border-gray-800 text-center md:text-left">
-      
-      {/* Le conteneur interne garde le contenu centré et propre, 
-          mais le fond (footer) s'étendra bien partout */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           
-          {/* Colonne 1 : Marque */}
+          {/* Colonne 1 */}
           <div className="flex flex-col items-center md:items-start"> 
-            <a
-                // onClick={() => navigate('/')} // Utilise la variable du hook
-                href="/" // Simple lien pour l'exemple
-                className="cursor-pointer font-bold text-white text-xl" // CORRECTION: text-black -> text-white (sinon invisible sur fond foncé)
-              >
-                Mars<span className="text-[#FF6B00]">AI</span>
-              </a>
+             <div
+              onClick={() => navigate('/')}
+              className="cursor-pointer font-bold text-xl z-50 relative"
+            >
+              Mars<span className="text-[#FF6600] font-bold">AI</span>
+            </div>
             <p className="text-gray-400 text-sm leading-relaxed max-w-xs md:max-w-none mt-2">
               Le premier festival international de films créés avec l'intelligence artificielle.
             </p>
           </div>
 
-          {/* Colonne 2 : Navigation */}
+          {/* Colonne 2 */}
           <div className="flex flex-col items-center md:items-start">
             <h4 className="text-lg font-semibold mb-4 text-white">Navigation</h4>
             <ul className="space-y-2">
-              <li><a href="#hero" className="hover:text-[#FF6600] transition-colors text-sm text-gray-400">Accueil</a></li>
-              <li><a href="#about" className="hover:text-[#FF6600] transition-colors text-sm text-gray-400">À propos</a></li>
-              <li><a href="#selection" className="hover:text-[#FF6600] transition-colors text-sm text-gray-400">Sélection</a></li>
-              <li><a href="#jury" className="hover:text-[#FF6600] transition-colors text-sm text-gray-400">Jury</a></li>
-              <li><a href="#contact" className="hover:text-[#FF6600] transition-colors text-sm text-gray-400">Contact</a></li>
+              <li>
+                <NavLink to="/" className={getLinkClass}>
+                  Accueil
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/about" className={getLinkClass}>
+                  À propos
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/movie" className={getLinkClass}>
+                  Films
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/jury" className={getLinkClass}>
+                  Jury
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/contact" className={getLinkClass}>
+                  Contact
+                </NavLink>
+              </li>
             </ul>
           </div>
 
-          {/* Colonne 3 : Légal */}
+          {/* Colonne 3 */}
           <div className="flex flex-col items-center md:items-start">
             <h4 className="text-lg font-semibold mb-4 text-white">Légal</h4>
             <ul className="space-y-2">
