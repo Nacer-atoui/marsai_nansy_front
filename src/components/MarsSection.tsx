@@ -46,7 +46,7 @@ export default function MarsSection() {
   return (
     // CONTENEUR PRINCIPAL
     // bg-slate-900 : Fond très sombre pour le style "Cinéma/Tech"
-    <section className="bg-slate-900 py-20 px-4">
+    <section className="bg-[#07091D] py-20 px-4">
       <div className="max-w-7xl mx-auto">
         
         {/* EN-TÊTE DE LA SECTION */}
