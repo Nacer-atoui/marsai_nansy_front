@@ -13,7 +13,7 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="w-full bg-[#07091D] text-white py-12 border-t border-gray-800 text-center md:text-left">
+    <footer className="w-full bg-[#0B0F23] text-white py-12 border-t border-gray-800 text-center md:text-left">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
@@ -100,7 +100,7 @@ export const Footer = () => {
         </div>
 
         <div className="border-t border-gray-800 pt-8 mt-8">
-          <p className="text-gray-500 text-sm md:text-center">
+          <p className="text-gray-200 text-sm md:text-center">
             © 2025 MarsAI Festival. Tous droits réservés.
           </p>
         </div>
