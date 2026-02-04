@@ -1,9 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import i18n from '../i18n';
 
 export function Header() {
   const Navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+
+  const [lang, setLang] = useState(i18n.language);
+
+  useEffect(() => {
+    i18n.changeLanguage(lang);
+  }, [lang]);
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
@@ -90,9 +97,13 @@ export function Header() {
         {/* --- 3. DROITE : LANGUES + BURGER --- */}
         <div className="flex items-center gap-4 z-50">
           {/* Sélecteur de langue : Toujours visible, placé à GAUCHE du burger */}
-          <select className="bg-midnight border-none focus:ring-0 cursor-pointer text-sm lg:text-base">
-            <option value="Fr">🌐 FR</option>
-            <option value="En">🌐 EN</option>
+          <select
+            className="bg-midnight border-none focus:ring-0 cursor-pointer text-sm lg:text-base"
+            value={lang}
+            onChange={e => setLang(e.target.value)}
+          >
+            <option value="fr">🌐 FR</option>
+            <option value="en">🌐 EN</option>
           </select>
 
           {/* Bouton Burger (Mobile seulement) */}
