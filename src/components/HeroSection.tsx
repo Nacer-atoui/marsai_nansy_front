@@ -8,19 +8,19 @@ const counter = ({ days, hours, minutes, seconds, completed }: any) => {
   } else {
     return (
       <div className="flex gap-x-6 text-white justify-center">
-        <div className="flex flex-col items-center border-2 rounded-xl w-24 border-cyan-500/30 shadow-[0_0_15px_rgba(6,182,212,0.5)] p-3">
+        <div className="flex flex-col items-center border-2 rounded-xl w-24 border-[#00FFFF]/30 shadow-[0_0_15px_rgba(6,182,212,0.5)] p-3">
           <span className="text-4xl font-bold">{days}</span>
           <span className="text-sm uppercase text-white">Jours</span>
         </div>
-        <div className="flex flex-col items-center border-2 rounded-xl w-24 border-cyan-500/30 shadow-[0_0_15px_rgba(6,182,212,0.5)] p-3">
+        <div className="flex flex-col items-center border-2 rounded-xl w-24 border-[#00FFFF]/30 shadow-[0_0_15px_rgba(6,182,212,0.5)] p-3">
           <span className="text-4xl font-bold">{hours}</span>
           <span className="text-sm uppercase text-white">Heures</span>
         </div>
-        <div className="flex flex-col items-center border-2 rounded-xl w-24 border-cyan-500/30 shadow-[0_0_15px_rgba(6,182,212,0.5)] p-3">
+        <div className="flex flex-col items-center border-2 rounded-xl w-24 border-[#00FFFF]/30 shadow-[0_0_15px_rgba(6,182,212,0.5)] p-3">
           <span className="text-4xl font-bold">{minutes}</span>
           <span className="text-sm uppercase text-white">Min</span>
         </div>
-        <div className="flex flex-col items-center border-2 rounded-xl w-24 border-cyan-500/30 shadow-[0_0_15px_rgba(6,182,212,0.5)] p-3">
+        <div className="flex flex-col items-center border-2 rounded-xl w-24 border-[#00FFFF]/30 shadow-[0_0_15px_rgba(6,182,212,0.5)] p-3">
           <span className="text-4xl font-bold">{seconds}</span>
           <span className="text-sm uppercase text-white">Sec</span>
         </div>
