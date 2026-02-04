@@ -1,31 +1,28 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
 
-// Les traductions
+// 1. On importe les fichiers JSON qu'on vient de remplir
+import fr from './locales/fr/translation.json';
+import en from './locales/en/translation.json';
+
 const resources = {
-  en: {
-    translation: {
-      welcome: 'Welcome to React',
-      poop: 'poop',
-      jury: 'jury page',
-    },
-  },
   fr: {
-    translation: {
-      welcome: 'Bienvenue sur React',
-      poop: 'caca',
-      jury: 'page du jury',
-    },
+    translation: fr  // On branche le fichier FR
   },
+  en: {
+    translation: en  // On branche le fichier EN
+  }
 };
 
 i18n
-  .use(initReactI18next) // passe i18n à react-i18next
+  .use(LanguageDetector) // Pour détecter la langue du navigateur
+  .use(initReactI18next)
   .init({
     resources,
-    lng: 'fr', // langue par défaut
+    fallbackLng: 'fr', // Langue de secours
     interpolation: {
-      escapeValue: false, // react protège déjà contre les attaques XSS
+      escapeValue: false,
     },
   });
 

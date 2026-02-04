@@ -7,6 +7,7 @@ import Movie from './page/Movie.tsx'
 import { Route, Routes } from 'react-router-dom'
 import HomePage from './page/HomePage.tsx'
 import './index.css'
+import './i18n';
   
   
   
