@@ -1,26 +1,30 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import i18n from '../i18n';
+import { useTranslation } from 'react-i18next'; // 1. On importe le hook
 
 export function Header() {
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
-  const [lang, setLang] = useState(i18n.language);
-
-  useEffect(() => {
-    i18n.changeLanguage(lang);
-  }, [lang]);
+  // 2. On récupère t (pour traduire) et i18n (pour la langue actuelle)
+  // Plus besoin de votre useState/useEffect manuel !
+  const { t, i18n } = useTranslation();
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
+
+  // Fonction pour changer la langue proprement
+  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newLang = e.target.value;
+    i18n.changeLanguage(newLang);
+  };
 
   return (
     <header className="ml-7 mr-7 mt-3 relative z-50">
       <nav className="mb-5 flex items-center justify-between h-12">
         {/* --- 1. GAUCHE : LOGO --- */}
         <div
-          onClick={() => Navigate('/')}
+          onClick={() => navigate('/')}
           className="cursor-pointer font-bold text-xl z-50 relative"
         >
           Mars<span className="text-mars-orange font-bold">AI</span>
@@ -44,7 +48,7 @@ export function Header() {
                 }
                 to="/"
               >
-                Accueil
+                {t('nav.home')}
               </NavLink>
             </li>
             <li>
@@ -55,7 +59,7 @@ export function Header() {
                 }
                 to="/about"
               >
-                A propos
+                {t('nav.about')}
               </NavLink>
             </li>
             <li>
@@ -66,7 +70,7 @@ export function Header() {
                 }
                 to="/movie"
               >
-                Films
+                {t('nav.movies')}
               </NavLink>
             </li>
             <li>
@@ -77,7 +81,7 @@ export function Header() {
                 }
                 to="/jury"
               >
-                Jury
+                {t('nav.jury')}
               </NavLink>
             </li>
             <li>
@@ -88,7 +92,7 @@ export function Header() {
                 }
                 to="/contact"
               >
-                Contact
+                {t('nav.contact')}
               </NavLink>
             </li>
           </ul>
@@ -96,11 +100,12 @@ export function Header() {
 
         {/* --- 3. DROITE : LANGUES + BURGER --- */}
         <div className="flex items-center gap-4 z-50">
-          {/* Sélecteur de langue : Toujours visible, placé à GAUCHE du burger */}
+          {/* Sélecteur de langue */}
           <select
             className="bg-midnight border-none focus:ring-0 cursor-pointer text-sm lg:text-base"
-            value={lang}
-            onChange={e => setLang(e.target.value)}
+            // On s'assure que la valeur correspond toujours à la langue actuelle (fr ou en)
+            value={i18n.language.split('-')[0]} 
+            onChange={handleLanguageChange}
           >
             <option value="fr">🌐 FR</option>
             <option value="en">🌐 EN</option>

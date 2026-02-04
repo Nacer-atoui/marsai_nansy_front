@@ -7,6 +7,8 @@ import Movie from './page/Movie.tsx'
 import { Route, Routes } from 'react-router-dom'
 import HomePage from './page/HomePage.tsx'
 import './index.css'
+import './i18n';
+  
 import FilmDetail from './page/FilmDetail.tsx'
   
   
@@ -22,7 +24,6 @@ import FilmDetail from './page/FilmDetail.tsx'
         <Route path='/jury' element={<Jury />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='/filmdetail' element={<FilmDetail></FilmDetail>} />
-           
       </Routes>
 
         <Footer />

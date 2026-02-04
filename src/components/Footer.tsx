@@ -1,9 +1,15 @@
 import { useNavigate, NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export const Footer = () => {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
 
- 
+  // CORRECTION ICI : J'ai ajouté ": string" pour que TypeScript soit content
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+  };
+
   const getLinkClass = ({ isActive }: { isActive: boolean }) => {
     return `text-sm transition-colors ${
       isActive 
@@ -18,7 +24,7 @@ export const Footer = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           
-          {/* Colonne 1 */}
+          {/* Colonne 1 : Logo & Description */}
           <div className="flex flex-col items-center md:items-start"> 
              <div
               onClick={() => navigate('/')}
@@ -27,55 +33,41 @@ export const Footer = () => {
               Mars<span className="text-[#FF6600] font-bold">AI</span>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed max-w-xs md:max-w-none mt-2">
-              Le premier festival international de films créés avec l'intelligence artificielle.
+              {t('footer.description')}
             </p>
           </div>
 
-          {/* Colonne 2 */}
+          {/* Colonne 2 : Navigation */}
           <div className="flex flex-col items-center md:items-start">
-            <h4 className="text-lg font-semibold mb-4 text-white">Navigation</h4>
+            <h4 className="text-lg font-semibold mb-4 text-white">
+              {t('footer.nav_title')}
+            </h4>
             <ul className="space-y-2">
-              <li>
-                <NavLink to="/" className={getLinkClass}>
-                  Accueil
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/about" className={getLinkClass}>
-                  À propos
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/movie" className={getLinkClass}>
-                  Films
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/jury" className={getLinkClass}>
-                  Jury
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/contact" className={getLinkClass}>
-                  Contact
-                </NavLink>
-              </li>
+              <li><NavLink to="/" className={getLinkClass}>{t('nav.home')}</NavLink></li>
+              <li><NavLink to="/about" className={getLinkClass}>{t('nav.about')}</NavLink></li>
+              <li><NavLink to="/movie" className={getLinkClass}>{t('nav.movies')}</NavLink></li>
+              <li><NavLink to="/jury" className={getLinkClass}>{t('nav.jury')}</NavLink></li>
+              <li><NavLink to="/contact" className={getLinkClass}>{t('nav.contact')}</NavLink></li>
             </ul>
           </div>
 
-          {/* Colonne 3 */}
+          {/* Colonne 3 : Légal */}
           <div className="flex flex-col items-center md:items-start">
-            <h4 className="text-lg font-semibold mb-4 text-white">Légal</h4>
+            <h4 className="text-lg font-semibold mb-4 text-white">
+              {t('footer.legal_title')}
+            </h4>
             <ul className="space-y-2">
-              <li><a href="#" className="hover:text-[#FF6600] transition-colors text-sm text-gray-400">Mentions légales</a></li>
-              <li><a href="#" className="hover:text-[#FF6600] transition-colors text-sm text-gray-400">Politique de confidentialité</a></li>
-              <li><a href="#" className="hover:text-[#FF6600] transition-colors text-sm text-gray-400">Conditions d'utilisation</a></li>
+              <li><a href="#" className="hover:text-[#FF6600] transition-colors text-sm text-gray-400">{t('footer.legal.mentions')}</a></li>
+              <li><a href="#" className="hover:text-[#FF6600] transition-colors text-sm text-gray-400">{t('footer.legal.privacy')}</a></li>
+              <li><a href="#" className="hover:text-[#FF6600] transition-colors text-sm text-gray-400">{t('footer.legal.terms')}</a></li>
             </ul>
           </div>
 
           {/* Colonne 4 : Contact */}
           <div className="flex flex-col items-center md:items-start">
-            <h4 className="text-lg font-semibold mb-4 text-white">Contact</h4>
+            <h4 className="text-lg font-semibold mb-4 text-white">
+              {t('footer.contact_title')}
+            </h4>
             <ul className="space-y-3 text-sm text-gray-400">
               
               <li className="flex items-center justify-center md:justify-start gap-2">
@@ -99,10 +91,27 @@ export const Footer = () => {
 
         </div>
 
-        <div className="border-t border-gray-800 pt-8 mt-8">
+        {/* Footer bas de page + Switcher Langue */}
+        <div className="border-t border-gray-800 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-200 text-sm md:text-center">
-            © 2025 MarsAI Festival. Tous droits réservés.
+            {t('footer.copyright')}
           </p>
+
+          <div className="flex gap-4">
+            <button 
+              onClick={() => changeLanguage('fr')} 
+              className={`text-sm ${i18n.language === 'fr' ? 'text-[#FF6600] font-bold' : 'text-gray-400'}`}
+            >
+              FR
+            </button>
+            <span className="text-gray-600">|</span>
+            <button 
+              onClick={() => changeLanguage('en')} 
+              className={`text-sm ${i18n.language === 'en' ? 'text-[#FF6600] font-bold' : 'text-gray-400'}`}
+            >
+              EN
+            </button>
+          </div>
         </div>
 
       </div>
