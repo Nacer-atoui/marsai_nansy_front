@@ -88,8 +88,8 @@ export default function HeroSection({ config }: HeroProps) {
             <Countdown date={EventDate} renderer={counter} />
           </div>
           <button className="rounded-full p-1.5 px-10 mt-8 bg-mars-orange hover:opacity-90">
-              Participez en envoyant votre film !
-            </button>
+            Participez en envoyant votre film !
+          </button>
         </div>
       </div>
     </div>
