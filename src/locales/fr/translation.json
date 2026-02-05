@@ -1,0 +1,21 @@
+{
+  "footer": {
+    "description": "Le premier festival international de films créés avec l'intelligence artificielle.",
+    "nav_title": "Navigation",
+    "legal_title": "Légal",
+    "contact_title": "Contact",
+    "copyright": "© 2025 MarsAI Festival. Tous droits réservés.",
+    "legal": {
+      "mentions": "Mentions légales",
+      "privacy": "Politique de confidentialité",
+      "terms": "Conditions d'utilisation"
+    }
+  },
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "movies": "Films",
+    "jury": "Jury",
+    "contact": "Contact"
+  }
+}
