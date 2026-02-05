@@ -3,7 +3,7 @@ import axios from 'axios';
 import HeroSection from '../components/HeroSection';
 import MarsSection from '../components/MarsSection';
 import FestivalObjectif from '../components/FestivalObjectif';
-import EventFormat from '../components/EventFormat'
+import AboutEvent from '../components/AboutEvent'
 
 export default function HomePage() {
   const [siteConfig, setSiteConfig] = useState<any>(null);
@@ -26,7 +26,7 @@ export default function HomePage() {
       <HeroSection config={siteConfig} />
       <MarsSection config={siteConfig} />
       <FestivalObjectif config={siteConfig} />
-      <EventFormat />
+      <AboutEvent/>
       {/* On rajoutera les autres (MarsSection, etc.) une fois que le Hero marche */}
     </>
   );
