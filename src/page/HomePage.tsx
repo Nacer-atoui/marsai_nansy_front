@@ -1,8 +1,16 @@
+<<<<<<< HEAD
+import React from 'react'
+import HeroSection from '../components/HeroSection'
+import MarsSection from '../components/MarsSection'
+import FestivalObjectif from '../components/FestivalObjectif'
+import AboutEvent from '../components/AboutEvent'
+=======
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import HeroSection from '../components/HeroSection';
 import MarsSection from '../components/MarsSection';
 import FestivalObjectif from '../components/FestivalObjectif';
+>>>>>>> 3637a9b9d384c6449b1447a67420e04f520275a5
 
 export default function HomePage() {
   const [siteConfig, setSiteConfig] = useState<any>(null);
@@ -21,11 +29,18 @@ export default function HomePage() {
 
   return (
     <>
+<<<<<<< HEAD
+        <HeroSection />
+        <MarsSection />
+        <FestivalObjectif/>
+        <AboutEvent/>
+=======
       {/* On passe l'objet siteConfig au composant HeroSection */}
       <HeroSection config={siteConfig} />
       <MarsSection config={siteConfig} />
       <FestivalObjectif config={siteConfig} />
       {/* On rajoutera les autres (MarsSection, etc.) une fois que le Hero marche */}
+>>>>>>> 3637a9b9d384c6449b1447a67420e04f520275a5
     </>
   );
 }
