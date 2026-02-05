@@ -4,6 +4,7 @@ import HeroSection from '../components/HeroSection';
 import MarsSection from '../components/MarsSection';
 import FestivalObjectif from '../components/FestivalObjectif';
 import AboutEvent from '../components/AboutEvent'
+import Sponsors from '../components/Sponsors';
 
 export default function HomePage() {
   const [siteConfig, setSiteConfig] = useState<any>(null);
@@ -27,6 +28,7 @@ export default function HomePage() {
       <MarsSection config={siteConfig} />
       <FestivalObjectif config={siteConfig} />
       <AboutEvent/>
+      <Sponsors/>
       {/* On rajoutera les autres (MarsSection, etc.) une fois que le Hero marche */}
     </>
   );
