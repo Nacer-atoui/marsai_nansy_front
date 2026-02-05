@@ -7,7 +7,9 @@ import Movie from './page/Movie.tsx'
 import { Route, Routes } from 'react-router-dom'
 import HomePage from './page/HomePage.tsx'
 import './index.css'
+import './i18n';
   
+import FilmDetail from './page/FilmDetail.tsx'
   
   
   export default function App() {
@@ -21,6 +23,7 @@ import './index.css'
         <Route path='/movie' element={<Movie />} />
         <Route path='/jury' element={<Jury />} />
         <Route path='/contact' element={<Contact />} />
+        <Route path='/filmdetail' element={<FilmDetail></FilmDetail>} />
       </Routes>
 
         <Footer />
