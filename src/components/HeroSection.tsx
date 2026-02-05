@@ -58,7 +58,7 @@ export default function HeroSection({ config }: HeroProps) {
 
   return (
     <div className="h-screen bg-[url('/bg_hero.avif')] bg-cover">
-      <div className="flex h-screen items-center justify-center flex-col gap-y-10 font-display text-white">
+      <div className="flex h-screen items-center justify-around  flex-col font-display text-white">
         <div className="flex">
           <h1 className="text-7xl">MARS</h1>
           <p
@@ -68,29 +68,31 @@ export default function HeroSection({ config }: HeroProps) {
             AI
           </p>
         </div>
+        
+        <div className="flex-col space-y-10">
+          <p className="text-6xl text-center">
+            {isEn ? config.hero_subtitle_en : config.hero_subtitle_fr}
+          </p>
 
-        <p className="text-4xl text-center">
-          {isEn ? config.hero_subtitle_en : config.hero_subtitle_fr}
-        </p>
-
-        <p
-          className="text-2xl text-center"
-          style={{ color: config.primary_color || '#f97316' }}
-        >
-          {isEn ? config.intro_text_en : config.intro_text_fr}
-        </p>
-
+          <p
+            className="text-4xl text-center"
+            style={{ color: config.primary_color || '#f97316' }}
+          >
+            {isEn ? config.intro_text_en : config.intro_text_fr}
+          </p>
+        </div>
         <div className="font-display w-full text-center">
           <p className="text-4xl mb-5">
             {isEn ? 'Event starts in:' : 'Début de l’évènement dans :'}
           </p>
-          <div className="flex justify-around items-center">
+          <div className="">
             <Countdown date={EventDate} renderer={counter} />
           </div>
           <button className="rounded-full p-1.5 px-10 mt-8 bg-mars-orange hover:opacity-90">
             Participez en envoyant votre film !
           </button>
         </div>
+        
       </div>
     </div>
   );
