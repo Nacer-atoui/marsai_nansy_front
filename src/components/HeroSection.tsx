@@ -17,7 +17,7 @@ export default function HeroSection({ config }: HeroProps) {
     if (completed) {
       return (
         <span className="text-mars-orange">
-          {isEn ? "The festival has started!" : "Le festival a commencé !"}
+          {isEn ? 'The festival has started!' : 'Le festival a commencé !'}
         </span>
       );
     } else {
@@ -27,28 +27,28 @@ export default function HeroSection({ config }: HeroProps) {
           <div className="flex flex-col items-center border-2 rounded-xl w-24 border-[#00FFFF]/30 shadow-[0_0_15px_rgba(6,182,212,0.5)] p-3">
             <span className="text-4xl font-bold">{days}</span>
             <span className="text-sm uppercase text-white">
-              {isEn ? "Days" : "Jours"}
+              {isEn ? 'Days' : 'Jours'}
             </span>
           </div>
           {/* Bloc Heures */}
           <div className="flex flex-col items-center border-2 rounded-xl w-24 border-[#00FFFF]/30 shadow-[0_0_15px_rgba(6,182,212,0.5)] p-3">
             <span className="text-4xl font-bold">{hours}</span>
             <span className="text-sm uppercase text-white">
-              {isEn ? "Hours" : "Heures"}
+              {isEn ? 'Hours' : 'Heures'}
             </span>
           </div>
           {/* Bloc Minutes */}
           <div className="flex flex-col items-center border-2 rounded-xl w-24 border-[#00FFFF]/30 shadow-[0_0_15px_rgba(6,182,212,0.5)] p-3">
             <span className="text-4xl font-bold">{minutes}</span>
             <span className="text-sm uppercase text-white">
-              {isEn ? "Min" : "Min"}
+              {isEn ? 'Min' : 'Min'}
             </span>
           </div>
           {/* Bloc Secondes */}
           <div className="flex flex-col items-center border-2 rounded-xl w-24 border-[#00FFFF]/30 shadow-[0_0_15px_rgba(6,182,212,0.5)] p-3">
             <span className="text-4xl font-bold">{seconds}</span>
             <span className="text-sm uppercase text-white">
-              {isEn ? "Sec" : "Sec"}
+              {isEn ? 'Sec' : 'Sec'}
             </span>
           </div>
         </div>
@@ -57,29 +57,40 @@ export default function HeroSection({ config }: HeroProps) {
   };
 
   return (
-    <div className="h-screen bg-[url('/bg_hero.png')] bg-cover">
-      <div className="flex h-screen items-center justify-center flex-col gap-y-15 font-display text-white">
-        
+    <div className="h-screen bg-[url('/bg_hero.avif')] bg-cover">
+      <div className="flex h-screen items-center justify-center flex-col gap-y-10 font-display text-white">
         <div className="flex">
           <h1 className="text-7xl">MARS</h1>
-          <p className="text-7xl" style={{ color: config.primary_color || '#f97316' }}>AI</p>
+          <p
+            className="text-7xl"
+            style={{ color: config.primary_color || '#f97316' }}
+          >
+            AI
+          </p>
         </div>
 
-        <p className="text-4xl text-center px-4">
+        <p className="text-4xl text-center">
           {isEn ? config.hero_subtitle_en : config.hero_subtitle_fr}
         </p>
 
-        <p className="text-2xl text-center px-4" style={{ color: config.primary_color || '#f97316' }}>
+        <p
+          className="text-2xl text-center"
+          style={{ color: config.primary_color || '#f97316' }}
+        >
           {isEn ? config.intro_text_en : config.intro_text_fr}
         </p>
 
-        <div className="text-4xl font-display text-center mt-8">
+        <div className="font-display w-full text-center">
           <p className="text-4xl mb-5">
-            {isEn ? "Event starts in:" : "Début de l’évènement dans :"}
+            {isEn ? 'Event starts in:' : 'Début de l’évènement dans :'}
           </p>
-          <Countdown date={EventDate} renderer={counter} />
+          <div className="flex justify-around items-center">
+            <Countdown date={EventDate} renderer={counter} />
+          </div>
+          <button className="rounded-full p-1.5 px-10 mt-8 bg-mars-orange hover:opacity-90">
+              Participez en envoyant votre film !
+            </button>
         </div>
-
       </div>
     </div>
   );
