@@ -12,12 +12,12 @@ export default function NightEvent() {
                 <div className='flex gap-10 '>
                     <div className="flex mb-6 flex-col w-[50%] gap-6">
                         <h2 className="text-white text-4xl md:text-[100px] font-bold">MARS<span className='text-mars-orange'>AI</span> <br />NIGHT</h2>
-                        <p className="text-gray-400 mt-4 text-lg md:text-2xl max-w-3xl">
+                        <p className=" mt-4 text-lg md:text-2xl max-w-3xl">
                             Fête Électro mêlant IA et futurs souhaitables. Une expérience immersive sonore et visuelle. 
                         </p>
                     </div>
                     <div className="flex flex-col md:flex-row gap-6 w-[50%] ">
-                        <div className="flex-1 bg-gray-900 border border-slate-700 rounded-xl p-6 text-gray-500">
+                        <div className="flex-1 bg-gray-900 border border-slate-700 rounded-xl p-6 ">
                             <div className='flex items-center flex-col justify-center gap-10 p-5'>
                                 <img src="/public/calendrier.png" alt="Icone d'un calendrier" className='w-20'/>
                                 <p className='text-7xl font-bold'>13 JUIN</p>
