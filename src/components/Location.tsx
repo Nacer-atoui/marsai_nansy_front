@@ -14,11 +14,14 @@ export default function Location() {
             <h1 className="text-mars-orange">LA</h1>
             <h1>PLATEFORME</h1>
           </div>
-            <p className='mt-20 text-xs'>(EX DOCKS DES SUDS)</p>
-            <div className='bg-midnight rounded-2xl mt-20 p-10'>
-                <h2 className='py-2 text-mars-orange text-xl '>SALLE DES SUCRES</h2>
-                <p>Futur sanctuaire des conférences et de la remise des prix de Mars.A.I. Un espace majestueux alliant patrimoine et technologie.</p>
-            </div>
+          <p className="mt-20 text-xs">(EX DOCKS DES SUDS)</p>
+          <div className="bg-midnight rounded-2xl mt-20 p-10">
+            <h2 className="py-2 text-mars-orange text-xl ">SALLE DES SUCRES</h2>
+            <p>
+              Futur sanctuaire des conférences et de la remise des prix de
+              Mars.A.I. Un espace majestueux alliant patrimoine et technologie.
+            </p>
+          </div>
         </div>
         {/* div coté droit */}
         <div className="mx-136">
@@ -26,6 +29,13 @@ export default function Location() {
             4 000 m² d'espaces modulables dans le centre de Marseille, au cœur
             de l'écosystème numérique.
           </p>
+          <div className="bg-midnight rounded-2xl mt-20 p-10">
+            <h2 className="py-2 text-mars-orange text-xl">SALLE DES SUCRES</h2>
+            <p>
+              Futur sanctuaire des conférences et de la remise des prix de
+              Mars.A.I. Un espace majestueux alliant patrimoine et technologie.
+            </p>
+          </div>
         </div>
       </div>
     </section>
