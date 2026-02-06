@@ -10,9 +10,14 @@ i18n
   .init({
     fallbackLng: 'fr',
     interpolation: { escapeValue: false },
+    
+    // Déclare les deux fichiers ici
+    ns: ['translation', 'common'], 
+    defaultNS: 'translation',
+
     backend: {
-      // Va chercher dans frontend/public/locales/
-      loadPath: '/locales/{{lng}}/translation.json',
+      // Le {{ns}} permet de charger soit translation.json, soit common.json
+      loadPath: '/locales/{{lng}}/{{ns}}.json',
     },
   });
 

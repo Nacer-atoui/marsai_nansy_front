@@ -25,7 +25,7 @@ export function Header() {
           Mars<span className="text-mars-orange font-bold">AI</span>
         </div>
 
-        {/* --- 2. CENTRE : NAVIGATION (Desktop) --- */}
+        {/* --- 2. CENTRE : NAVIGATION --- */}
         <div
           className={`
           fixed inset-0 bg-midnight z-40 flex flex-col justify-center items-center transition-transform duration-300 ease-in-out
@@ -38,66 +38,56 @@ export function Header() {
             <li>
               <NavLink
                 onClick={closeMenu}
-                className={({ isActive }) =>
-                  isActive ? 'text-mars-orange' : 'hover:text-mars-orange'
-                }
+                className={({ isActive }) => isActive ? 'text-mars-orange' : 'hover:text-mars-orange'}
                 to="/"
               >
-                {/* CHANGÉ : nav_home au lieu de nav.home */}
-                {t('nav_home')}
+                {/* On précise le namespace 'common' et le chemin 'nav.home' */}
+                {t('common:nav.home')}
               </NavLink>
             </li>
             <li>
               <NavLink
                 onClick={closeMenu}
-                className={({ isActive }) =>
-                  isActive ? 'text-mars-orange' : 'hover:text-mars-orange'
-                }
+                className={({ isActive }) => isActive ? 'text-mars-orange' : 'hover:text-mars-orange'}
                 to="/about"
               >
-                {t('nav_about')}
+                {t('common:nav.about')}
               </NavLink>
             </li>
             <li>
               <NavLink
                 onClick={closeMenu}
-                className={({ isActive }) =>
-                  isActive ? 'text-mars-orange' : 'hover:text-mars-orange'
-                }
+                className={({ isActive }) => isActive ? 'text-mars-orange' : 'hover:text-mars-orange'}
                 to="/movie"
               >
-                {t('nav_movies')}
+                {t('common:nav.movies')}
               </NavLink>
             </li>
             <li>
               <NavLink
                 onClick={closeMenu}
-                className={({ isActive }) =>
-                  isActive ? 'text-mars-orange' : 'hover:text-mars-orange'
-                }
+                className={({ isActive }) => isActive ? 'text-mars-orange' : 'hover:text-mars-orange'}
                 to="/jury"
               >
-                {t('nav_jury')}
+                {t('common:nav.jury')}
               </NavLink>
             </li>
             <li>
               <NavLink
                 onClick={closeMenu}
-                className={({ isActive }) =>
-                  isActive ? 'text-mars-orange' : 'hover:text-mars-orange'
-                }
+                className={({ isActive }) => isActive ? 'text-mars-orange' : 'hover:text-mars-orange'}
                 to="/contact"
               >
-                {t('nav_contact')}
+                {t('common:nav.contact')}
               </NavLink>
             </li>
           </ul>
         </div>
 
-        {/* --- 3. DROITE : LANGUES + BURGER --- */}
+        {/* --- 3. DROITE : LANGUES --- */}
         <div className="flex items-center gap-4 z-50">
           <select
-            className="bg-midnight border-none focus:ring-0 cursor-pointer text-sm lg:text-base text-white"
+            className="bg-midnight border-none focus:ring-0 cursor-pointer text-sm lg:text-base text-white outline-none"
             value={i18n.language.split('-')[0]} 
             onChange={handleLanguageChange}
           >
@@ -105,10 +95,7 @@ export function Header() {
             <option value="en">🌐 EN</option>
           </select>
 
-          <button
-            onClick={toggleMenu}
-            className="lg:hidden text-white focus:outline-none ml-2"
-          >
+          <button onClick={toggleMenu} className="lg:hidden text-white focus:outline-none ml-2">
             {isOpen ? (
               <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
