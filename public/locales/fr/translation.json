@@ -47,5 +47,8 @@
   "join_challenge": "PARTICIPER",
   "sponsors_label": "Nos partenaires",
   "sponsors_title_part1": "Ils soutiennent ",
-  "sponsors_title_highlight": "le futur"
+  "sponsors_title_highlight": "le futur",
+  "btn_participate": "PARTICIPER AU DÉFI",
+  "btn_reserve": "RÉSERVER MA PLACE",
+  "btn_view_program": "DÉCOUVRIR LE PROGRAMME"
 }
