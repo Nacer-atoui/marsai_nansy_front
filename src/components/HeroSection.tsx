@@ -33,11 +33,11 @@ export default function HeroSection({ config }: HeroProps) {
           </div>
           <div className="flex flex-col items-center border-2 rounded-xl w-24 border-[#00FFFF]/30 shadow-[0_0_15px_rgba(6,182,212,0.5)] p-3">
             <span className="text-4xl font-bold">{minutes}</span>
-            <span className="text-sm uppercase text-white">Min</span>
+            <span className="text-sm uppercase text-white">{t('Min', { defaultValue: 'Minutes' })}</span>
           </div>
           <div className="flex flex-col items-center border-2 rounded-xl w-24 border-[#00FFFF]/30 shadow-[0_0_15px_rgba(6,182,212,0.5)] p-3">
             <span className="text-4xl font-bold">{seconds}</span>
-            <span className="text-sm uppercase text-white">Sec</span>
+            <span className="text-sm uppercase text-white">{t('Sec', { defaultValue: 'Secondes' })}</span>
           </div>
         </div>
       );
@@ -46,30 +46,36 @@ export default function HeroSection({ config }: HeroProps) {
 
   return (
     <div className="h-screen bg-[url('/bg_hero.png')] bg-cover">
-      {/* On utilise font-montserrat pour s'assurer que c'est bien la bonne police */}
-      <div className="flex h-screen items-center justify-center flex-col gap-y-15 text-white font-montserrat">
+      <div className="flex h-screen items-center justify-center flex-col gap-y-10 text-white font-montserrat">
         
-        {/* TITRE : Structure originale avec Montserrat */}
+        {/* TITRE */}
         <div className="flex">
-          <h1 className="text-7xl">MARS</h1>
-          <p className="text-7xl" style={{ color: config.primary_color || '#f97316' }}>AI</p>
+          <h1 className="text-7xl font-bold">MARS</h1>
+          <p className="text-7xl font-bold" style={{ color: config.primary_color || '#f97316' }}>AI</p>
         </div>
 
-        <p className="text-4xl text-center px-4">
-          {t('hero_subtitle')}
-        </p>
+        {/* TEXTES TRADUITS VIA I18NEXT */}
+        <div className="flex flex-col gap-y-5 text-center px-4">
+          <p className="text-5xl font-bold">
+            {t('hero_subtitle')}
+          </p>
+          <p className="text-2xl" style={{ color: config.primary_color || '#f97316' }}>
+            {t('intro_text')}
+          </p>
+        </div>
 
-        <p className="text-2xl text-center px-4" style={{ color: config.primary_color || '#f97316' }}>
-          {t('intro_text')}
-        </p>
-
-        <div className="text-4xl text-center mt-8">
+        {/* COMPTE À REBOURS */}
+        <div className="text-center mt-8">
           <p className="text-4xl mb-5">
             {t('event_starts_in', { defaultValue: 'Début de l’évènement dans :' })}
           </p>
           <Countdown date={EventDate} renderer={counter} />
+          
+          <button className="rounded-full p-3 px-10 mt-10 bg-mars-orange hover:opacity-90 font-bold">
+            {t('participate_button', { defaultValue: 'Participez en envoyant votre film !' })}
+          </button>
         </div>
-
+        
       </div>
     </div>
   );
