@@ -45,7 +45,7 @@ export default function AboutEvent() {
         </div>
 
         {/* GRILLE : PROJECTION & WORKSHOPS */}
-        <div className="flex flex-col md:flex-row gap-5 justify-between mt-10">
+        <div className="flex flex-col md:flex-row gap-10 justify-between mt-10">
           <div className="border-3 bg-section-light w-full md:w-[50%] border-[#00FFFF]/30 shadow-[0_0_15px_rgba(0,255,255,0.5)] rounded-xl p-10">
             <img className="w-10" src="projection.png" alt="projection" />
             <h3 className="font-bold text-[32px] mt-5 mb-5 uppercase">
