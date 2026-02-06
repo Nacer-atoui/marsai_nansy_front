@@ -6,6 +6,7 @@ import FestivalObjectif from '../components/FestivalObjectif';
 import AboutEvent from '../components/AboutEvent'
 import Sponsors from '../components/Sponsors';
 import EventFormat from '../components/EventFormat';
+import NightEvent from '../components/NightEvent';
 
 export default function HomePage() {
   const [siteConfig, setSiteConfig] = useState<any>(null);
@@ -30,6 +31,7 @@ export default function HomePage() {
       <FestivalObjectif config={siteConfig} />
       <EventFormat />
       <AboutEvent/>
+      <NightEvent/>
       <Sponsors/>
       {/* On rajoutera les autres (MarsSection, etc.) une fois que le Hero marche */}
     </>
