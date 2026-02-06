@@ -8,7 +8,13 @@ export default function EventFormat() {
     <section className="bg-[#07091D] py-20 px-4">
       <div className="max-w-7xl mx-auto">
             {/* Titre et Sous-titre traduits */}
-            <H2 texte={t('format_title', { defaultValue: 'Format de la sélection' })} />
+            {/* <H2 texte={t('format_title', { defaultValue: 'Format de la sélection' })} /> */}
+            <h2 className="text-3xl md:text-5xl font-bold text-white uppercase tracking-wider">
+              {t('format_title', { defaultValue: 'Format de la' })}
+              <span className="text-mars-orange">
+                {t('format_title_part_2', { defaultValue: 'sélection' })}
+              </span>
+            </h2>
             <p className="text-gray-400 mt-4 max-w-2xl text-[25px]">
               {t('format_subtitle', { defaultValue: 'Le parcours des oeuvres' })}
             </p>
