@@ -56,9 +56,9 @@ a:hover {
   color: var(--color-mars-orange);
 }
 
-h1, h2, h3, h4, h5, h6 {
+/* h1, h2, h3, h4, h5, h6 {
   color: white; /* Tous les titres en blanc */
-}
+ */
 
 button {
   cursor: pointer;
