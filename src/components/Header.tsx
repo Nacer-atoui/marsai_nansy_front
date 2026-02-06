@@ -1,26 +1,21 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next'; // 1. On importe le hook
+import { useTranslation } from 'react-i18next';
 
 export function Header() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-
-  // 2. On récupère t (pour traduire) et i18n (pour la langue actuelle)
-  // Plus besoin de votre useState/useEffect manuel !
   const { t, i18n } = useTranslation();
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
 
-  // Fonction pour changer la langue proprement
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newLang = e.target.value;
-    i18n.changeLanguage(newLang);
+    i18n.changeLanguage(e.target.value);
   };
 
   return (
-    <header className="ml-7 mr-7 mt-3 relative z-50">
+    <header className="ml-7 mr-7 mt-3 relative z-50 text-white">
       <nav className="mb-5 flex items-center justify-between h-12">
         {/* --- 1. GAUCHE : LOGO --- */}
         <div
@@ -48,7 +43,8 @@ export function Header() {
                 }
                 to="/"
               >
-                {t('nav.home')}
+                {/* CHANGÉ : nav_home au lieu de nav.home */}
+                {t('nav_home')}
               </NavLink>
             </li>
             <li>
@@ -59,7 +55,7 @@ export function Header() {
                 }
                 to="/about"
               >
-                {t('nav.about')}
+                {t('nav_about')}
               </NavLink>
             </li>
             <li>
@@ -70,7 +66,7 @@ export function Header() {
                 }
                 to="/movie"
               >
-                {t('nav.movies')}
+                {t('nav_movies')}
               </NavLink>
             </li>
             <li>
@@ -81,7 +77,7 @@ export function Header() {
                 }
                 to="/jury"
               >
-                {t('nav.jury')}
+                {t('nav_jury')}
               </NavLink>
             </li>
             <li>
@@ -92,7 +88,7 @@ export function Header() {
                 }
                 to="/contact"
               >
-                {t('nav.contact')}
+                {t('nav_contact')}
               </NavLink>
             </li>
           </ul>
@@ -100,10 +96,8 @@ export function Header() {
 
         {/* --- 3. DROITE : LANGUES + BURGER --- */}
         <div className="flex items-center gap-4 z-50">
-          {/* Sélecteur de langue */}
           <select
-            className="bg-midnight border-none focus:ring-0 cursor-pointer text-sm lg:text-base"
-            // On s'assure que la valeur correspond toujours à la langue actuelle (fr ou en)
+            className="bg-midnight border-none focus:ring-0 cursor-pointer text-sm lg:text-base text-white"
             value={i18n.language.split('-')[0]} 
             onChange={handleLanguageChange}
           >
@@ -111,40 +105,17 @@ export function Header() {
             <option value="en">🌐 EN</option>
           </select>
 
-          {/* Bouton Burger (Mobile seulement) */}
           <button
             onClick={toggleMenu}
             className="lg:hidden text-white focus:outline-none ml-2"
           >
             {isOpen ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-8 w-8"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-8 w-8"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             )}
           </button>

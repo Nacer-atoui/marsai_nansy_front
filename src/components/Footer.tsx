@@ -5,7 +5,6 @@ export const Footer = () => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
 
-  // CORRECTION ICI : J'ai ajouté ": string" pour que TypeScript soit content
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
   };
@@ -33,40 +32,40 @@ export const Footer = () => {
               Mars<span className="text-[#FF6600] font-bold">AI</span>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed max-w-xs md:max-w-none mt-2">
-              {t('footer.description')}
+              {t('footer_description')}
             </p>
           </div>
 
           {/* Colonne 2 : Navigation */}
           <div className="flex flex-col items-center md:items-start">
             <h4 className="text-lg font-semibold mb-4 text-white">
-              {t('footer.nav_title')}
+              {t('footer_nav_title')}
             </h4>
             <ul className="space-y-2">
-              <li><NavLink to="/" className={getLinkClass}>{t('nav.home')}</NavLink></li>
-              <li><NavLink to="/about" className={getLinkClass}>{t('nav.about')}</NavLink></li>
-              <li><NavLink to="/movie" className={getLinkClass}>{t('nav.movies')}</NavLink></li>
-              <li><NavLink to="/jury" className={getLinkClass}>{t('nav.jury')}</NavLink></li>
-              <li><NavLink to="/contact" className={getLinkClass}>{t('nav.contact')}</NavLink></li>
+              <li><NavLink to="/" className={getLinkClass}>{t('nav_home')}</NavLink></li>
+              <li><NavLink to="/about" className={getLinkClass}>{t('nav_about')}</NavLink></li>
+              <li><NavLink to="/movie" className={getLinkClass}>{t('nav_movies')}</NavLink></li>
+              <li><NavLink to="/jury" className={getLinkClass}>{t('nav_jury')}</NavLink></li>
+              <li><NavLink to="/contact" className={getLinkClass}>{t('nav_contact')}</NavLink></li>
             </ul>
           </div>
 
           {/* Colonne 3 : Légal */}
           <div className="flex flex-col items-center md:items-start">
             <h4 className="text-lg font-semibold mb-4 text-white">
-              {t('footer.legal_title')}
+              {t('footer_legal_title')}
             </h4>
             <ul className="space-y-2">
-              <li><a href="#" className="hover:text-[#FF6600] transition-colors text-sm text-gray-400">{t('footer.legal.mentions')}</a></li>
-              <li><a href="#" className="hover:text-[#FF6600] transition-colors text-sm text-gray-400">{t('footer.legal.privacy')}</a></li>
-              <li><a href="#" className="hover:text-[#FF6600] transition-colors text-sm text-gray-400">{t('footer.legal.terms')}</a></li>
+              <li><a href="#" className="hover:text-[#FF6600] transition-colors text-sm text-gray-400">{t('legal_mentions')}</a></li>
+              <li><a href="#" className="hover:text-[#FF6600] transition-colors text-sm text-gray-400">{t('legal_privacy')}</a></li>
+              <li><a href="#" className="hover:text-[#FF6600] transition-colors text-sm text-gray-400">{t('legal_terms')}</a></li>
             </ul>
           </div>
 
-          {/* Colonne 4 : Contact */}
+          {/* Colonne 4 : Contact (REMIS AVEC LE NUMÉRO ET LES ICÔNES) */}
           <div className="flex flex-col items-center md:items-start">
             <h4 className="text-lg font-semibold mb-4 text-white">
-              {t('footer.contact_title')}
+              {t('footer_contact_title')}
             </h4>
             <ul className="space-y-3 text-sm text-gray-400">
               
@@ -93,21 +92,21 @@ export const Footer = () => {
 
         {/* Footer bas de page + Switcher Langue */}
         <div className="border-t border-gray-800 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-gray-200 text-sm md:text-center">
-            {t('footer.copyright')}
+          <p className="text-gray-200 text-sm">
+            {t('footer_copyright')}
           </p>
 
           <div className="flex gap-4">
             <button 
               onClick={() => changeLanguage('fr')} 
-              className={`text-sm ${i18n.language === 'fr' ? 'text-[#FF6600] font-bold' : 'text-gray-400'}`}
+              className={`text-sm ${i18n.language.startsWith('fr') ? 'text-[#FF6600] font-bold' : 'text-gray-400'}`}
             >
               FR
             </button>
             <span className="text-gray-600">|</span>
             <button 
               onClick={() => changeLanguage('en')} 
-              className={`text-sm ${i18n.language === 'en' ? 'text-[#FF6600] font-bold' : 'text-gray-400'}`}
+              className={`text-sm ${i18n.language.startsWith('en') ? 'text-[#FF6600] font-bold' : 'text-gray-400'}`}
             >
               EN
             </button>
