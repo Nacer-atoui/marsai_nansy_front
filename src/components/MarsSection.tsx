@@ -15,7 +15,7 @@ export default function MarsSection({ config }: MarsProps) {
       description: isEn ? config.section_50_text_en : config.section_50_text_fr,
       buttonText: isEn ? "JOIN THE CHALLENGE" : "PARTICIPER AU DÉFI",
       themeColor: 'orange' as const,
-      imageUrl: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?q=80&w=800&auto=format&fit=crop", 
+      imageUrl: "/public/MarsSection1.jpg", 
     },
     {
       id: 2,
@@ -23,7 +23,7 @@ export default function MarsSection({ config }: MarsProps) {
       description: isEn ? config.section_prix_text_en : config.section_prix_text_fr,
       buttonText: isEn ? "BOOK A SEAT" : "RÉSERVER MA PLACE",
       themeColor: 'cyan' as const,
-      imageUrl: "https://images.unsplash.com/photo-1622979135228-5b1ed317b9bd?q=80&w=800&auto=format&fit=crop",
+      imageUrl:"/public/MarsSection2.png",
     },
     {
       id: 3,
@@ -31,7 +31,7 @@ export default function MarsSection({ config }: MarsProps) {
       description: isEn ? config.section_jury_text_en : config.section_jury_text_fr,
       buttonText: isEn ? "VIEW PROGRAM" : "DÉCOUVRIR LE PROGRAMME",
       themeColor: 'orange' as const,
-      imageUrl: "https://images.unsplash.com/photo-1478720568477-152d9b164e63?q=80&w=800&auto=format&fit=crop",
+      imageUrl: "/public/MarsSection3.png",
     },
   ];
 
