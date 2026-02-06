@@ -1,23 +1,30 @@
 {
-  "footer": {
-    "description": "The first international festival of films created with artificial intelligence.",
-    "nav_title": "Navigation",
-    "legal_title": "Legal",
-    "contact_title": "Contact",
-    "copyright": "© 2025 MarsAI Festival. All rights reserved.",
-    "subscribe_btn": "Subscribe",
-    "rights": "All rights reserved",
-    "legal": {
-      "mentions": "Legal Notice",
-      "privacy": "Privacy Policy",
-      "terms": "Terms of Use"
-    }
-  },
   "nav": {
     "home": "Home",
     "about": "About",
     "movies": "Movies",
     "jury": "Jury",
     "contact": "Contact"
+  },
+  "footer": {
+    "description": "The first international festival of films created with artificial intelligence.",
+    "nav_title": "Navigation",
+    "legal_title": "Legal",
+    "contact_title": "Contact",
+    "copyright": "© 2025 MarsAI Festival. All rights reserved.",
+    "legal": {
+      "mentions": "Legal Notice",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Use"
+    }
+  },
+  "countdown": {
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "seconds": "Seconds",
+    "event_started": "The festival has started!",
+    "starts_in": "The event starts in:",
+    "participate": "Participate by sending your film!"
   }
 }

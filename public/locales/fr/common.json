@@ -1,0 +1,30 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "movies": "Films",
+    "jury": "Jury",
+    "contact": "Contact"
+  },
+  "footer": {
+    "description": "Le premier festival international de courts-métrages dédié à l'intelligence artificielle à Marseille.",
+    "nav_title": "Navigation",
+    "legal_title": "Informations Légales",
+    "contact_title": "Contact",
+    "copyright": "© 2025 MarsAI Festival",
+    "legal": {
+      "mentions": "Mentions Légales",
+      "privacy": "Confidentialité",
+      "terms": "Conditions d'utilisation"
+    }
+  },
+  "countdown": {
+    "starts_in": "L'événement commence dans :",
+    "days": "Jours",
+    "hours": "Heures",
+    "minutes": "Min",
+    "seconds": "Sec",
+    "participate": "Participer à l'évènement",
+    "event_started": "Le festival a commencé !"
+  }
+}
