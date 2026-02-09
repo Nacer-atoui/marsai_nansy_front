@@ -1,60 +1,49 @@
 import { useTranslation } from 'react-i18next';
 
-// On définit l'interface pour enlever le rouge sur "config"
-interface ObjectifProps {
-  config: any;
-}
+export default function FestivalObjectif() {
+  // On récupère t pour les textes et i18n pour la langue actuelle si besoin
+  const { t } = useTranslation();
 
-export default function FestivalObjectif({ config }: ObjectifProps) {
-  const { i18n } = useTranslation();
-  const isEn = i18n.language === 'en';
+  const marsOrange = '#f97316';
 
-  // On prépare les données des 3 blocs
   const cards = [
     {
       img: "Fleche.png",
-      title: isEn ? "Human at the center" : "L'Humain au centre",
-      // Ici on utilise par exemple le champ "prix" de la BDD pour ce bloc
-      desc: isEn 
-        ? (config.section_prix_text_en || "Putting humans at the heart of AI-generated creation so as not to lose emotion.") 
-        : (config.section_prix_text_fr || "Mettre l'humain au cœur de la création d'œuvres générées par IA pour ne pas perdre l'émotion.")
+      // Les clés correspondent aux content_key dans ta table SQL translations
+      title: t('objectif_card1_title', { defaultValue: "L'Humain au centre" }),
+      desc: t('section_prix_text') 
     },
     {
       img: "Foudre.png",
-      title: isEn ? "Creative Challenge" : "Challenge Créatif",
-      // Ici on utilise le texte "50 films" car il parle du format court
-      desc: isEn 
-        ? (config.section_50_text_en || "Challenging participants' creativity through a very short 60-second format.") 
-        : (config.section_50_text_fr || "Challenger la créativité des participants grâce à un format très court de 60 secondes.")
+      title: t('objectif_card2_title', { defaultValue: "Challenge Créatif" }),
+      desc: t('section_50_text')
     },
     {
       img: "Fusée.png",
-      title: isEn ? "Desirable Futures" : "Futurs Souhaitables",
-      // Ici on utilise le champ "jury" ou un autre texte de la BDD
-      desc: isEn 
-        ? (config.section_jury_text_en || "Leveraging the power of AI to illustrate a theme: Imagine desirable futures.") 
-        : (config.section_jury_text_fr || "Mettre à profit la puissance de l'IA pour illustrer un thème : Imaginez des futurs souhaitables.")
+      title: t('objectif_card3_title', { defaultValue: "Futurs Souhaitables" }),
+      desc: t('section_jury_text')
     }
   ];
 
   return (
-    <section className="bg-section-light py-20 px-4">
+    <section className="bg-[#07091D] py-20 px-4">
       <div className="max-w-7xl mx-auto">
         <div>
           <h2 className="text-3xl md:text-5xl font-bold text-white uppercase tracking-wider">
-            {isEn ? "Festival" : "Objectif Du"}{' '}
-            <span style={{ color: config.primary_color || '#f97316' }} className="font-bold">
-               {isEn ? "Objectives" : "Festival"}
+            {t('objectif_main_title_part1', { defaultValue: "Objectif Du" })}{' '}
+            <span style={{ color: marsOrange }} className="font-bold">
+               {t('objectif_main_title_part2', { defaultValue: "Festival" })}
             </span>
           </h2>
         </div>
 
-        <div className="flex justify-between mt-10 gap-10">
+        {/* Ajout de flex-wrap pour le responsive mobile */}
+        <div className="flex flex-wrap lg:flex-nowrap justify-between mt-10 gap-10">
           {cards.map((card, index) => (
-            <div key={index} className="w-[33%] border-[#00FFFF]/30 shadow-[0_0_15px_#00FFFF]/50 border-2 p-10 rounded-xl">
-              <img className="w-15" src={card.img} alt="icon" />
-              <h3 className="font-bold text-[32px] mt-5 text-white">{card.title}</h3>
-              <p className="text-gray-300 mt-2">
+            <div key={index} className="w-full lg:w-[33%] border-[#00FFFF]/30 shadow-[0_0_15px_rgba(0,255,255,0.2)] border-2 p-10 rounded-xl bg-[#0B0F23]">
+              <img className="w-12 h-12 object-contain" src={card.img} alt="icon" />
+              <h3 className="font-bold text-2xl mt-5 text-white uppercase">{card.title}</h3>
+              <p className="text-gray-300 mt-4 leading-relaxed">
                 {card.desc}
               </p>
             </div>

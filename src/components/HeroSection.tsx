@@ -1,14 +1,14 @@
 import Countdown, { type CountdownRenderProps } from 'react-countdown';
 import { useTranslation } from 'react-i18next';
 
-interface HeroProps {
-  config: any;
-}
+// On retire l'interface obligatoire qui posait problème dans HomePage
+export default function HeroSection() {
+  // On utilise les deux namespaces : translation (par défaut) et common
+  const { t } = useTranslation(['translation', 'common']);
 
-export default function HeroSection({ config }: HeroProps) {
-  const { t } = useTranslation();
-
-  const EventDate = new Date(config.event_date || '2026-06-13T00:00:00');
+  // On définit la couleur en dur ou via une clé i18n si tu veux qu'elle soit modifiable en BDD
+  const primaryColor = '#f97316'; 
+  const eventDate = new Date('2026-06-13T00:00:00');
 
   const counter = ({ days, hours, minutes, seconds, completed }: CountdownRenderProps) => {
     if (completed) {
@@ -20,65 +20,44 @@ export default function HeroSection({ config }: HeroProps) {
     } else {
       return (
         <div className="flex gap-x-6 text-white justify-center">
-          {/* Bloc Jours */}
-          <div className="flex flex-col items-center border-2 rounded-xl w-24 border-[#00FFFF]/30 shadow-[0_0_15px_rgba(6,182,212,0.5)] p-3">
-            <span className="text-4xl font-light">{days}</span>
-            <span className="text-sm uppercase text-white">
-              {t('common:countdown.days')}
-            </span>
-          </div>
-
-          <div className="flex flex-col items-center border-2 rounded-xl w-24 border-[#00FFFF]/30 shadow-[0_0_15px_rgba(6,182,212,0.5)] p-3">
-            <span className="text-4xl font-light">{hours}</span>
-            <span className="text-sm uppercase text-white">
-              {t('common:countdown.hours')}
-            </span>
-          </div>
-
-          <div className="flex flex-col items-center border-2 rounded-xl w-24 border-[#00FFFF]/30 shadow-[0_0_15px_rgba(6,182,212,0.5)] p-3">
-            <span className="text-4xl font-light">{minutes}</span>
-            <span className="text-sm uppercase text-white">
-              {t('common:countdown.minutes')}
-            </span>
-          </div>
-
-          <div className="flex flex-col items-center border-2 rounded-xl w-24 border-[#00FFFF]/30 shadow-[0_0_15px_rgba(6,182,212,0.5)] p-3">
-            <span className="text-4xl font-light">{seconds}</span>
-            <span className="text-sm uppercase text-white">
-              {t('common:countdown.seconds')}
-            </span>
-          </div>
+          {/* On mappe sur les unités pour éviter de répéter 4 fois le même code HTML */}
+          {[
+            { label: t('common:countdown.days'), value: days },
+            { label: t('common:countdown.hours'), value: hours },
+            { label: t('common:countdown.minutes'), value: minutes },
+            { label: t('common:countdown.seconds'), value: seconds }
+          ].map((unit, idx) => (
+            <div key={idx} className="flex flex-col items-center border-2 rounded-xl w-24 border-[#00FFFF]/30 shadow-[0_0_15px_rgba(6,182,212,0.5)] p-3 bg-black/20">
+              <span className="text-4xl font-light">{unit.value}</span>
+              <span className="text-sm uppercase text-white/80">{unit.label}</span>
+            </div>
+          ))}
         </div>
       );
     }
   };
 
   return (
-    <div className="h-screen bg-[url('/bg_hero.avif')] bg-cover">
-      <div className="flex h-screen items-center justify-around flex-col font-display text-white">
+    <div className="relative h-screen bg-[url('/bg_hero.avif')] bg-cover bg-center">
+      {/* Overlay pour garantir la lisibilité du texte par-dessus l'image */}
+      <div className="absolute inset-0 bg-black/30" />
+
+      <div className="relative z-10 flex h-screen items-center justify-around flex-col font-display text-white">
         
-        {/* TITRE : ABAISSÉ AVEC mt-24 ET COLLÉ */}
+        {/* LOGO */}
         <div className="flex mt-24">
           <h1 className="text-7xl font-normal uppercase tracking-tighter">MARS</h1>
-          <p
-            className="text-7xl font-normal uppercase"
-            style={{ color: config.primary_color || '#f97316' }}
-          >
+          <p className="text-7xl font-normal uppercase" style={{ color: primaryColor }}>
             AI
           </p>
         </div>
         
         <div className="flex-col space-y-10 text-center px-4">
-          {/* SUBTITLE : FONT-NORMAL */}
           <p className="text-6xl font-normal max-w-5xl leading-tight">
             {t('hero_subtitle')}
           </p>
 
-          {/* INTRO TEXT : SEMIBOLD */}
-          <p
-            className="text-4xl font-semibold"
-            style={{ color: config.primary_color || '#f97316' }}
-          >
+          <p className="text-4xl font-semibold" style={{ color: primaryColor }}>
             {t('intro_text')}
           </p>
         </div>
@@ -88,17 +67,15 @@ export default function HeroSection({ config }: HeroProps) {
             {t('common:countdown.starts_in')}
           </p>
           
-          <Countdown date={EventDate} renderer={counter} />
+          <Countdown date={eventDate} renderer={counter} />
           
-          {/* BOUTON : LARGEUR AJUSTÉE ET TEXTE SEMIBOLD */}
           <button 
-            className="mt-14 px-10 py-4 rounded-full text-white transition-all duration-300 font-semibold uppercase tracking-widest shadow-xl"
-            style={{ backgroundColor: config.primary_color || '#f97316' }}
+            className="mt-14 px-10 py-4 rounded-full text-white transition-all duration-300 font-semibold uppercase tracking-widest shadow-xl hover:scale-105 active:scale-95"
+            style={{ backgroundColor: primaryColor }}
           >
             {t('common:countdown.participate')}
           </button>
         </div>
-        
       </div>
     </div>
   );

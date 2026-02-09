@@ -1,11 +1,8 @@
 import { useTranslation } from 'react-i18next';
 
-interface MarsProps {
-  config: any;
-}
-
-export default function MarsSection({ config }: MarsProps) {
+export default function MarsSection() {
   const { t } = useTranslation();
+  const marsOrange = '#f97316';
 
   const events = [
     {
@@ -14,15 +11,15 @@ export default function MarsSection({ config }: MarsProps) {
       description: t('section_50_text'),
       buttonText: t('btn_participate', { defaultValue: 'PARTICIPER AU DÉFI' }),
       themeColor: 'orange' as const,
-      imageUrl: "/MarsSection1.jpg", // Chemin vers ton dossier public
+      imageUrl: "/MarsSection1.jpg", 
     },
     {
       id: 2,
-      title: "MASTERCLASS & LABS",
+      title: t('masterclass_title', { defaultValue: 'MASTERCLASS & LABS' }),
       description: t('section_prix_text'),
       buttonText: t('btn_reserve', { defaultValue: 'RÉSERVER MA PLACE' }),
       themeColor: 'cyan' as const,
-      imageUrl: "/MarsSection2.png", // Chemin vers ton dossier public
+      imageUrl: "/MarsSection2.png", 
     },
     {
       id: 3,
@@ -30,18 +27,23 @@ export default function MarsSection({ config }: MarsProps) {
       description: t('section_jury_text'),
       buttonText: t('btn_view_program', { defaultValue: 'DÉCOUVRIR LE PROGRAMME' }),
       themeColor: 'orange' as const,
-      imageUrl: "/MarsSection3.png", // Chemin vers ton dossier public
+      imageUrl: "/MarsSection3.png", 
     },
   ];
-  
 
   return (
     <section className="bg-[#07091D] py-20 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="mb-12">
             <h2 className="text-3xl md:text-5xl font-bold text-white uppercase tracking-wider">
-               {/* Utilisation de hero_title pour matcher ton JSON */}
-               {t('hero_title', { defaultValue: 'LE PROJET' })} <span style={{ color: config.primary_color || '#f97316' }}>MARS.A.I</span>
+               {/* Titre dynamique ("LE PROJET") */}
+               {t('mars_project_title', { defaultValue: 'LE PROJET' })} 
+               
+               {/* "MARS" en blanc (par défaut via text-white du h2) */}
+               {' '}MARS
+               
+               {/* "AI" en orange */}
+               <span style={{ color: marsOrange }}>AI</span>
             </h2>
             <p className="text-gray-400 mt-4 max-w-2xl text-lg font-medium">
               {t('section_mars_subtitle')}
@@ -62,7 +64,11 @@ export default function MarsSection({ config }: MarsProps) {
                 <p className="text-gray-300 text-sm mb-6 font-medium border-t border-gray-600/50 pt-4 w-full leading-relaxed">
                   {card.description}
                 </p>
-                <span className={`inline-block px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider border transition-all duration-300 cursor-pointer ${card.themeColor === 'orange' ? 'border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white' : 'border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-slate-900'}`}>
+                <span className={`inline-block px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider border transition-all duration-300 cursor-pointer ${
+                  card.themeColor === 'orange' 
+                  ? 'border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white' 
+                  : 'border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-slate-900'
+                }`}>
                   {card.buttonText}
                 </span>
               </div>
