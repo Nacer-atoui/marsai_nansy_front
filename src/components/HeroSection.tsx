@@ -1,82 +1,112 @@
-import Countdown, { type CountdownRenderProps } from 'react-countdown';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
-// On retire l'interface obligatoire qui posait problème dans HomePage
 export default function HeroSection() {
-  // On utilise les deux namespaces : translation (par défaut) et common
-  const { t } = useTranslation(['translation', 'common']);
+  const { t } = useTranslation();
 
-  // On définit la couleur en dur ou via une clé i18n si tu veux qu'elle soit modifiable en BDD
-  const primaryColor = '#f97316'; 
-  const eventDate = new Date('2026-06-13T00:00:00');
+  // DATE CIBLE : 13 Juin 2025 à 19h00
+  // On la fixe ici directement au lieu de l'attendre depuis la base de données
+  const targetDate = new Date("2025-06-13T19:00:00").getTime();
 
-  const counter = ({ days, hours, minutes, seconds, completed }: CountdownRenderProps) => {
-    if (completed) {
-      return (
-        <span className="text-mars-orange text-2xl font-light">
-          {t('common:countdown.event_started')}
-        </span>
-      );
-    } else {
-      return (
-        <div className="flex gap-x-6 text-white justify-center">
-          {/* On mappe sur les unités pour éviter de répéter 4 fois le même code HTML */}
-          {[
-            { label: t('common:countdown.days'), value: days },
-            { label: t('common:countdown.hours'), value: hours },
-            { label: t('common:countdown.minutes'), value: minutes },
-            { label: t('common:countdown.seconds'), value: seconds }
-          ].map((unit, idx) => (
-            <div key={idx} className="flex flex-col items-center border-2 rounded-xl w-24 border-[#00FFFF]/30 shadow-[0_0_15px_rgba(6,182,212,0.5)] p-3 bg-black/20">
-              <span className="text-4xl font-light">{unit.value}</span>
-              <span className="text-sm uppercase text-white/80">{unit.label}</span>
-            </div>
-          ))}
-        </div>
-      );
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+
+  function calculateTimeLeft() {
+    const now = new Date().getTime();
+    const difference = targetDate - now;
+
+    if (difference <= 0) {
+      return { days: 0, hours: 0, minutes: 0, seconds: 0 };
     }
-  };
+
+    return {
+      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+      minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+      seconds: Math.floor((difference % (1000 * 60)) / 1000),
+    };
+  }
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
 
   return (
-    <div className="relative h-screen bg-[url('/bg_hero.avif')] bg-cover bg-center">
-      {/* Overlay pour garantir la lisibilité du texte par-dessus l'image */}
-      <div className="absolute inset-0 bg-black/30" />
-
-      <div className="relative z-10 flex h-screen items-center justify-around flex-col font-display text-white">
-        
-        {/* LOGO */}
-        <div className="flex mt-24">
-          <h1 className="text-7xl font-normal uppercase tracking-tighter">MARS</h1>
-          <p className="text-7xl font-normal uppercase" style={{ color: primaryColor }}>
-            AI
-          </p>
-        </div>
-        
-        <div className="flex-col space-y-10 text-center px-4">
-          <p className="text-6xl font-normal max-w-5xl leading-tight">
-            {t('hero_subtitle')}
-          </p>
-
-          <p className="text-4xl font-semibold" style={{ color: primaryColor }}>
-            {t('intro_text')}
-          </p>
-        </div>
-
-        <div className="font-display w-full text-center">
-          <p className="text-4xl mb-10 font-light uppercase tracking-widest text-white/90">
-            {t('common:countdown.starts_in')}
-          </p>
-          
-          <Countdown date={eventDate} renderer={counter} />
-          
-          <button 
-            className="mt-14 px-10 py-4 rounded-full text-white transition-all duration-300 font-semibold uppercase tracking-widest shadow-xl hover:scale-105 active:scale-95"
-            style={{ backgroundColor: primaryColor }}
-          >
-            {t('common:countdown.participate')}
-          </button>
-        </div>
+    <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      
+      {/* --- IMAGE DE FOND --- */}
+      <div className="absolute inset-0 z-0">
+        <img 
+          src="/hero-bg.jpg" // Assure-toi que cette image existe dans /public
+          alt="Mars AI Background" 
+          className="w-full h-full object-cover opacity-60"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#07091D]/80 via-transparent to-[#07091D]"></div>
       </div>
-    </div>
+
+      {/* --- CONTENU --- */}
+      <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
+        
+        {/* Sous-titre */}
+        <p className="text-[#00FFFF] text-lg md:text-xl font-bold tracking-[0.2em] uppercase mb-4 animate-pulse">
+          {t('hero_subtitle', { defaultValue: 'Imaginer des futurs désirables' })}
+        </p>
+
+        {/* Grand Titre */}
+        <h1 className="text-6xl md:text-8xl font-extrabold text-white mb-6 tracking-tighter shadow-neon">
+          MARS<span className="text-[#f97316]">.AI</span>
+        </h1>
+
+        <p className="text-gray-300 text-xl md:text-2xl mb-12 max-w-3xl mx-auto font-light">
+          {t('intro_text', { defaultValue: 'Le 1er Festival International du Court-Métrage IA - Marseille' })}
+        </p>
+
+        {/* --- COMPTE À REBOURS --- */}
+        <div className="flex flex-wrap justify-center gap-6 md:gap-10 mb-12">
+          {/* Jours */}
+          <div className="flex flex-col items-center">
+            <span className="text-4xl md:text-6xl font-bold text-white font-mono">
+              {String(timeLeft.days).padStart(2, '0')}
+            </span>
+            <span className="text-xs md:text-sm text-gray-400 uppercase tracking-widest mt-2">
+              {t('common.countdown.days', { defaultValue: 'Jours' })}
+            </span>
+          </div>
+
+          <span className="text-4xl md:text-6xl text-[#f97316] font-light">:</span>
+
+          {/* Heures */}
+          <div className="flex flex-col items-center">
+            <span className="text-4xl md:text-6xl font-bold text-white font-mono">
+              {String(timeLeft.hours).padStart(2, '0')}
+            </span>
+            <span className="text-xs md:text-sm text-gray-400 uppercase tracking-widest mt-2">
+              {t('common.countdown.hours', { defaultValue: 'Heures' })}
+            </span>
+          </div>
+
+          <span className="text-4xl md:text-6xl text-[#f97316] font-light">:</span>
+
+          {/* Minutes */}
+          <div className="flex flex-col items-center">
+            <span className="text-4xl md:text-6xl font-bold text-white font-mono">
+              {String(timeLeft.minutes).padStart(2, '0')}
+            </span>
+            <span className="text-xs md:text-sm text-gray-400 uppercase tracking-widest mt-2">
+              {t('common.countdown.minutes', { defaultValue: 'Minutes' })}
+            </span>
+          </div>
+        </div>
+
+        {/* Bouton d'action */}
+        <button className="px-8 py-4 bg-[#f97316] text-white font-bold text-lg rounded-full uppercase tracking-wider hover:bg-orange-600 hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(249,115,22,0.4)]">
+          {t('btn_participate', { defaultValue: 'Participer au défi' })}
+        </button>
+
+      </div>
+    </section>
   );
 }
