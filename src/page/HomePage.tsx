@@ -7,6 +7,7 @@ import AboutEvent from '../components/AboutEvent'
 import Sponsors from '../components/Sponsors';
 import EventFormat from '../components/EventFormat';
 import NightEvent from '../components/NightEvent';
+import MovieSelection from '../components/MovieSelection';
 
 export default function HomePage() {
   const [siteConfig, setSiteConfig] = useState<any>(null);
@@ -28,6 +29,7 @@ export default function HomePage() {
       {/* On passe l'objet siteConfig au composant HeroSection */}
       <HeroSection config={siteConfig} />
       <MarsSection config={siteConfig} />
+      <MovieSelection/>
       <FestivalObjectif config={siteConfig} />
       <EventFormat />
       <AboutEvent/>

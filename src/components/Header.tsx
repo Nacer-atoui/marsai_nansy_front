@@ -20,7 +20,7 @@ export function Header() {
         {/* --- 1. GAUCHE : LOGO --- */}
         <div
           onClick={() => navigate('/')}
-          className="cursor-pointer font-bold text-xl z-50 relative"
+          className="uppercase cursor-pointer font-bold text-xl z-50 relative"
         >
           Mars<span className="text-mars-orange font-bold">AI</span>
         </div>
