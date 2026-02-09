@@ -19,7 +19,7 @@ export default function NightEvent() {
                     <div className="flex flex-col md:flex-row gap-6 w-[50%] ">
                         <div className="flex-1 bg-gray-900 border border-slate-700 rounded-xl p-6 ">
                             <div className='flex items-center flex-col justify-center gap-10 p-5'>
-                                <img src="/public/calendrier.png" alt="Icone d'un calendrier" className='w-20'/>
+                                <img src="/calendrier.png" alt="Icone d'un calendrier" className='w-20'/>
                                 <p className='text-7xl font-bold'>13 JUIN</p>
                                 <p className='text-3xl text-orange-500'>à partir de 19h</p>
                                 <button className="px-6 py-3 bg-mars-orange text-white font-bold rounded-lg uppercase mb-6 hover:bg-orange-600 transition-colors duration-300 w-[50%]">Prendre mon pass</button>
