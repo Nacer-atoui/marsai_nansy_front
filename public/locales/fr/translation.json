@@ -39,8 +39,8 @@
   "format_card2_desc": "Courts-métrages d une minute retenus pour la compétition.",
   "format_card3_desc": "Visibilité mondiale via les réseaux et plateformes.",
   "format_card4_desc": "Projection sur grand écran pour une immersion totale.",
-  "about_title_part1": "Deux journées de ",
-  "about_title_highlight": "conférences ",
+  "about_title_part1": "Deux journées de",
+  "about_title_highlight": "conférences",
   "about_title_part2": "gratuites",
   "challenge_title": "DÉFI 1 MINUTE",
   "future_cinema_title": "FUTUR DU CINÉMA",
@@ -50,5 +50,9 @@
   "sponsors_title_highlight": "le futur",
   "btn_participate": "PARTICIPER AU DÉFI",
   "btn_reserve": "RÉSERVER MA PLACE",
-  "btn_view_program": "DÉCOUVRIR LE PROGRAMME"
+  "btn_view_program": "DÉCOUVRIR LE PROGRAMME",
+  "format_title_part1": "Format de la",
+  "format_title_part2": "sélection",
+  "format_title_p1": "Format de la",
+  "format_title_p2": "sélection"
 }
