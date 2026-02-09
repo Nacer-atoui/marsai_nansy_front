@@ -3,7 +3,9 @@ import { useTranslation } from 'react-i18next';
 
 export const Footer = () => {
   const navigate = useNavigate();
-  const { t, i18n } = useTranslation();
+  
+  // En passant 'common' ici, on n'a plus besoin de l'écrire dans chaque t()
+  const { t, i18n } = useTranslation('common');
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
@@ -32,42 +34,40 @@ export const Footer = () => {
               Mars<span className="text-[#FF6600] font-bold">AI</span>
             </div>
             <p className="text-gray-400 text-sm leading-relaxed max-w-xs md:max-w-none mt-2">
-              {/* CORRIGÉ : Ajout de common: et du point */}
-              {t('common:footer.description')}
+              {t('footer.description')}
             </p>
           </div>
 
           {/* Colonne 2 : Navigation */}
           <div className="flex flex-col items-center md:items-start">
             <h4 className="text-lg font-semibold mb-4 text-white">
-              {t('common:footer.nav_title')}
+              {t('footer.nav_title')}
             </h4>
             <ul className="space-y-2">
-              <li><NavLink to="/" className={getLinkClass}>{t('common:nav.home')}</NavLink></li>
-              <li><NavLink to="/about" className={getLinkClass}>{t('common:nav.about')}</NavLink></li>
-              <li><NavLink to="/movie" className={getLinkClass}>{t('common:nav.movies')}</NavLink></li>
-              <li><NavLink to="/jury" className={getLinkClass}>{t('common:nav.jury')}</NavLink></li>
-              <li><NavLink to="/contact" className={getLinkClass}>{t('common:nav.contact')}</NavLink></li>
+              <li><NavLink to="/" className={getLinkClass}>{t('nav.home')}</NavLink></li>
+              <li><NavLink to="/about" className={getLinkClass}>{t('nav.about')}</NavLink></li>
+              <li><NavLink to="/movie" className={getLinkClass}>{t('nav.movies')}</NavLink></li>
+              <li><NavLink to="/jury" className={getLinkClass}>{t('nav.jury')}</NavLink></li>
+              <li><NavLink to="/contact" className={getLinkClass}>{t('nav.contact')}</NavLink></li>
             </ul>
           </div>
 
           {/* Colonne 3 : Légal */}
           <div className="flex flex-col items-center md:items-start">
             <h4 className="text-lg font-semibold mb-4 text-white">
-              {/* Ces clés doivent être dans ton common.json ou translation.json */}
-              {t('common:footer.legal_title', { defaultValue: 'Légal' })}
+              {t('footer.legal_title')}
             </h4>
             <ul className="space-y-2">
-              <li><a href="#" className="hover:text-[#FF6600] transition-colors text-sm text-gray-400">{t('common:footer.legal.mentions', { defaultValue: 'Mentions Légales' })}</a></li>
-              <li><a href="#" className="hover:text-[#FF6600] transition-colors text-sm text-gray-400">{t('common:footer.legal.privacy', { defaultValue: 'Confidentialité' })}</a></li>
-              <li><a href="#" className="hover:text-[#FF6600] transition-colors text-sm text-gray-400">{t('common:footer.legal.terms', { defaultValue: 'CGU' })}</a></li>
+              <li><NavLink to="/mentions" className="hover:text-[#FF6600] transition-colors text-sm text-gray-400">{t('footer.legal.mentions')}</NavLink></li>
+              <li><NavLink to="/privacy" className="hover:text-[#FF6600] transition-colors text-sm text-gray-400">{t('footer.legal.privacy')}</NavLink></li>
+              <li><NavLink to="/terms" className="hover:text-[#FF6600] transition-colors text-sm text-gray-400">{t('footer.legal.terms')}</NavLink></li>
             </ul>
           </div>
 
           {/* Colonne 4 : Contact */}
           <div className="flex flex-col items-center md:items-start">
             <h4 className="text-lg font-semibold mb-4 text-white">
-              {t('common:footer.contact_title', { defaultValue: 'Contact' })}
+              {t('footer.contact_title')}
             </h4>
             <ul className="space-y-3 text-sm text-gray-400">
               <li className="flex items-center justify-center md:justify-start gap-2">
@@ -91,7 +91,7 @@ export const Footer = () => {
         {/* Footer bas de page */}
         <div className="border-t border-gray-800 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-200 text-sm">
-            {t('common:footer.copyright')}
+            {t('footer.copyright')}
           </p>
 
           <div className="flex gap-4">

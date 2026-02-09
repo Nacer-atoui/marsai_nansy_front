@@ -9,15 +9,21 @@ i18n
   .use(initReactI18next)
   .init({
     fallbackLng: 'fr',
+    ns: ['common', 'translation'],
+    defaultNS: 'translation', // 'translation' reste le défaut pour les pages
     interpolation: { escapeValue: false },
-    
-    // Déclare les deux fichiers ici
-    ns: ['translation', 'common'], 
-    defaultNS: 'translation',
-
+    react: { useSuspense: false },
     backend: {
-      // Le {{ns}} permet de charger soit translation.json, soit common.json
-      loadPath: '/locales/{{lng}}/{{ns}}.json',
+      loadPath: (lngs: string[], namespaces: string[]) => {
+        const lang = lngs[0];
+        const ns = namespaces[0];
+
+        // LOGIQUE : common = public/locales, le reste = Express
+        if (ns === 'common') {
+          return `/locales/${lang}/common.json`;
+        }
+        return `http://localhost:3000/api/translations/${lang}`;
+      },
     },
   });
 
