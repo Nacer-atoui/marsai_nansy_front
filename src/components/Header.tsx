@@ -5,7 +5,9 @@ import { useTranslation } from 'react-i18next';
 export function Header() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const { t, i18n } = useTranslation();
+  
+  // 1. On passe 'common' ici. Cela permet de ne plus écrire "common:" plus bas.
+  const { t, i18n } = useTranslation('common');
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
@@ -17,18 +19,18 @@ export function Header() {
   return (
     <header className="ml-7 mr-7 mt-3 relative z-50 text-white">
       <nav className="mb-5 flex items-center justify-between h-12">
-        {/* --- 1. GAUCHE : LOGO --- */}
+        {/* LOGO */}
         <div
           onClick={() => navigate('/')}
-          className="cursor-pointer font-bold text-xl z-50 relative"
+          className="uppercase cursor-pointer font-bold text-xl z-50 relative"
         >
-          Mars<span className="text-mars-orange font-bold">AI</span>
+          Mars<span className="text-[#FF6600] font-bold">AI</span>
         </div>
 
-        {/* --- 2. CENTRE : NAVIGATION --- */}
+        {/* NAVIGATION */}
         <div
           className={`
-          fixed inset-0 bg-midnight z-40 flex flex-col justify-center items-center transition-transform duration-300 ease-in-out
+          fixed inset-0 bg-[#0B0F23] z-40 flex flex-col justify-center items-center transition-transform duration-300 ease-in-out
           lg:static lg:bg-transparent lg:flex-row lg:translate-x-0 lg:h-auto lg:w-auto lg:inset-auto
           lg:absolute lg:left-1/2 lg:-translate-x-1/2
           ${isOpen ? 'translate-x-0' : 'translate-x-full lg:translate-x-0'}
@@ -37,74 +39,66 @@ export function Header() {
           <ul className="flex flex-col lg:flex-row items-center gap-8 lg:gap-6 text-xl lg:text-base font-medium">
             <li>
               <NavLink
-                onClick={closeMenu}
-                className={({ isActive }) => isActive ? 'text-mars-orange' : 'hover:text-mars-orange'}
                 to="/"
+                onClick={closeMenu}
+                className={({ isActive }) => isActive ? 'text-[#FF6600]' : 'hover:text-[#FF6600]'}
               >
-                {/* On précise le namespace 'common' et le chemin 'nav.home' */}
-                {t('common:nav.home')}
+                {/* Plus besoin de common: devant nav.home */}
+                {t('nav.home')}
               </NavLink>
             </li>
             <li>
               <NavLink
-                onClick={closeMenu}
-                className={({ isActive }) => isActive ? 'text-mars-orange' : 'hover:text-mars-orange'}
                 to="/about"
+                onClick={closeMenu}
+                className={({ isActive }) => isActive ? 'text-[#FF6600]' : 'hover:text-[#FF6600]'}
               >
-                {t('common:nav.about')}
+                {t('nav.about')}
               </NavLink>
             </li>
             <li>
               <NavLink
-                onClick={closeMenu}
-                className={({ isActive }) => isActive ? 'text-mars-orange' : 'hover:text-mars-orange'}
                 to="/movie"
+                onClick={closeMenu}
+                className={({ isActive }) => isActive ? 'text-[#FF6600]' : 'hover:text-[#FF6600]'}
               >
-                {t('common:nav.movies')}
+                {t('nav.movies')}
               </NavLink>
             </li>
             <li>
               <NavLink
-                onClick={closeMenu}
-                className={({ isActive }) => isActive ? 'text-mars-orange' : 'hover:text-mars-orange'}
                 to="/jury"
+                onClick={closeMenu}
+                className={({ isActive }) => isActive ? 'text-[#FF6600]' : 'hover:text-[#FF6600]'}
               >
-                {t('common:nav.jury')}
+                {t('nav.jury')}
               </NavLink>
             </li>
             <li>
               <NavLink
-                onClick={closeMenu}
-                className={({ isActive }) => isActive ? 'text-mars-orange' : 'hover:text-mars-orange'}
                 to="/contact"
+                onClick={closeMenu}
+                className={({ isActive }) => isActive ? 'text-[#FF6600]' : 'hover:text-[#FF6600]'}
               >
-                {t('common:nav.contact')}
+                {t('nav.contact')}
               </NavLink>
             </li>
           </ul>
         </div>
 
-        {/* --- 3. DROITE : LANGUES --- */}
+        {/* LANGUES */}
         <div className="flex items-center gap-4 z-50">
           <select
-            className="bg-midnight border-none focus:ring-0 cursor-pointer text-sm lg:text-base text-white outline-none"
+            className="bg-transparent border-none focus:ring-0 cursor-pointer text-sm lg:text-base text-white outline-none"
             value={i18n.language.split('-')[0]} 
             onChange={handleLanguageChange}
           >
-            <option value="fr">🌐 FR</option>
-            <option value="en">🌐 EN</option>
+            <option value="fr" className="bg-[#0B0F23]">FR</option>
+            <option value="en" className="bg-[#0B0F23]">EN</option>
           </select>
 
           <button onClick={toggleMenu} className="lg:hidden text-white focus:outline-none ml-2">
-            {isOpen ? (
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            )}
+            {isOpen ? "✕" : "☰"}
           </button>
         </div>
       </nav>
