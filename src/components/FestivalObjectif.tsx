@@ -26,13 +26,13 @@ export default function FestivalObjectif() {
   ];
 
   return (
-    <section className="bg-[#07091D] py-20 px-4">
+    <section className="bg-midnight py-20 px-4">
       <div className="max-w-7xl mx-auto">
         <div>
           <h2 className="text-3xl md:text-5xl font-bold text-white uppercase tracking-wider">
             {t('objectif_main_title_part1', { defaultValue: "Objectif Du" })}{' '}
             <span style={{ color: marsOrange }} className="font-bold">
-               {t('objectif_main_title_part2', { defaultValue: "Festival" })}
+            {t('objectif_main_title_part2', { defaultValue: "Festival" })}
             </span>
           </h2>
         </div>

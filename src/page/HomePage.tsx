@@ -6,6 +6,7 @@ import AboutEvent from '../components/AboutEvent'
 import Sponsors from '../components/Sponsors';
 import EventFormat from '../components/EventFormat';
 import NightEvent from '../components/NightEvent';
+import MovieSelection from '../components/MovieSelection';
 
 export default function HomePage() {
   const { t, ready } = useTranslation();

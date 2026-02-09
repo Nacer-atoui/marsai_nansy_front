@@ -22,7 +22,7 @@ export function Header() {
         {/* LOGO */}
         <div
           onClick={() => navigate('/')}
-          className="cursor-pointer font-bold text-xl z-50 relative"
+          className="uppercase cursor-pointer font-bold text-xl z-50 relative"
         >
           Mars<span className="text-[#FF6600] font-bold">AI</span>
         </div>
