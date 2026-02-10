@@ -10,6 +10,8 @@
   --color-section-light: #0B0F2E;
   --color-midnight: #07091D;
   --color-blue-card: #15666d;    
+  --color-footer: #0A0F23;    
+
   
   --font-sans: system-ui, Avenir, Helvetica, Arial, sans-serif;
   --font-display: "Montserrat", sans-serif; 
@@ -56,9 +58,9 @@ a:hover {
   color: var(--color-mars-orange);
 }
 
-h1, h2, h3, h4, h5, h6 {
+/* h1, h2, h3, h4, h5, h6 {
   color: white; /* Tous les titres en blanc */
-}
+ */
 
 button {
   cursor: pointer;

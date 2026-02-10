@@ -97,14 +97,14 @@ export const Footer = () => {
           <div className="flex gap-4">
             <button 
               onClick={() => changeLanguage('fr-FR')} 
-              className={`text-sm ${i18n.language.startsWith('fr-FR') ? 'text-[#FF6600] font-bold' : 'text-gray-400'}`}
+              className={`text-sm ${(i18n.language || 'fr').startsWith('fr') ? 'text-[#FF6600] font-bold' : 'text-gray-400'}`}
             >
               FR
             </button>
             <span className="text-gray-600">|</span>
             <button 
               onClick={() => changeLanguage('en-EN')} 
-              className={`text-sm ${i18n.language.startsWith('en-EN') ? 'text-[#FF6600] font-bold' : 'text-gray-400'}`}
+              className={`text-sm ${(i18n.language || 'fr').startsWith('en') ? 'text-[#FF6600] font-bold' : 'text-gray-400'}`}
             >
               EN
             </button>
