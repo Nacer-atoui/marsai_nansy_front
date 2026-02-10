@@ -12,8 +12,11 @@ export function Header() {
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
 
+  console.log(i18n.language)
+
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    i18n.changeLanguage(e.target.value);
+
+    e.target.value == "fr" ? i18n.changeLanguage("fr-FR") : i18n.changeLanguage("en-EN")
   };
 
   return (
