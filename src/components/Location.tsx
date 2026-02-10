@@ -12,15 +12,15 @@ export default function Location() {
         <div className="flex flex-col justify-between">
           <div>
             <div className="flex items-center gap-2 mb-6">
-              <MapPin className="text-mars-orange" />
+              <MapPin className="text-cyan-400" />
               <p className="uppercase tracking-widest font-bold text-sm">
                 Le lieu
               </p>
             </div>
 
-            <div className="text-6xl font-bold leading-none">
-              <h1 className="text-mars-orange">LA</h1>
-              <h1>PLATEFORME</h1>
+            <div className="text-8xl font-bold leading-none">
+              <h1>LA</h1>
+              <h1 className="text-mars-orange">PLATEFORME</h1>
             </div>
 
             <p className="mt-4 text-sm font-mono opacity-60 tracking-wider">
@@ -29,10 +29,15 @@ export default function Location() {
           </div>
 
           {/* Bloc sombre gauche */}
-          <div className="bg-footer text-white rounded-2xl p-8 mt-20 shadow-xl border border-white/5">
-            <h2 className="py-2 text-blue-card text-xl font-bold uppercase">
-              SALLE DES SUCRES
-            </h2>
+          <div className="bg-footer text-white rounded-2xl p-8 mt-20 border-[#00FFFF]/30 shadow-[0_0_15px_#00FFFF]/50 border-2">
+            <div className="flex">
+              <h2 className="py-2 text-xl font-bold uppercase mx-1.5">
+                SALLE DES
+              </h2>
+              <h2 className="py-2 text-xl font-bold uppercase text-mars-orange">
+                SUCRES
+              </h2>
+            </div>
             <p className="text-gray-300 font-light">
               Futur sanctuaire des conférences et de la remise des prix de
               Mars.A.I. Un espace majestueux alliant patrimoine et technologie.
@@ -42,16 +47,21 @@ export default function Location() {
 
         {/* --- COLONNE DROITE --- */}
         <div className="flex flex-col justify-between pt-10 md:pt-0 items-end">
-          <p className="text-xs leading-relaxed font-light w-50">
+          <p className="text-xl leading-relaxed font-light w-90">
             4 000 m² d'espaces modulables dans le centre de Marseille, au cœur
             de l'écosystème numérique.
           </p>
 
           {/* Bloc sombre droite */}
-          <div className="bg-footer text-white rounded-2xl p-8 mt-20 shadow-xl border border-white/5">
-            <h2 className="py-2 text-mars-orange text-xl font-bold uppercase">
-              SALLE PLAZA
-            </h2>
+          <div className="bg-footer text-white rounded-2xl p-8 mt-20 border-[#00FFFF]/30 shadow-[0_0_15px_#00FFFF]/50 border-2">
+            <div className="flex">
+              <h2 className="py-2 text-xl font-bold uppercase mx-1.5">
+                SALLE
+              </h2>
+              <h2 className="py-2 text-xl font-bold uppercase text-mars-orange">
+                plaza
+              </h2>
+            </div>
             <p className="text-gray-300 font-light">
               L'épicentre du festival : accueil, animations, workshops et
               restauration. Le point de rencontre de tous les participants.
@@ -60,13 +70,13 @@ export default function Location() {
         </div>
       </div>
       <div className="w-320 h-[450px] m-auto mt-8 rounded-2xl overflow-hidden shadow-lg border border-white/10">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2903.003972515497!2d5.366207075862241!3d43.314176271120196!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12c9c13ddc0211b9%3A0xd1642ae4b32c4bc4!2s%C3%89cole%20La%20Plateforme_%20Marseille%20-%20Entr%C3%A9e%20Sud!5e0!3m2!1sfr!2sfr!4v1770648071784!5m2!1sfr!2sfr"
-        className="w-full h-full"
-        loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-        title="Localisation La Plateforme Marseille"
-      ></iframe>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2903.003972515497!2d5.366207075862241!3d43.314176271120196!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12c9c13ddc0211b9%3A0xd1642ae4b32c4bc4!2s%C3%89cole%20La%20Plateforme_%20Marseille%20-%20Entr%C3%A9e%20Sud!5e0!3m2!1sfr!2sfr!4v1770648071784!5m2!1sfr!2sfr"
+          className="w-full h-full"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          title="Localisation La Plateforme Marseille"
+        ></iframe>
       </div>
     </section>
   );
