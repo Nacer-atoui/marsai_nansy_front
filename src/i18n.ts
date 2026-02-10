@@ -8,7 +8,7 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    fallbackLng: 'fr',
+    fallbackLng: 'fr-FR',
     ns: ['common', 'translation'],
     defaultNS: 'translation', // 'translation' reste le défaut pour les pages
     interpolation: { escapeValue: false },
@@ -22,6 +22,7 @@ i18n
         if (ns === 'common') {
           return `/locales/${lang}/common.json`;
         }
+        console.log(lang)
         return `http://localhost:3000/api/translations/${lang}`;
       },
     },
