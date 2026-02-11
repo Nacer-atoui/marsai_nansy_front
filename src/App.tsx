@@ -6,6 +6,7 @@ import { Footer } from './components/Footer.tsx';
 import Movie from './page/Movie.tsx';
 import { Route, Routes } from 'react-router-dom';
 import HomePage from './page/HomePage.tsx';
+import SubmitPage from './page/SubmitPage.tsx';
 import './index.css';
 import './i18n';
 
@@ -23,6 +24,7 @@ export default function App() {
         <Route path="/jury" element={<Jury />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/filmdetail" element={<FilmDetail />} />
+        <Route path="/submit" element={<SubmitPage />} />
       </Routes>
 
       <Footer />
