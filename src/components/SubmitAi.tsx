@@ -14,14 +14,14 @@ export default function SubmitAi() {
         <h2 className='text-cyan-400'>DÉCLARATION D'USAGE DE L'IA*</h2>
       </div>
       <div className='flex'>
-      <div className='border border-[#364153] rounded-2xl w-xl mx-7 mt-8 p-4'>
+      <button name='100' className='border border-[#364153] rounded-2xl w-xl mx-7 mt-8 p-4 text-left focus:border-mars-orange'>
         <h3 className='mb-3 font-bold'>Génération Intégrale (100% IA)</h3>
         <p className='text-gray-300'>Le contenu a été entièrement généré par intelligence artificielle</p>
-      </div>
-      <div className='border border-[#364153] rounded-2xl w-xl mx-7 mt-8 p-4'>
-        <h3 className='mb-3 font-bold'>Génération Intégrale (100% IA)</h3>
-        <p className='text-gray-300'>Le contenu a été entièrement généré par intelligence artificielle</p>
-      </div>
+      </button>
+      <button className='border border-[#364153] rounded-2xl w-xl mx-7 mt-8 p-4 text-left focus:border-mars-orange'>
+        <h3 className='mb-3 font-bold'>Production Hybride (Réel + IA)</h3>
+        <p className='text-gray-300'>Le contenu combine des éléments réels et générés par IA</p>
+      </button>
       </div>
       <div className='mx-7 mt-8'>
         <label htmlFor="stack" className={labelClasses}>Stack Technologique (Liste des outils)</label>
