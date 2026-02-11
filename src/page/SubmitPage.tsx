@@ -1,4 +1,5 @@
-import React from 'react'
+
+import SubmitMetaData from '../components/SubmitMetaData'
 import SubmitRealisator from '../components/SubmitRealisator'
 import SubmitAi from '../components/SubmitAi'
 
@@ -9,6 +10,8 @@ export default function SubmitPage() {
             <h2 className="text-3xl md:text-5xl font-bold text-white uppercase tracking-wider mb-10">Soumission de film</h2>
             <SubmitRealisator />
             <SubmitAi />
+        <SubmitRealisator />
+        <SubmitMetaData/>
         </div>
     </section>
   )
