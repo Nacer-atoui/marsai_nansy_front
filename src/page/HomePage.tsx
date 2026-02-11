@@ -17,8 +17,8 @@ export default function HomePage() {
       <FestivalObjectif />
       <EventFormat />
       <AboutEvent />
-      <Location />
       <NightEvent />
+      <Location />
       <Sponsors />
     </>
   );
