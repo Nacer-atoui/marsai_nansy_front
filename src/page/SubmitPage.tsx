@@ -1,5 +1,6 @@
 import React from 'react'
 import SubmitRealisator from '../components/SubmitRealisator'
+import SubmitAi from '../components/SubmitAi'
 
 export default function SubmitPage() {
   return (
@@ -7,6 +8,7 @@ export default function SubmitPage() {
         <div className="max-w-7xl mx-auto">
             <h2 className="text-3xl md:text-5xl font-bold text-white uppercase tracking-wider mb-10">Soumission de film</h2>
             <SubmitRealisator />
+            <SubmitAi />
         </div>
     </section>
   )
