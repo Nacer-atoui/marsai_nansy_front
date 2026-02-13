@@ -1,16 +1,10 @@
 import { Cpu } from 'lucide-react';
-import { RadioButton } from 'primereact/radiobutton';
-import { useState } from 'react';
 
 const inputClasses =
   'w-full bg-[#13162A] border border-[#364153] text-white px-4 py-3 rounded-lg focus:outline-none focus:border-[#f97316] focus:ring-1 focus:ring-[#f97316] placeholder-gray-500 transition-all';
 const labelClasses = 'block text-gray-400 text-sm mb-2 font-medium';
 
 export default function SubmitAi() {
-  const [isHybrid, setIsHybrid] = useState(true);
-  function handleChange(e: any) {
-    setIsHybrid(e.target.value);
-  }
 
   return (
     <section className="border border-[#364153] rounded-2xl p-5 my-10 font-display ">
