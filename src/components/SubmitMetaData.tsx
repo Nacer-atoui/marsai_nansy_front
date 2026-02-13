@@ -1,14 +1,14 @@
 export default function SubmitMetaData() {
     
     const inputClasses = "w-full bg-[#13162A] border border-[#364153] text-white px-4 py-3 rounded-lg focus:outline-none focus:border-[#f97316] focus:ring-1 focus:ring-[#f97316] placeholder-gray-500 transition-all";
-    const labelClasses = "block text-gray-400 text-sm mb-2 font-medium";
+    const labelClasses = "block text-gray-300 text-sm mb-2 font-medium";
 
     return (
       
         <section className="w-full">
             
            
-            <div className="mt-10 bg-[#07091D] border border-[#364153] rounded-2xl p-8 flex flex-col gap-8">
+            <div className="mt-10  border border-[#364153] rounded-2xl p-8 flex flex-col gap-8">
                 
                
                 <div className="flex">
