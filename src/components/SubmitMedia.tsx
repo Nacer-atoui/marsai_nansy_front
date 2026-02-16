@@ -1,10 +1,11 @@
-import { Film, Upload } from "lucide-react";
+import { Film, Upload, ImagePlus } from "lucide-react";
 
 const inputClasses =
   'w-full bg-[#13162A] border border-[#364153] text-white px-4 py-3 rounded-lg focus:outline-none focus:border-[#f97316] focus:ring-1 focus:ring-[#f97316] placeholder-gray-500 transition-all';
 const labelClasses = 'block text-gray-400 text-sm mb-2 font-medium';
 const inputFile = 'w-full h-30 bg-[#13162A] border border-[#364153] text-sm text-center px-4 py-3 rounded-lg text-slate-500 hover:cursor-pointer file:mr-4 file: file:py-2 file:px-4 file:rounded-lg file:border file:border-[#364153] file:text-sm file:font-semibold file:bg-footer file:text-white hover:file:border-mars-orange';
 const inputFile1 = 'w-full h-150 bg-[#13162A] border border-[#364153] text-sm text-center px-4 py-3 rounded-lg text-slate-500 hover:cursor-pointer file:mr-4 file: file:py-2 file:px-4 file:rounded-lg file:border file:border-[#364153] file:text-sm file:font-semibold file:bg-footer file:text-white hover:file:border-mars-orange';
+const inputFile2 = 'w-100 h-100 bg-[#13162A] border border-[#364153] text-sm text-center px-4 py-3 rounded-lg text-slate-500 hover:cursor-pointer hover:border-mars-orange file:mr-4 file: file:py-2 file:px-4 file:rounded-lg file:border file:border-[#364153] file:text-sm file:font-semibold file:bg-footer file:text-white hover:file:border-mars-orange';
 
 
 export default function SubmitMedia() {
@@ -28,7 +29,7 @@ export default function SubmitMedia() {
         <div>
             <label htmlFor="srt">
                 <div className={inputFile}>
-                    <Upload className="text-cyan-400 mx-auto mt-6" />
+                    <Upload className="text-cyan-400 mx-auto mt-6 " />
                     <p className="mt-2">Cliquez ici pour déposer votre fichier .SRT</p>
                 </div>
                 <input type="file" id="srt" accept=".srt" className="hidden" />
@@ -36,12 +37,33 @@ export default function SubmitMedia() {
         </div>
         <div className="mt-5">
             <p className={labelClasses}>Vignette Officielle*</p>
-            <label htmlFor="srt">
+            <label htmlFor="vignette">
                 <div className={inputFile1}>
                     <Upload className="text-cyan-400 mx-auto mt-65" />
                     <p className="mt-2">Format 16:9 recommandé (1920x1080px)</p>
                 </div>
-                <input type="file" id="srt" accept=".srt" className="hidden" />
+                <input type="file" id="vignette" accept=".srt" className="hidden" />
+            </label>
+        </div>
+            <p className="block mt-6 text-gray-400 text-sm mb-2 font-medium">Galerie Stills (3 images max)</p>
+        <div className="flex w-full gap-4 mt-1">
+            <label htmlFor="image">
+                <div className={inputFile2}>
+                    <ImagePlus className="text-cyan-400 mx-auto mt-45" />
+                </div>
+                <input type="file" id="image" accept="image/png, image/jpeg" className="hidden" />
+            </label>
+            <label htmlFor="image">
+                <div className={inputFile2}>
+                    <ImagePlus className="text-cyan-400 mx-auto mt-45" />
+                </div>
+                <input type="file" id="image" accept="image/png, image/jpeg" className="hidden" />
+            </label>
+            <label htmlFor="image">
+                <div className={inputFile2}>
+                    <ImagePlus className="text-cyan-400 mx-auto mt-45" />
+                </div>
+                <input type="file" id="image" accept="image/png, image/jpeg" className="hidden" />
             </label>
         </div>
     </section>
