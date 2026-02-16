@@ -5,15 +5,19 @@ import { useTranslation } from 'react-i18next';
 export function Header() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  
+
   // 1. On passe 'common' ici. Cela permet de ne plus écrire "common:" plus bas.
   const { t, i18n } = useTranslation('common');
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
 
+  console.log(i18n.language);
+
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    i18n.changeLanguage(e.target.value);
+    e.target.value == 'fr'
+      ? i18n.changeLanguage('fr-FR')
+      : i18n.changeLanguage('en-EN');
   };
 
   return (
@@ -41,7 +45,9 @@ export function Header() {
               <NavLink
                 to="/"
                 onClick={closeMenu}
-                className={({ isActive }) => isActive ? 'text-[#FF6600]' : 'hover:text-[#FF6600]'}
+                className={({ isActive }) =>
+                  isActive ? 'text-[#FF6600]' : 'hover:text-[#FF6600]'
+                }
               >
                 {/* Plus besoin de common: devant nav.home */}
                 {t('nav.home')}
@@ -51,7 +57,9 @@ export function Header() {
               <NavLink
                 to="/about"
                 onClick={closeMenu}
-                className={({ isActive }) => isActive ? 'text-[#FF6600]' : 'hover:text-[#FF6600]'}
+                className={({ isActive }) =>
+                  isActive ? 'text-[#FF6600]' : 'hover:text-[#FF6600]'
+                }
               >
                 {t('nav.about')}
               </NavLink>
@@ -60,7 +68,9 @@ export function Header() {
               <NavLink
                 to="/movie"
                 onClick={closeMenu}
-                className={({ isActive }) => isActive ? 'text-[#FF6600]' : 'hover:text-[#FF6600]'}
+                className={({ isActive }) =>
+                  isActive ? 'text-[#FF6600]' : 'hover:text-[#FF6600]'
+                }
               >
                 {t('nav.movies')}
               </NavLink>
@@ -69,7 +79,9 @@ export function Header() {
               <NavLink
                 to="/jury"
                 onClick={closeMenu}
-                className={({ isActive }) => isActive ? 'text-[#FF6600]' : 'hover:text-[#FF6600]'}
+                className={({ isActive }) =>
+                  isActive ? 'text-[#FF6600]' : 'hover:text-[#FF6600]'
+                }
               >
                 {t('nav.jury')}
               </NavLink>
@@ -78,7 +90,9 @@ export function Header() {
               <NavLink
                 to="/contact"
                 onClick={closeMenu}
-                className={({ isActive }) => isActive ? 'text-[#FF6600]' : 'hover:text-[#FF6600]'}
+                className={({ isActive }) =>
+                  isActive ? 'text-[#FF6600]' : 'hover:text-[#FF6600]'
+                }
               >
                 {t('nav.contact')}
               </NavLink>
@@ -90,15 +104,23 @@ export function Header() {
         <div className="flex items-center gap-4 z-50">
           <select
             className="bg-transparent border-none focus:ring-0 cursor-pointer text-sm lg:text-base text-white outline-none"
-            value={i18n.language.split('-')[0]} 
+            /* On sécurise l'accès à split pour Firefox */
+            value={(i18n.language || 'fr').split('-')[0]}
             onChange={handleLanguageChange}
           >
-            <option value="fr" className="bg-[#0B0F23]">FR</option>
-            <option value="en" className="bg-[#0B0F23]">EN</option>
+            <option value="fr" className="bg-[#0B0F23]">
+              FR
+            </option>
+            <option value="en" className="bg-[#0B0F23]">
+              EN
+            </option>
           </select>
 
-          <button onClick={toggleMenu} className="lg:hidden text-white focus:outline-none ml-2">
-            {isOpen ? "✕" : "☰"}
+          <button
+            onClick={toggleMenu}
+            className="lg:hidden text-white focus:outline-none ml-2"
+          >
+            {isOpen ? '✕' : '☰'}
           </button>
         </div>
       </nav>

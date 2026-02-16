@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import SearchMovie from '../components/MovieList/SearchMovie';
 // import './Movie.css'; // Tu peux créer un fichier CSS spécifique si besoin
 
 // 1. DÉFINITION DU TYPE
@@ -52,7 +54,7 @@ function Movie() {
   // 4. LE RENDU (JSX)
   return (
     <div className="movie-page" style={{ padding: '20px' }}>
-      <h1>Liste des Films</h1>
+      <SearchMovie/>
 
       {/* Grille de films */}
       <div
