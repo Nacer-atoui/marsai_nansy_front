@@ -23,7 +23,7 @@ import FilmDetail from './page/FilmDetail.tsx'
         <Route path='/movie' element={<Movie />} />
         <Route path='/jury' element={<Jury />} />
         <Route path='/contact' element={<Contact />} />
-        <Route path='/filmdetail' element={<FilmDetail/>} />
+        <Route path='/filmdetail/:id' element={<FilmDetail/>} />
            
       </Routes>
 
