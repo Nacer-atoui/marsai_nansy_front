@@ -6,32 +6,27 @@ import JuryVideoDetail from '../components/JuryVideoDetail';
 import UserDetailVideo from '../components/UserDetailVideo';
 
 export default function FilmDetails() {
-
   const { id } = useParams();
-  const jury = false;
+  const jury = true;
 
   const [movie, setMovie] = useState<MovieType>();
-
+  const [youtubeId, setYoutubeId] = useState<string>();
 
   useEffect(() => {
     fetch('http://localhost:3000/movie/' + id)
       .then(res => {
-       
         if (!res.ok) {
           throw new Error('Erreur réseau ou 404');
         }
         return res.json();
       })
-      .then(movie => {
-        console.log(movie);
-        
-        setMovie(movie[0]);
+      .then(data => {
+        setMovie(data[0]);
+        setYoutubeId(data[0].youtube_url.split('v=')[1]);
       });
-  }, [id]); 
-
+  }, [id]);
 
   if (movie == undefined) return;
-
   return (
     <div className="min-h-screen bg-slate-950 text-white p-6 md:p-12">
       <div className="max-w-7xl mx-auto">
@@ -50,17 +45,20 @@ export default function FilmDetails() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-8">
             <div className="aspect-video bg-gray-900 border border-slate-700 rounded-xl flex items-center justify-center text-gray-500">
-              <video className="h-full w-full rounded-lg" controls>
-                <source src='' />
-              </video>
+              <iframe
+                className="w-full h-full"
+                src={'https://www.youtube.com/embed/' + youtubeId}
+                title="YouTube video"
+                allow="fullscreen"
+                referrerPolicy="strict-origin-when-cross-origin"
+                loading="lazy"
+              ></iframe>
             </div>
 
             <div className="min-h-[100px] border border-dashed border-gray-700 p-4 rounded-xl text-gray-500 space-y-5">
               <div className="flex flex-nowrap gap-x-30 ">
                 <div>
-                  <p className="text-xl">
-                    Reslise par: {movie.original_title}
-                  </p>
+                  <p className="text-xl">Reslise par: {movie.original_title}</p>
                 </div>
                 <div>
                   <p className="text-xl">Durée: {movie.duration} </p>{' '}
@@ -69,7 +67,7 @@ export default function FilmDetails() {
                   <p className="text-xl">Pays:</p>{' '}
                 </div>
               </div>
-              
+
               <div>
                 {' '}
                 <h2 className="text-base">{movie.original_synopsis}</h2>
