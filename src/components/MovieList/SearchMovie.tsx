@@ -1,4 +1,12 @@
+import React, { useState } from "react";
+
+
+
 export default function SearchMovie() {
+  const [SelectedOption, setSelectedOption] = useState<string>('');
+
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) =>
+    setSelectedOption(e.target.value);
   return (
     <section className="py-20 px-4 font-montserrat text-white">
       <div className="text-center ">
@@ -17,9 +25,11 @@ export default function SearchMovie() {
       <div className="text-center mt-20">
         <select
           className="focus:outline-1 focus:outline-[#00FFFF]/30   mx-5 w-full lg:w-[20%] border-[#00FFFF]/30 border-2 p-3 rounded-lg bg-[#0B0F23]"
-          value="date"
+          value={SelectedOption}
+          onChange={handleChange}
         >
-          <option>Trier par : Plus récents</option>
+          <option value="option1">Trier par : Plus récents</option>
+          <option value="option2">Trier par : Plus ancients</option>
         </select>
         <select
           className="focus:outline-1 focus:outline-[#00FFFF]/30 mx-5 w-full lg:w-[20%] border-[#00FFFF]/30 border-2 p-3 rounded-lg bg-[#0B0F23]"

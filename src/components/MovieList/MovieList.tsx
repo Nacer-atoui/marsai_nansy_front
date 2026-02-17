@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // import './Movie.css'; // Tu peux créer un fichier CSS spécifique si besoin
 
 // 1. DÉFINITION DU TYPE
-interface MovieType {
+export interface MovieType {
   id: number;
   original_title: string;
   cover_img?: string;
@@ -11,14 +11,7 @@ interface MovieType {
   release_date?: string;
 }
 
- function MovieList() {
-  const navigate = useNavigate();
-
-  // 2. Luego creas tu función que usa esa variable
-  const navigateToFilm = () => {
-    navigate('/FilmDetail');
-  };
-
+function Movie() {
   // 2. LE STATE
   const [movies, setMovies] = useState<MovieType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -56,66 +49,59 @@ interface MovieType {
 
   // 4. LE RENDU (JSX)
   return (
-    <div className="movie-page" style={{ padding: '20px' }}>
+    <div className="ml-10 mb-10">
       {/* Grille de films */}
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-          gap: '20px',
-        }}
-      >
+      <div className="flex-wrap flex gap-[30px]  gap-[30px] ">
         {movies.map(movie => (
-          <div
-            key={movie.id}
-            onClick={navigateToFilm}
-            style={{
-              border: '1px solid #ccc',
-              padding: '10px',
-              borderRadius: '8px',
-              background: '#fff',
-            }}
-          >
-            {/* Image */}
-            {movie.cover_img ? (
-              <img
-                src={movie.cover_img}
-                alt={movie.original_title}
-                style={{
-                  width: '100%',
-                  height: '250px',
-                  objectFit: 'cover',
-                  borderRadius: '4px',
-                }}
-              />
-            ) : (
-              // Placeholder si pas d'image
-              <div
-                style={{
-                  width: '100%',
-                  height: '250px',
-                  background: '#eee',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <span>Pas d'image</span>
-              </div>
-            )}
+          <Link className="w-[22%]" to={'/filmdetail/' + movie.id}>
+            <div
+              key={movie.id}
+              className="focus:outline-1 focus:outline-[#00FFFF]/30 mx-5 w-full border-[#00FFFF]/30 border-2 rounded-lg bg-[#0B0F23] "
+            >
+              {/* Image */}
 
-            {/* Titre */}
-            <h3 style={{ margin: '10px 0' }}>{movie.original_title}</h3>
+              {movie.cover_img ? (
+                <div
+                  className={
+                    'w-[100%] h-[300px] bg-[url(' +
+                    movie.cover_img +
+                    ')] bg-cover  bg-size[auto] bg-center bg-contain'
+                  }
+                ></div>
+              ) : (
+                // Placeholder si pas d'image
+                <div className="w-[100%] h-[300px] bg-[url(/public/Pasdimage.webp)] bg-size[auto] bg-center bg-contain"></div>
+              )}
+              {/* {movie.cover_img ? (
+                <img
+                  src={movie.cover_img}
+                  alt={movie.original_title}
+                  className="w-[100%] h-[250px] object-contain rounded-md "
+                />
+              ) : (
+                // Placeholder si pas d'image
+                <div>
+                  <img
+                    className="w-[100%] h-[250px] rounded-md"
+                    src="PasD'image.webp"
+                    alt="pas d'image"
+                  />
+                </div>
+              )} */}
 
-            {/* Description (tronquée si trop longue, optionnel) */}
-            {movie.description && (
-              <p style={{ fontSize: '14px', color: '#555' }}>
-                {movie.description.length > 100
-                  ? movie.description.substring(0, 100) + '...'
-                  : movie.description}
-              </p>
-            )}
-          </div>
+              {/* Titre */}
+              <h3 className="m-5 text-center">{movie.original_title}</h3>
+
+              {/* Description (tronquée si trop longue, optionnel) */}
+              {movie.description && (
+                <p style={{ fontSize: '14px', color: '#555' }}>
+                  {movie.description.length > 100
+                    ? movie.description.substring(0, 100) + '...'
+                    : movie.description}
+                </p>
+              )}
+            </div>
+          </Link>
         ))}
       </div>
 
@@ -127,4 +113,4 @@ interface MovieType {
   );
 }
 
-export default MovieList;
+export default Movie;
