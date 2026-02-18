@@ -21,8 +21,7 @@ export default function UserDetailVideo() {
           </div>
         </div>
 
-        <p className="text-gray-400 text-sm leading-relaxed mb-6">
-        </p>
+        <p className="text-gray-400 text-sm leading-relaxed mb-6"></p>
 
         <div className="flex gap-3">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 flex items-center justify-center cursor-pointer hover:scale-110 transition-transform">
@@ -44,12 +43,22 @@ export default function UserDetailVideo() {
         </h3>
 
         <div className="flex gap-3">
-          <button className="flex-1 bg-sky-500 hover:bg-sky-400 text-white py-2 px-4 rounded-lg font-bold text-sm transition-colors flex items-center justify-center gap-2">
-            Twitter
-          </button>
-          <button className="flex-1 bg-blue-800 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-bold text-sm transition-colors flex items-center justify-center gap-2">
+          <a
+            href="https://x.com/POTUS"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-1 bg-black hover:bg-gray-900 text-white py-2 px-4 rounded-lg font-bold text-sm transition-colors flex items-center justify-center gap-2"
+          >
+            <span>X</span>
+          </a>
+          <a
+            href="https://www.facebook.com/IsraelenFrance/?locale=fr_FR"
+            target="_blank" // Abre en una pestaña nueva
+            rel="noopener noreferrer" // Seguridad necesaria al usar target="_blank"
+            className="flex-1 bg-blue-800 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-bold text-sm transition-colors flex items-center justify-center gap-2"
+          >
             Facebook
-          </button>
+          </a>
         </div>
       </div>
     </>

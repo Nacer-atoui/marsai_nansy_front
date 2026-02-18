@@ -51,10 +51,9 @@ function Movie() {
       <div style={{ padding: '20px', color: 'red' }}>Erreur : {error}</div>
     );
 
-  // 4. LE RENDU (JSX)
   return (
     <div className="movie-page" style={{ padding: '20px' }}>
-      <SearchMovie/>
+      <SearchMovie />
 
       {/* Grille de films */}
       <div
