@@ -1,0 +1,46 @@
+export interface Director {
+  civility: string;
+  firstname: string;
+  lastname: string;
+  email: string;
+  phone: string;
+  country: string;
+  birthday: string;
+  address: {
+    street: string;
+    zipcode: string;
+    city: string;
+  };
+}
+
+export interface Movie {
+  original_title: string;
+  original_synopsis: string;
+  duration: number;
+  language: string;
+  youtube_url: string;
+  creative_process: string;
+  ia_tools: string;
+  ishybrid: boolean;
+  cover_img: File | string;
+  hassubs: boolean;
+  srt: string;
+  statut: string;
+}
+
+export interface Tag{
+  id:number
+}
+
+export interface Collaborator {
+  firstname: string;
+  lastname: string;
+  email: string;
+  job: string;
+  contribution: string;
+}
+
+export interface Image {
+  url: string;
+
+}
