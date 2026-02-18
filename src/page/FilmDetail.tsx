@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import type { MovieType } from './Movie';
+import type { MovieType } from '../components/MovieList/MovieList';
 import JuryVideoDetail from '../components/JuryVideoDetail';
 import UserDetailVideo from '../components/UserDetailVideo';
 
