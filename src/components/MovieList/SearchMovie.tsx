@@ -26,7 +26,7 @@ export default function SearchMovie() {
       </div>
       <div className="text-center mt-20">
         <select
-          className="focus:outline-1 focus:outline-[#00FFFF]/30   mx-5 w-full lg:w-[20%] border-[#00FFFF]/30 border-2 p-3 rounded-lg bg-[#0B0F23]"
+          className="focus:outline-1 focus:outline-[#00FFFF]/30  mx-5 w-full lg:w-[20%] border-[#00FFFF]/30 border-2 p-3 rounded-lg bg-[#0B0F23]"
           value={SelectedOption}
           onChange={handleChange}
         >
