@@ -65,7 +65,7 @@ function Movie() {
                   className={
                     'w-[100%] h-[300px] bg-[url(' +
                     movie.cover_img +
-                    ')] bg-cover  bg-size[auto] bg-center bg-contain'
+                    ')] bg-cover  bg-size[auto] bg-center bg-contain '
                   }
                 ></div>
               ) : (
