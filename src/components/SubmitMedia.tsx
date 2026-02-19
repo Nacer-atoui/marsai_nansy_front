@@ -1,20 +1,17 @@
-import { Film, Upload, ImagePlus } from 'lucide-react';
+import { Film, Upload } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { SubmitImage } from './SubmitImage';
+
 
 const inputClasses =
   'w-full bg-[#13162A] border border-[#364153] text-white px-4 py-3 rounded-lg focus:outline-none focus:border-[#f97316] focus:ring-1 focus:ring-[#f97316] placeholder-gray-500 transition-all';
 const labelClasses = 'block text-gray-400 text-sm mb-2 font-medium';
 const inputFile =
-  'w-full h-30 bg-[#13162A] border border-[#364153] text-sm text-center px-4 py-3 rounded-lg text-slate-500 hover:cursor-pointer file:mr-4 file: file:py-2 file:px-4 file:rounded-lg file:border file:border-[#364153] file:text-sm file:font-semibold file:bg-footer file:text-white hover:file:border-mars-orange';
-const inputFile1 =
-  'w-full h-150 bg-[#13162A] border border-[#364153] text-sm text-center px-4 py-3 rounded-lg text-slate-500 hover:cursor-pointer file:mr-4 file: file:py-2 file:px-4 file:rounded-lg file:border file:border-[#364153] file:text-sm file:font-semibold file:bg-footer file:text-white hover:file:border-mars-orange';
-const inputFile2 =
-  'w-100 h-100 bg-[#13162A] border border-[#364153] text-sm text-center px-4 py-3 rounded-lg text-slate-500 hover:cursor-pointer hover:border-mars-orange file:mr-4 file: file:py-2 file:px-4 file:rounded-lg file:border file:border-[#364153] file:text-sm file:font-semibold file:bg-footer file:text-white hover:file:border-mars-orange';
+  'w-full h-30 bg-[#13162A] border border-dashed border-[#364153] text-sm text-center px-4 py-3 rounded-lg text-slate-500 hover:border-mars-orange hover:cursor-pointer file:mr-4 file: file:py-2 file:px-4 file:rounded-lg file:border file:border-[#364153] file:text-sm file:font-semibold file:bg-footer file:text-white hover:file:border-mars-orange';
 
 export default function SubmitMedia() {
-  const [file, setFile] = useState<File | undefined>();
-  const [preview, setPreview] = useState<string | null>(null);
+  const [vignetteFile, setVignetteFile] = useState<File | null>(null);
+  const [vignettePreview, setVignettePreview] = useState<string | null>(null);
 
   type ImageLot = {
     file: File | null;
@@ -27,13 +24,47 @@ export default function SubmitMedia() {
     { file: null, preview: null },
   ]);
 
+  const handleVignetteChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (vignettePreview) {
+      URL.revokeObjectURL(vignettePreview);
+    }
+
+    const objectUrl = URL.createObjectURL(file);
+    setVignetteFile(file);
+    setVignettePreview(objectUrl);
+  };
+
+  const handleRemoveVignette = () => {
+    if (vignettePreview) {
+      URL.revokeObjectURL(vignettePreview);
+    }
+    setVignetteFile(null);
+    setVignettePreview(null);
+
+    const inputElement = document.getElementById(
+      'vignette'
+    ) as HTMLInputElement;
+    if (inputElement) {
+      inputElement.value = '';
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      if (vignettePreview) URL.revokeObjectURL(vignettePreview);
+    };
+  }, [vignettePreview]);
+
   const handleFileChange = (
     index: number,
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     const file = e.target.files?.[0];
     if (!file) return;
-
+    
     const objectUrl = URL.createObjectURL(file);
 
     setImages(prevImages => {
@@ -48,11 +79,31 @@ export default function SubmitMedia() {
 
   useEffect(() => {
     return () => {
-      if (preview) {
-        URL.revokeObjectURL(preview);
-      }
+      images.forEach(img => {
+        if (img.preview) URL.revokeObjectURL(img.preview);
+      });
     };
-  }, [preview]);
+  }, [images]);
+
+  const handleRemoveImage = (index: number) => {
+    setImages(prevImages => {
+      const newImages = [...prevImages];
+
+      if (newImages[index].preview) {
+        URL.revokeObjectURL(newImages[index].preview as string);
+      }
+
+      newImages[index] = { file: null, preview: null };
+      return newImages;
+    });
+
+    const inputElement = document.getElementById(
+      `image${index}`
+    ) as HTMLInputElement;
+    if (inputElement) {
+      inputElement.value = '';
+    }
+  };
 
   return (
     <section className="border border-[#364153] rounded-2xl p-5 my-10 font-display">
@@ -100,26 +151,79 @@ export default function SubmitMedia() {
       </div>
       <div className="mt-5">
         <p className={labelClasses}>Vignette Officielle*</p>
-        <label htmlFor="vignette">
-          <div className={inputFile1}>
-            <Upload className="text-cyan-400 mx-auto mt-65" />
-            <p className="mt-2">Format 16:9 recommandé (1920x1080px)</p>
-          </div>
-          <input type="file" id="vignette" accept=".srt" className="hidden" />
-        </label>
+        <div className="relative w-full aspect-video mt-2">
+          <label
+            htmlFor="vignette"
+            className="absolute inset-0 flex flex-col items-center justify-center bg-[#13162A] border-2 border-dashed border-[#364153] rounded-lg text-slate-500 hover:cursor-pointer hover:border-[#f97316] overflow-hidden transition-all"
+          >
+            {vignettePreview ? (
+              <img
+                src={vignettePreview}
+                alt="Vignette"
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <>
+                <Upload className="text-cyan-400 w-10 h-10 mb-3" />
+                <p className="text-sm font-semibold">
+                  Cliquez pour ajouter la vignette
+                </p>
+              </>
+            )}
+            <input
+              type="file"
+              id="vignette"
+              accept="image/png, image/jpeg"
+              className="hidden"
+              onChange={handleVignetteChange}
+            />
+          </label>
+          {vignettePreview && (
+            <button
+              type="button"
+              onClick={e => {
+                e.preventDefault();
+                handleRemoveVignette();
+              }}
+              className="absolute -top-3 -right-3 bg-mars-orange hover:bg-orange-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold transition shadow-lg z-10 border-2 border-[#13162A]"
+              title="Supprimer la vignette"
+            >
+              ✕
+            </button>
+          )}
+        </div>
+
+        <p className="mt-2 text-xs text-slate-500 text-center">
+          Format 16:9 recommandé (1920x1080px)
+        </p>
       </div>
       <p className="block mt-6 text-gray-400 text-sm mb-2 font-medium">
         Galerie Stills (3 images max)
       </p>
       <div className="flex w-full gap-4 mt-1">
         {images.map((imageLot, index) => (
-          <SubmitImage
-            key={index}
-            id={`image${index}`}
-            preview={imageLot.preview}
-            onChange={e => handleFileChange(index, e)}
-            accept="image/*"
-          />
+          <div key={index} className="relative flex-1">
+            <SubmitImage
+              key={index}
+              id={`image${index}`}
+              preview={imageLot.preview}
+              onChange={e => handleFileChange(index, e)}
+              accept="image/*"
+            />
+            {imageLot.preview && (
+              <button
+                type="button"
+                onClick={e => {
+                  e.preventDefault();
+                  handleRemoveImage(index);
+                }}
+                className="absolute -top-3 -right-3 bg-[#f97316] hover:bg-orange-600 text-white rounded-full w-7 h-7 flex items-center justify-center text-xs font-bold transition shadow-lg z-10 border-2 border-[#13162A]"
+                title="Supprimer l'image"
+              >
+                X
+              </button>
+            )}
+          </div>
         ))}
       </div>
     </section>
