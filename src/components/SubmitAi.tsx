@@ -1,4 +1,6 @@
 import { Cpu } from 'lucide-react';
+import { RadioButton } from 'primereact/radiobutton';
+import { useState } from 'react';
 import type { Submit } from './types';
 import type { Ia } from './types';
 
@@ -26,10 +28,11 @@ export default function SubmitAi({
       <div className="mx-7 ">
         <h2 className="text-cyan-400">DÉCLARATION D'USAGE DE L'IA*</h2>
       </div>
+
       <div className="flex justify-center mt-8 gap-3">
         <label
           htmlFor="ai"
-          className="inline-flex  w-xl p-5 border border-[#364153] rounded-xl cursor-pointer has-checked:border-mars-orange"
+          className="inline-flex  w-xl p-5 border border-[#364153] rounded-xl cursor-pointer transition delay-75 duration-300 ease-in-out hover:translate-y-0.5  hover:scale-103 hover:bg-footer has-checked:border-mars-orange"
         >
         <input
           type="radio"
@@ -45,9 +48,10 @@ export default function SubmitAi({
             </p>
           </div>
         </label>
+
         <label
           htmlFor="hybrid"
-          className="inline-flex w-xl p-5 border border-[#364153] rounded-xl cursor-pointer has-checked:border-mars-orange"
+          className="inline-flex w-xl p-5 border border-[#364153] rounded-xl cursor-pointer transition delay-75 duration-300 ease-in-out hover:translate-y-0.5  hover:scale-103 hover:bg-footer has-checked:border-mars-orange"
         >
         <input
           type="radio"
@@ -56,7 +60,7 @@ export default function SubmitAi({
           value="true"
           className="hidden"
         />
-          <div className="block">
+          <div className="block ">
             <div className="font-bold mb-1">Production Hybride (Réel + IA)</div>
             <div className="text-sm text-gray-300">
               Le contenu combine des éléments réels et générés par IA
