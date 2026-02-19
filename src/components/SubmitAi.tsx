@@ -1,18 +1,25 @@
 import { Cpu } from 'lucide-react';
 import { RadioButton } from 'primereact/radiobutton';
 import { useState } from 'react';
+import type { Submit } from './types';
+import type { Ia } from './types';
 
 const inputClasses =
   'w-full bg-[#13162A] border border-[#364153] text-white px-4 py-3 rounded-lg focus:outline-none focus:border-[#f97316] focus:ring-1 focus:ring-[#f97316] placeholder-gray-500 transition-all';
 const labelClasses = 'block text-gray-400 text-sm mb-2 font-medium';
 
-export default function SubmitAi() {
-  const [isHybrid, setIsHybrid] = useState(true);
-  function handleChange(e: any) {
-    setIsHybrid(e.target.value);
-  }
+export default function SubmitAi({
+      ia, 
+    handleChange
+  }: { 
+    ia: Ia, 
+    
+    handleChange: (event: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>, section: keyof Submit) => void
+  }) 
+ {
 
   return (
+    <>
     <section className="border border-[#364153] rounded-2xl p-5 my-10 font-display ">
       <div className="flex px-5 pb-5">
         <Cpu className="mx-2" />
@@ -67,7 +74,9 @@ export default function SubmitAi() {
         </label>
         <textarea
           name="stack"
-          id="stack_ia"
+            id="stack_ia"
+            value={ia.stack} 
+            onChange={(e) => handleChange(e, 'ia')}
           placeholder="Midjourney v5, Stable Diffusion XL, Adobe After Effects, DaVinci Resolve..."
           className={inputClasses}
         ></textarea>
@@ -78,11 +87,14 @@ export default function SubmitAi() {
         </label>
         <textarea
           name="method"
-          id="method_ia"
+            id="method_ia"
+            value={ia.method} 
+            onChange={(e) => handleChange(e, 'ia')}
           placeholder="Décrivez votre approche créative et l'utilisation de l'IA dans votre processus..."
           className={inputClasses}
         ></textarea>
       </div>
-    </section>
+      </section>
+      </>
   );
 }
