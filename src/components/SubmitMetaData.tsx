@@ -15,7 +15,7 @@ export default function SubmitMetaData({
 
     return (
       
-        <section className="w-full">
+        <section className="w-full font-display">
             
            
             <div className="mt-10  border border-[#364153] rounded-2xl p-8 flex flex-col gap-8">

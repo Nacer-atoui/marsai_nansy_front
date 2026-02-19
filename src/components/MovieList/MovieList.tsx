@@ -8,36 +8,14 @@ export interface MovieType {
   original_title: string;
   cover_img?: string;
   description?: string;
-  release_date?: string;
+  ia_tools: string;
+  submitted_at: string;
+  duration: number;
+  language:string;
 }
-
-function Movie() {
+function Movie({movies, loading, error, moviesNew}: {movies: MovieType[], loading: boolean, error: string | null, moviesNew: MovieType[];}) {
   // 2. LE STATE
-  const [movies, setMovies] = useState<MovieType[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-
-  // 3. LE FETCH
-  useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const response = await fetch('http://localhost:3000/movie');
-
-        if (!response.ok) {
-          throw new Error('Erreur réseau');
-        }
-
-        const data = await response.json();
-        setMovies(data);
-      } catch (err: any) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchMovies();
-  }, []);
+  
 
   // GESTION DES ÉTATS DE CHARGEMENT / ERREUR
   if (loading)
@@ -52,7 +30,7 @@ function Movie() {
     <div className="ml-10 mb-10">
       {/* Grille de films */}
       <div className="flex-wrap flex gap-[30px]  gap-[30px] ">
-        {movies.map(movie => (
+        {moviesNew.map(movie => (
           <Link className="w-[22%]" to={'/filmdetail/' + movie.id}>
             <div
               key={movie.id}
@@ -72,34 +50,20 @@ function Movie() {
                 // Placeholder si pas d'image
                 <div className="w-[100%] h-[300px] bg-[url(/public/Pasdimage.webp)] bg-size[auto] bg-center bg-contain"></div>
               )}
-              {/* {movie.cover_img ? (
-                <img
-                  src={movie.cover_img}
-                  alt={movie.original_title}
-                  className="w-[100%] h-[250px] object-contain rounded-md "
-                />
-              ) : (
-                // Placeholder si pas d'image
-                <div>
-                  <img
-                    className="w-[100%] h-[250px] rounded-md"
-                    src="PasD'image.webp"
-                    alt="pas d'image"
-                  />
-                </div>
-              )} */}
 
               {/* Titre */}
-              <h3 className="m-5 text-center">{movie.original_title}</h3>
-
+              <h3 className="m-5 text-left uppercase text-[19px]  ">
+                {movie.original_title}
+              </h3>
+              <p className="mx-5 text-left flex justify-between">
+                Par moi wesh • {movie.duration} sec
+                <span className="text-gray-400">[{movie.language}] </span>
+              </p>
+              {/* <p className='text-center'> {movie.submitted_at}</p> */}
+              <p className="text-center m-5 border-1 flex justify-center">
+                {movie.ia_tools}
+              </p>
               {/* Description (tronquée si trop longue, optionnel) */}
-              {movie.description && (
-                <p style={{ fontSize: '14px', color: '#555' }}>
-                  {movie.description.length > 100
-                    ? movie.description.substring(0, 100) + '...'
-                    : movie.description}
-                </p>
-              )}
             </div>
           </Link>
         ))}
