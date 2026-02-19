@@ -9,20 +9,22 @@ export default function SubmitRealisator({
   handleChange: (event: React.ChangeEvent<HTMLInputElement>, section: keyof Submit) => void
 }) {
 
-  const inputStyle = "w-full p-3 rounded-lg bg-[#0B0F23]/50 border-[#00FFFF]/30 border-2 text-white focus:outline-none focus:border-[#00FFFF] transition-all placeholder-gray-600";
+  const inputStyle =
+    'w-full bg-[#13162A] border border-[#364153] focus:outline-none focus:border-mars-orange focus:ring-1 focus:ring-[#f97316] text-sm text-center px-4 py-3 rounded-lg text-slate-500 hover:border-mars-orange file:mr-4 file: file:py-2 file:px-4 file:rounded-lg file:border file:border-[#364153] file:text-sm file:font-semibold file:bg-footer file:text-white hover:file:border-mars-orange';
   const rowClass = "mt-5 flex flex-wrap md:flex-nowrap gap-5";
   const colClass = "w-full md:w-1/2";
+  const labelClasses = 'block text-gray-400 text-sm mb-2 font-medium'
 
   return (
-    <div className='p-10 border-[#00FFFF]/30 rounded-xl bg-[#0B0F23]/50 border'>
-      <h3 className="text-white text-2xl font-bold border-b border-[#00FFFF]/20 pb-4">
+    <div className='p-10 border-[#364153] rounded-xl border font-display'>
+      <h3 className="text-white text-2xl font-bold border-b border-[#364153] pb-4">
         Coordonnées du réalisateur
       </h3>
       
      
       <div className={rowClass}>
         <div className={colClass}>
-          <label className="block text-gray-300 mb-2">Civilité*</label>
+          <label className={labelClasses}>Civilité*</label>
           <input 
             type="text" 
             name="civility"
@@ -33,7 +35,7 @@ export default function SubmitRealisator({
           />
         </div>
         <div className={colClass}>
-          <label className="block text-gray-300 mb-2">Prénom*</label>
+          <label className={labelClasses}>Prénom*</label>
           <input 
             type="text" 
             name="firstname"
@@ -48,7 +50,7 @@ export default function SubmitRealisator({
       
       <div className={rowClass}>
         <div className={colClass}>
-          <label className="block text-gray-300 mb-2">Nom*</label>
+          <label className={labelClasses}>Nom*</label>
           <input 
             type="text" 
             name="lastname" 
@@ -59,7 +61,7 @@ export default function SubmitRealisator({
           />
         </div>
         <div className={colClass}>
-          <label className="block text-gray-300 mb-2">Date de naissance*</label>
+          <label className={labelClasses}>Date de naissance*</label>
           <input 
             type="date" 
             name="birthday"
@@ -73,7 +75,7 @@ export default function SubmitRealisator({
      
       <div className={rowClass}>
         <div className={colClass}>
-          <label className="block text-gray-300 mb-2">Email*</label>
+          <label className={labelClasses}>Email*</label>
           <input 
             type="email" 
             name="email" 
@@ -84,7 +86,7 @@ export default function SubmitRealisator({
           />
         </div>
         <div className={colClass}>
-          <label className="block text-gray-300 mb-2">Téléphone*</label>
+          <label className={labelClasses}>Téléphone*</label>
           <input 
             type="text" 
             name="phone" 
@@ -99,7 +101,7 @@ export default function SubmitRealisator({
      
       <div className={rowClass}>
         <div className={colClass}>
-          <label className="block text-gray-300 mb-2">Rue*</label>
+          <label className={labelClasses}>Rue*</label>
           <input 
             type="text" 
             name="address.street"
@@ -110,7 +112,7 @@ export default function SubmitRealisator({
           />
         </div>
         <div className={colClass}>
-          <label className="block text-gray-300 mb-2">Code Postal*</label>
+          <label className={labelClasses}>Code Postal*</label>
           <input 
             type="text" 
             name="address.zipcode"
@@ -125,7 +127,7 @@ export default function SubmitRealisator({
      
       <div className={rowClass}>
         <div className={colClass}>
-          <label className="block text-gray-300 mb-2">Ville*</label>
+          <label className={labelClasses}>Ville*</label>
           <input 
             type="text" 
             name="address.city"
@@ -136,7 +138,7 @@ export default function SubmitRealisator({
           />
         </div>
         <div className={colClass}>
-          <label className="block text-gray-300 mb-2">Pays*</label>
+          <label className={labelClasses}>Pays*</label>
           <input 
             type="text" 
             name="country" 
@@ -149,7 +151,7 @@ export default function SubmitRealisator({
       </div>
 
      
-  <div className="mt-5 flex items-center">
+  <div className="mt-5 flex items-center font-display">
             <div className="mt-10 w-[50%] mr-5 flex items-center gap-3">
                 <input 
                     type="checkbox" 
