@@ -21,34 +21,7 @@ export default function SubmitAi() {
       <div className="mx-7 ">
         <h2 className="text-cyan-400">DÉCLARATION D'USAGE DE L'IA*</h2>
       </div>
-      {/* <div className="flex">
-        <div className="peer border border-[#364153] hover:bg-[#13162A] rounded-2xl w-xl mx-7 mt-8 p-4 text-left focus:border-mars-orange">
-          <label>
-            <input
-              type="checkbox"
-              name="100"
-              className="peer-* h-5 w-5 cursor-pointer appearance-none rounded-xl border border-[#364153] checked:bg-mars-orange"
-            />
-            <h3 className="mb-3 font-bold">Génération Intégrale (100% IA)</h3>
-            <p className="text-gray-300">
-              Le contenu a été entièrement généré par intelligence artificielle
-            </p>
-          </label>
-        </div>
-            <input
-              type="checkbox"
-              name="100"
-              className="peer hidden h-5 w-5 cursor-pointer appearance-none rounded-xl border border-[#364153] checked:bg-mars-orange"
-            />
-          <label className='peer-checked:hover:border-mars-orange peer-checked:hover:border'>
-        <div className="border border-[#364153] hover:bg-[#13162A] rounded-2xl w-xl mx-7 mt-8 p-4 text-left focus:border-mars-orange">
-            <h3 className="mb-3 font-bold">Production Hybride (Réel + IA)</h3>
-            <p className="text-gray-300">
-              Le contenu combine des éléments réels et générés par IA
-            </p>
-        </div>
-          </label>
-      </div> */}
+
       <div className="flex justify-center mt-8 gap-3">
         <label
           htmlFor="ai"
