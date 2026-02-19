@@ -1,8 +1,8 @@
 import { ImagePlus } from 'lucide-react';
-import { useState, type InputHTMLAttributes } from 'react';
+import { type InputHTMLAttributes } from 'react';
 
 const inputFile2 =
-  'w-100 h-100 bg-[#13162A] border border-[#364153] text-sm text-center px-4 py-3 rounded-lg text-slate-500 hover:cursor-pointer hover:border-mars-orange file:mr-4 file: file:py-2 file:px-4 file:rounded-lg file:border file:border-[#364153] file:text-sm file:font-semibold file:bg-footer file:text-white hover:file:border-mars-orange';
+  'w-100 h-100 bg-[#13162A] border border-dashed border-[#364153] text-sm text-center px-4 py-3 rounded-lg text-slate-500 hover:cursor-pointer hover:border-mars-orange file:mr-4 file: file:py-2 file:px-4 file:rounded-lg file:border file:border-[#364153] file:text-sm file:font-semibold file:bg-footer file:text-white hover:file:border-mars-orange';
 
 interface Gallery extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
