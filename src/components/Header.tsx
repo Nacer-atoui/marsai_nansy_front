@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import '../index.css'
 
 export function Header() {
   const navigate = useNavigate();
@@ -46,7 +47,7 @@ export function Header() {
                 to="/"
                 onClick={closeMenu}
                 className={({ isActive }) =>
-                  isActive ? 'text-[#FF6600]' : 'hover:text-[#FF6600]'
+                  isActive ? 'text-color-mars-orange' : 'hover:text-color-mars-orange'
                 }
               >
                 {/* Plus besoin de common: devant nav.home */}
@@ -58,7 +59,7 @@ export function Header() {
                 to="/about"
                 onClick={closeMenu}
                 className={({ isActive }) =>
-                  isActive ? 'text-[#FF6600]' : 'hover:text-[#FF6600]'
+                  isActive ? 'text-color-mars-orange' : 'hover:text-color-mars-orange'
                 }
               >
                 {t('nav.about')}
@@ -69,7 +70,7 @@ export function Header() {
                 to="/movie"
                 onClick={closeMenu}
                 className={({ isActive }) =>
-                  isActive ? 'text-[#FF6600]' : 'hover:text-[#FF6600]'
+                  isActive ? 'text-color-mars-orange' : 'hover:text-color-mars-orange'
                 }
               >
                 {t('nav.movies')}
@@ -80,7 +81,7 @@ export function Header() {
                 to="/jury"
                 onClick={closeMenu}
                 className={({ isActive }) =>
-                  isActive ? 'text-[#FF6600]' : 'hover:text-[#FF6600]'
+                  isActive ? 'text-color-mars-orange' : 'hover:text-color-mars-orange'
                 }
               >
                 {t('nav.jury')}
@@ -91,7 +92,7 @@ export function Header() {
                 to="/contact"
                 onClick={closeMenu}
                 className={({ isActive }) =>
-                  isActive ? 'text-[#FF6600]' : 'hover:text-[#FF6600]'
+                  isActive ? 'text-color-mars-orange' : 'hover:text-color-mars-orange'
                 }
               >
                 {t('nav.contact')}

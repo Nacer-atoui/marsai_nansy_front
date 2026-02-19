@@ -1,40 +1,45 @@
+import { Route, Routes } from 'react-router-dom';
 import { Header } from './components/Header.tsx';
 import { About } from './page/About.tsx';
 import Jury from './page/Jury.tsx';
 import Contact from './page/Contact.tsx';
+import Auth from './components/Auth.tsx';
 import { Footer } from './components/Footer.tsx';
 import Movie from './page/Movie.tsx';
-import { Route, Routes } from 'react-router-dom';
 import HomePage from './page/HomePage.tsx';
 import SubmitPage from './page/SubmitPage.tsx';
+import FilmDetail from './page/FilmDetail.tsx';
 import './index.css';
 import './i18n';
 
-import FilmDetail from './page/FilmDetail.tsx';
-
 export default function App() {
+  return (
+    <Routes>
+     
+      <Route path={`/${import.meta.env.VITE_SECRET_AUTH_PATH}`} element={<Auth />} />
+
+     
+      <Route path="*" element={<MainLayout />} />
+    </Routes>
+  );
+}
+
+function MainLayout() {
   return (
     <>
       <Header />
-
       <Routes>
-        <Route path="/" element={<HomePage/>} />
-        <Route path='/about' element={<About />} />
-        <Route path='/movie' element={<Movie />} />
-        <Route path='/jury' element={<Jury />} />
-        <Route path='/contact' element={<Contact />} />
-        <Route path='/filmdetail/:id' element={<FilmDetail/>} />
-           
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<About />} />
         <Route path="/movie" element={<Movie />} />
         <Route path="/jury" element={<Jury />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/filmdetail" element={<FilmDetail />} />
+        <Route path="/filmdetail/:id" element={<FilmDetail />} />
         <Route path="/submit" element={<SubmitPage />} />
       </Routes>
-
       <Footer />
     </>
   );
 }
+
+
