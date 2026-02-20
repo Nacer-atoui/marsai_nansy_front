@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import dashboard from '../components/dashboard';
+import  { useState } from 'react';
+import DashBoard from '../components/dashBoard';
 
 
 export default function Admin() {
@@ -24,7 +24,7 @@ export default function Admin() {
             onClick={() => setActiveTab('dashboard')}
             className={`${baseBtn} ${activeTab === 'dashboard' ? activeBtn : inactiveBtn}`}
           >
-            Dashboard
+           
           </button>
 
           <button
