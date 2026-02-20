@@ -1,5 +1,7 @@
+import { ArrowBigRight } from 'lucide-react';
 import Countdown, { type CountdownRenderProps } from 'react-countdown';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 // On retire l'interface obligatoire qui posait problème dans HomePage
 export default function HeroSection() {
@@ -42,7 +44,7 @@ export default function HeroSection() {
       {/* Overlay pour garantir la lisibilité du texte par-dessus l'image */}
       <div className="absolute inset-0 bg-black/30" />
 
-      <div className="relative z-10 flex h-screen items-center justify-around flex-col font-display text-white">
+      <div className="relative z-10 pb-20 flex h-screen items-center justify-around flex-col font-display text-white">
         
         {/* LOGO */}
         <div className="flex mt-24">
@@ -69,12 +71,14 @@ export default function HeroSection() {
           
           <Countdown date={eventDate} renderer={counter} />
           
+          <Link to="/submit">
           <button 
-            className="mt-14 px-10 py-4 rounded-full text-white transition-all duration-300 font-semibold uppercase tracking-widest shadow-xl hover:scale-105 active:scale-95"
+            className="mt-14 px-10 py-4 rounded-full text-white transition-all duration-300 font-semibold uppercase tracking-widest shadow-xl hover:cursor-pointer hover:opacity-80"
             style={{ backgroundColor: primaryColor }}
           >
             {t('common:countdown.participate')}
           </button>
+          </Link>
         </div>
       </div>
     </div>
