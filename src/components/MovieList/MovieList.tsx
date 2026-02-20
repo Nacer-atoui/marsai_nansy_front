@@ -12,6 +12,8 @@ export interface MovieType {
   submitted_at: string;
   duration: number;
   language:string;
+  release_date?: string;
+  original_synopsis: string;
 }
 function Movie({movies, loading, error, moviesNew}: {movies: MovieType[], loading: boolean, error: string | null, moviesNew: MovieType[];}) {
   // 2. LE STATE
