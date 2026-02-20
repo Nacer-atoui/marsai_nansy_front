@@ -89,8 +89,8 @@ export default function SubmitTeam({
     const headerClasses = "px-6 py-4 font-medium text-gray-300 uppercase text-xs";
 
     return (
-        <section className="w-full">
-            <div className="mt-10 border border-[#364153] rounded-2xl p-8 flex flex-col gap-8 bg-[#0B0E14]">
+        <section className="w-full font-display">
+            <div className="mt-10 border border-[#364153] rounded-2xl p-8 flex flex-col gap-8">
 
                 <div className="flex items-center gap-3">
                     <img className="w-8 h-8 px-2" src="/equipe.svg" alt="" aria-hidden="true" />
