@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import type { MovieType } from '../components/MovieList/MovieList';
@@ -32,7 +32,7 @@ export default function FilmDetails() {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col items-start justify-center mb-8">
           <Link to="/movie" className="mb-1">
-            <h3 className="underline !text-orange-500 hover:!text-white transition-colors duration-300 text-sm font-bold uppercase">
+            <h3 className="underline text-orange-500 hover:text-white transition-colors duration-300 text-sm font-bold uppercase">
               RETOUR À LA LISTE DES VIDEOS
             </h3>
           </Link>
@@ -55,7 +55,7 @@ export default function FilmDetails() {
               ></iframe>
             </div>
 
-            <div className="min-h-[100px] border border-dashed border-gray-700 p-4 rounded-xl text-gray-500 space-y-5">
+            <div className="min-h-100px border border-dashed border-gray-700 p-4 rounded-xl text-gray-500 space-y-5">
               <div className="flex flex-nowrap gap-x-30 ">
                 <div>
                   <p className="text-xl">Reslise par: {movie.original_title}</p>
@@ -75,7 +75,7 @@ export default function FilmDetails() {
             </div>
 
             {/* Fiche technique IA (Statique) */}
-            <div className="border border-orange-500/50 rounded-xl p-6 min-h-[150px] bg-slate-900/30">
+            <div className="border border-orange-500/50 rounded-xl p-6 min-h-150px bg-slate-900/30">
               <h3 className="text-orange-500 font-bold uppercase text-sm tracking-wider mb-2">
                 FICHE D'IDENTITE IA
               </h3>

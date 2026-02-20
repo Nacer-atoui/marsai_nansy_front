@@ -9,6 +9,8 @@ export interface MovieType {
   cover_img?: string;
   description?: string;
   release_date?: string;
+  duration: number;
+  original_synopsis: string;
 }
 
 function Movie() {
