@@ -9,8 +9,10 @@ import Movie from './page/Movie.tsx';
 import HomePage from './page/HomePage.tsx';
 import SubmitPage from './page/SubmitPage.tsx';
 import FilmDetail from './page/FilmDetail.tsx';
+
 import './index.css';
 import './i18n';
+import Admin from './page/Admin.tsx';
 
 // 1. Le Gardien : Il ne bloque que si on essaie d'aller sur une route protégée
 const ProtectedRoute = ({ children }: { children: any }) => {
@@ -39,7 +41,7 @@ export default function App() {
           <ProtectedRoute>
             <div className="admin-container">
                <h1>Page Admin Privée</h1>
-               {/* Ici ton composant Dashboard Admin */}
+               <Admin/>
             </div>
           </ProtectedRoute>
         } 
