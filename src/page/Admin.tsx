@@ -5,11 +5,30 @@ import DashBoard from '../components/Admin/DashBoard';
 export default function Admin() {
   // Estado para controlar qué botón está activo
   const [activeTab, setActiveTab] = useState('utilisateurs');
+  console.log("ok")
 
   // Clases base para no repetir el código en cada botón
   const baseBtn = "w-full text-left px-6 py-3 font-medium transition-colors border-l-4";
   const activeBtn = "border-orange-500 text-orange-500 bg-white/5";
   const inactiveBtn = "border-transparent text-gray-400 hover:text-white hover:bg-white/5";
+
+  function renderSwitch(activeTab: string) {
+    switch (activeTab) {
+      case 'dashboard': 
+        return "Dashboard";
+      case 'films': 
+        return "Films";
+      case 'utilisateurs': 
+        return "Utilisateurs";
+      case 'statistiques': 
+        return <DashBoard />;
+      case 'parametres': 
+        return <DashBoard />;
+      default: 
+        return <DashBoard />;
+    }
+  }
+
 
   return (
     <div className="grid grid-cols-[17%_83%] h-screen">
@@ -61,33 +80,7 @@ export default function Admin() {
       {/* PANEL DERECHO */}
       <div className="bg-orange-500 p-4 font-bold text-white text-2xl flex items-center justify-center">
 
-    {/* switch ({activeTab}) {
-    case 0:
-        console.log("It is a Sunday.");
-        break;
-    case 1:
-        console.log("It is a Monday.");
-        break;
-    case 2:
-        console.log("It is a Tuesday.");
-        break;
-    case 3:
-        console.log("It is a Wednesday.");
-        break;
-    case 4:
-        console.log("It is a Thursday.");
-        break;
-    case 5:
-        console.log("It is a Friday.");
-        break;
-    case 6:
-        console.log("It is a Saturday.");
-        break;
-    default:
-        console.log("No such day exists!");
-        break;
-} */}
-
+        {renderSwitch(activeTab)}
 
       </div>
       
