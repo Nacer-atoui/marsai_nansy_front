@@ -3,7 +3,7 @@ import { Header } from './components/Header.tsx';
 import { About } from './page/About.tsx';
 import Jury from './page/Jury.tsx';
 import Contact from './page/Contact.tsx';
-import Auth from './components/Auth.tsx';
+import Auth from './components/Admin/Auth.tsx';
 import { Footer } from './components/Footer.tsx';
 import Movie from './page/Movie.tsx';
 import HomePage from './page/HomePage.tsx';
