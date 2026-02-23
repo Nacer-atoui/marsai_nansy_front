@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import * as React from "react"; 
 import { useState } from "react";
-import '../index.css';
+import '../../index.css'
 export default function Auth() {
     // --- ÉTATS ---
     const [showPassword, setShowPassword] = useState<boolean>(false);
