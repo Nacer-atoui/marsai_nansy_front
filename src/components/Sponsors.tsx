@@ -20,10 +20,10 @@ export default function Sponsors() {
   ];
 
   return (
-    <section className="bg-[#07091D] py-24 px-4 relative">
+    <section className="bg-#07091D py-24 px-4 relative">
       
       {/* Fond lumineux orange discret derrière le titre */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[#f97316]/10 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-600px h-400px bg-[#f97316]/10 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         
