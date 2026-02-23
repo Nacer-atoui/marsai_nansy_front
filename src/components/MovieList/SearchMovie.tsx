@@ -7,10 +7,18 @@ export default function SearchMovie({
   movies,
   setMoviesNew,
   moviesNew,
+  pagination,
+  actualPage,
+  setActualPage,
+  setPagination,
 }: {
   movies: MovieType[];
   setMoviesNew: Dispatch<SetStateAction<MovieType[]>>;
   moviesNew: MovieType[];
+  pagination: number;
+  actualPage: number;
+  setActualPage: Dispatch<SetStateAction<number>>;
+  setPagination: Dispatch<SetStateAction<number>>;
 }) {
   const [selectedOption, setSelectedOption] = useState('option1');
   const [search, setSearch] = useState('');
@@ -51,7 +59,7 @@ export default function SearchMovie({
     });
 
     moviesNew = moviesNew.filter(movie => {
-      if (selectLanguage == "All"){
+      if (selectLanguage == 'All') {
         return true;
       }
 
@@ -60,19 +68,17 @@ export default function SearchMovie({
       }
       return false;
     });
-  
-    console.log(movies);
+
+    setPagination(Math.ceil(moviesNew.length / 20));
+
+    let before = ((actualPage * 20)-20);
+    let after = 20 * actualPage;
+
+    moviesNew = moviesNew.slice(before, after);
+    console.log(actualPage);
 
     setMoviesNew(moviesNew);
-  }, [search, selectedOption, selectLanguage, movies]);
-
-
-  //  useEffect(() => {
-  //   option = movies.filter(movie => {
-
-  //   })
-  //  })
-  // console.log(moviesNew);
+  }, [search, selectedOption, selectLanguage, movies, actualPage]);
 
   return (
     <section className="py-20 px-4 font-montserrat text-white">
