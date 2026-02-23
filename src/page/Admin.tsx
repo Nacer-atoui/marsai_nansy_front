@@ -1,5 +1,5 @@
 import  { useState } from 'react';
-import DashBoard from '../components/dashBoard';
+import DashBoard from '../components/Admin/DashBoard';
 
 
 export default function Admin() {
