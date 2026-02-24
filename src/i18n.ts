@@ -8,21 +8,18 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    fallbackLng: 'fr-FR',
+    fallbackLng: 'fr',
     ns: ['common', 'translation'],
-    defaultNS: 'translation', // 'translation' reste le défaut pour les pages
+    defaultNS: 'translation',
     interpolation: { escapeValue: false },
     react: { useSuspense: false },
     backend: {
-      loadPath: (lngs: string[], namespaces: string[]) => {
-        const lang = lngs[0];
-        const ns = namespaces[0];
+      loadPath: (lngs: string | string[], namespaces: string | string[]) => {
+        const langRaw = Array.isArray(lngs) ? lngs[0] : lngs;
+        const ns = Array.isArray(namespaces) ? namespaces[0] : namespaces;
+        const lang = langRaw.split('-')[0]; // Transforme fr-FR en fr
 
-        // LOGIQUE : common = public/locales, le reste = Express
-        if (ns === 'common') {
-          return `/locales/${lang}/common.json`;
-        }
-        console.log(lang)
+        if (ns === 'common') return `/locales/${lang}/common.json`;
         return `http://localhost:3000/api/translations/${lang}`;
       },
     },
