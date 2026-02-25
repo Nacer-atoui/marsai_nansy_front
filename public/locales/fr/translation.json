@@ -60,5 +60,22 @@
   "night_description": "Fête Électro mêlant IA et futurs souhaitables. Une expérience immersive sonore et visuelle.",
   "night_date": "13 JUIN",
   "night_time": "à partir de 19h",
-  "night_btn_pass": "Prendre mon pass"
+  "night_btn_pass": "Prendre mon pass",
+  "location.badge": "Le lieu",
+  "location.name.part1": "LA",
+  "location.name.part2": "PLATEFORME",
+  "location.old.name": "(EX DOCKS DES SUDS)",
+  "location.main.desc": "4 000 m² d'espaces modulables dans le centre de Marseille, au cœur de l'écosystème numérique.",
+  "location.room.sucres.t1": "salle des",
+  "location.room.sucres.t2": "sucres",
+  "location.room.sucres.desc": "Futur sanctuaire des conférences et de la remise des prix de Mars.A.I. Un espace majestueux alliant patrimoine et technologie.",
+  "location.room.plaza.t1": "SALLE",
+  "location.room.plaza.t2": "PLAZA",
+  "location.room.plaza.desc": "L'épicentre du festival : accueil, animations, workshops et restauration. Le point de rencontre de tous les participants.",
+  "films.title.t1": "FILMS EN ",
+  "films.title.t2": "COMPÉTITION",
+  "films.description": " Découvrez une sélection d'œuvres pionnières qui explorent les\n            nouvelles frontières de l'imaginaire assisté par l'Intelligence\n            Artificielle.",
+  "films.link.text": "voir toute la selection →",
+  "films.labels.director": "Réalisateur",
+  "films.labels.origin": "Origine"
 }
