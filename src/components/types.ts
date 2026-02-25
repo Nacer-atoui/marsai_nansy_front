@@ -25,6 +25,8 @@ export interface Media {
   hassubs: boolean;
   srt: string;
   statut: string;
+  cover_img:string
+  image:{}
 }
 
 export interface Collaborator{
@@ -37,7 +39,7 @@ export interface Collaborator{
 
 export interface Ia{
   stack: string,
-  method:string
+  method: boolean
 }
 
 export interface Image {
@@ -50,5 +52,4 @@ export type Submit = {
   media: Media;
   ia: Ia;
   collaborator: Collaborator[];
-  image: Image;
 };
