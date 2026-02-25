@@ -1,7 +1,7 @@
+import React from 'react';
 
-
-export default function DashBoard() {
- return  (
+export default function Dashboard() {
+  return (
     // Contenedor principal sin fondo (lo hereda de Admin.tsx) y con texto blanco
     <div className="p-8 text-white w-full">
       
@@ -14,10 +14,10 @@ export default function DashBoard() {
         <div className="flex items-center gap-4">
           <div className="text-right">
             <p className="font-bold uppercase">Administrateur</p>
-            <p className="text-blue-400 text-sm">adminA@email.com</p>
+            <p className="text-blue-400 text-sm">admin@email.com</p>
           </div>
           <img 
-            src="https://preview.redd.it/qui-se-souvient-de-ayuwoki-v0-0fh0d8qf4v9c1.jpeg?width=640&crop=smart&auto=webp&s=805095f4a9e7ce0350d2ce03025079bd1d9df5be" 
+            src="https://i.pravatar.cc/150?img=11" 
             alt="Avatar" 
             className="w-12 h-12 rounded-full border-2 border-blue-500" 
           />
@@ -40,8 +40,8 @@ export default function DashBoard() {
       {/* GRID DE TARJETAS (2 columnas) */}
       <div className="grid grid-cols-2 gap-6">
 
-        {/* TARJETA 1: Films */}
-        <div className="bg-slate-800 p-6 rounded-xl border border-slate-700">
+        {/* TARJETA 1: Films (SIN BARRA) */}
+        <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 flex flex-col justify-between">
           <div className="flex justify-between items-start mb-6">
             <div className="text-3xl bg-slate-700 p-3 rounded-lg">
               🎬
@@ -51,21 +51,27 @@ export default function DashBoard() {
             </span>
           </div>
           
-          <h2 className="text-4xl font-bold mb-1">482</h2>
-          <p className="text-gray-400 text-sm mb-6 uppercase">Films évalués par le jury</p>
-
+          <div>
+             <h2 className="text-4xl font-bold mb-1">482</h2>
+             <p className="text-gray-400 text-sm uppercase">Films évalués par le jury</p>
+          </div>
         </div>
 
-        {/* TARJETA 2: Jurés */}
-        <div className="bg-slate-800 p-6 rounded-xl border border-slate-700">
+        {/* TARJETA 2: Jurés (SIN BARRA) */}
+        <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 flex flex-col justify-between">
           <div className="flex justify-between items-start mb-6">
             <div className="text-3xl bg-slate-700 p-3 rounded-lg">
               🎖️
             </div>
+            <span className="bg-orange-900 text-orange-300 text-xs font-bold px-3 py-1 rounded-full">
+              QUOTA: 100/JURÉ
+            </span>
           </div>
           
-          <h2 className="text-4xl font-bold mb-1">08/12</h2>
-          <p className="text-gray-400 text-sm mb-6 uppercase">Jurés ayant finalisé leur lot</p>
+          <div>
+            <h2 className="text-4xl font-bold mb-1">08/12</h2>
+            <p className="text-gray-400 text-sm uppercase">Jurés ayant finalisé leur lot</p>
+          </div>
         </div>
 
         {/* TARJETA 3: Pays */}
@@ -85,7 +91,7 @@ export default function DashBoard() {
               🎟️
             </div>
             <div className="text-3xl text-orange-500">
-              
+              ⚡
             </div>
           </div>
           
@@ -98,9 +104,19 @@ export default function DashBoard() {
 
         {/* TARJETA 5: Comptes (Ocupa 2 espacios con col-span-2) */}
         <div className="col-span-2 bg-slate-800 p-6 rounded-xl border border-slate-700 flex justify-between items-center">
+          <div className="flex items-center gap-4">
+            <div className="text-3xl bg-slate-700 p-3 rounded-lg">
+              🎬
+            </div>
+            <div>
+              <h2 className="text-4xl font-bold mb-1">182</h2>
+              <p className="text-gray-400 text-sm uppercase">Comptes réalisateurs actifs</p>
+            </div>
+          </div>
           
           <div className="text-right">
-
+            <h2 className="text-4xl font-bold text-blue-400 mb-1">+8</h2>
+            <p className="text-gray-400 text-sm uppercase">Aujourd'hui</p>
           </div>
         </div>
 
