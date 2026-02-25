@@ -46,10 +46,15 @@ export interface Image {
   url: string;
 }
 
+export interface Video {
+  video: File;
+}
+
 export type Submit = {
   director: Director;
   metadata: MetaData;
   media: Media;
   ia: Ia;
   collaborator: Collaborator[];
+  video: Video | null;
 };
