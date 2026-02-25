@@ -104,7 +104,7 @@ export default function SearchMovie({
           onChange={handleChange}
         >
           <option value="option1">Trier par : Plus récents</option>
-          <option value="option2">Trier par : Plus ancients</option>
+          <option value="option2">Trier par : Plus ancien</option>
         </select>
 
         <select

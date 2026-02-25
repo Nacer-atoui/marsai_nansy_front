@@ -1,6 +1,9 @@
 import { MapPin } from 'lucide-react';
+import { useTranslation } from 'react-i18next'; // Import pour la traduction
 
 export default function Location() {
+  const { t } = useTranslation(); // Initialisation de la fonction t
+
   return (
     <section className=" bg-midnight py-20 px-4 font-display">
       {/* 1. max-w-7xl mx-auto : Centre le contenu sur les grands écrans
@@ -14,17 +17,17 @@ export default function Location() {
             <div className="flex items-center gap-2 mb-6">
               <MapPin className="text-cyan-400" />
               <p className="uppercase tracking-widest font-bold text-sm">
-                Le lieu
+                {t('location.badge')}
               </p>
             </div>
 
             <div className="text-8xl font-bold leading-none">
-              <h1>LA</h1>
-              <h1 className="text-mars-orange">PLATEFORME</h1>
+              <h1>{t('location.name.part1')}</h1>
+              <h1 className="text-mars-orange">{t('location.name.part2')}</h1>
             </div>
 
             <p className="mt-4 text-sm font-mono opacity-60 tracking-wider">
-              (EX DOCKS DES SUDS)
+              {t('location.old.name')}
             </p>
           </div>
 
@@ -32,15 +35,14 @@ export default function Location() {
           <div className="bg-footer text-white rounded-2xl p-8 mt-20 border-[#00FFFF]/30 shadow-[0_0_15px_#00FFFF]/50 border-2">
             <div className="flex">
               <h2 className="py-2 text-xl font-bold uppercase mx-1.5">
-                SALLE DES
+                {t('location.room.sucres.t1')}
               </h2>
               <h2 className="py-2 text-xl font-bold uppercase text-mars-orange">
-                SUCRES
+                {t('location.room.sucres.t2')}
               </h2>
             </div>
             <p className="text-gray-300 font-light">
-              Futur sanctuaire des conférences et de la remise des prix de
-              Mars.A.I. Un espace majestueux alliant patrimoine et technologie.
+              {t('location.room.sucres.desc')}
             </p>
           </div>
         </div>
@@ -48,23 +50,21 @@ export default function Location() {
         {/* --- COLONNE DROITE --- */}
         <div className="flex flex-col justify-between pt-10 md:pt-0 items-end">
           <p className="text-xl leading-relaxed font-light w-90">
-            4 000 m² d'espaces modulables dans le centre de Marseille, au cœur
-            de l'écosystème numérique.
+            {t('location.main.desc')}
           </p>
 
           {/* Bloc sombre droite */}
           <div className="bg-footer text-white rounded-2xl p-8 mt-20 border-[#00FFFF]/30 shadow-[0_0_15px_#00FFFF]/50 border-2">
             <div className="flex">
               <h2 className="py-2 text-xl font-bold uppercase mx-1.5">
-                SALLE
+                {t('location.room.plaza.t1')}
               </h2>
               <h2 className="py-2 text-xl font-bold uppercase text-mars-orange">
-                plaza
+                {t('location.room.plaza.t2')}
               </h2>
             </div>
             <p className="text-gray-300 font-light">
-              L'épicentre du festival : accueil, animations, workshops et
-              restauration. Le point de rencontre de tous les participants.
+              {t('location.room.plaza.desc')}
             </p>
           </div>
         </div>

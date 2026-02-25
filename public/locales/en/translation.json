@@ -60,5 +60,22 @@
   "night_description": "Electro party mixing AI and desirable futures. An immersive sound and visual experience.",
   "night_date": "JUNE 13",
   "night_time": "from 7 PM",
-  "night_btn_pass": "Get my pass"
+  "night_btn_pass": "Get my pass",
+  "location.badge": "Location",
+  "location.name.part1": "LA",
+  "location.name.part2": "PLATFORME",
+  "location.old.name": "(EX DOCKS DES SUDS)",
+  "location.main.desc": "4,000 m² of modular space in the center of Marseille, at the heart of the digital ecosystem.",
+  "location.room.sucres.t1": "room ",
+  "location.room.sucres.t2": "sugars",
+  "location.room.sucres.desc": "Future sanctuary for Mars.A.I. conferences and awards ceremonies. A majestic space combining heritage and technology.",
+  "location.room.plaza.t1": "PLAZA",
+  "location.room.plaza.t2": "ROOM",
+  "location.room.plaza.desc": "The epicenter of the festival: reception, entertainment, workshops and catering. The meeting point for all participants.",
+  "films.title.t1": "FILMS IN",
+  "films.title.t2": "COMPETITION",
+  "films.description": " Discover a selection of pioneering works exploring the new frontiers\n            the new frontiers of AI-assisted imagination.\n            Artificial Intelligence.",
+  "films.link.text": "see the entire selection →",
+  "films.labels.director": "Director",
+  "films.labels.origin": "Origin"
 }

@@ -1,31 +1,32 @@
 import { useState } from 'react';
 import DashBoard from '../components/Admin/DashBoard';
+import AdminTranslations from '../components/Admin/CmsEditor'; 
 
 export default function Admin() {
-  // Estado para controlar qué botón está activo
-  const [activeTab, setActiveTab] = useState('utilisateurs');
-  console.log('ok');
+  // État pour contrôler quel bouton est actif
+  const [activeTab, setActiveTab] = useState('traductions');
 
-  // Clases base para no repetir el código en cada botón
-  const baseBtn =
-    'w-full text-left px-6 py-3 font-medium transition-colors border-l-4';
-  const activeBtn = 'border-orange-500 text-orange-500 bg-white/5';
-  const inactiveBtn =
-    'border-transparent text-gray-400 hover:text-white hover:bg-white/5';
+  // Clases base (Ton CSS d'origine)
+  const baseBtn = "w-full text-left px-6 py-3 font-medium transition-colors border-l-4";
+  const activeBtn = "border-orange-500 text-orange-500 bg-white/5";
+  const inactiveBtn = "border-transparent text-gray-400 hover:text-white hover:bg-white/5";
 
+  // fonction Switch avec l'ajout de la traduction
   function renderSwitch(activeTab: string) {
     switch (activeTab) {
-      case 'dashboard':
-        return 'Dashboard';
-      case 'films':
-        return 'Films';
-      case 'utilisateurs':
-        return 'Utilisateurs';
-      case 'statistiques':
+      case 'dashboard': 
         return <DashBoard />;
-      case 'parametres':
-        return <DashBoard />;
-      default:
+      case 'traductions': 
+        return <AdminTranslations />; // intégration 
+      case 'films': 
+        return <p>Interface Films</p>;
+      case 'utilisateurs': 
+        return <p>Interface Utilisateurs</p>;
+      case 'statistiques': 
+        return <p>Interface Statistiques</p>;
+      case 'parametres': 
+        return <p>Interface Paramètres</p>;
+      default: 
         return <DashBoard />;
     }
   }
@@ -71,8 +72,9 @@ export default function Admin() {
         </div>
       </div>
 
-      {/* PANEL DERECHO */}
-      <div className="bg-[oklch(28.2% 0.091 267.935)] overflow-y-auto">
+      
+      <div className={`${activeTab === 'traductions' ? 'bg-[#050505]' : 'bg-orange-500'} p-4 flex items-center justify-center overflow-y-auto transition-colors duration-300`}>
+
         {renderSwitch(activeTab)}
       </div>
     </div>
