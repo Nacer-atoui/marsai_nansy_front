@@ -37,6 +37,7 @@ export default function SubmitPage() {
       cover_img: '',
       image: {},
     },
+    video: null,
     ia: { stack: 'Je suis une IA', method: true },
     collaborator: [],
   });
@@ -84,12 +85,30 @@ export default function SubmitPage() {
     setData(null);
     console.log(formData);
     try {
+      const data = new FormData();
+      console.log(JSON.stringify(formData.video));
+
+
+      data.append('director', JSON.stringify(formData.director));
+      data.append('metadata', JSON.stringify(formData.metadata));
+      data.append('media', JSON.stringify(formData.media));
+      data.append('ia', JSON.stringify(formData.ia));
+      data.append('collaborator', JSON.stringify(formData.collaborator));
+
+      console.log(Array.from(data.entries()));
+
+      // Méthode 2 : Boucler dessus
+      data.forEach((value, key) => {
+        console.log(key, value);
+      });
+
+      if (formData.video) {
+        data.append('video', formData.video.video);
+      }
+
       const response = await fetch('http://localhost:3000/movie', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+        body: data
       });
 
       const result = await response.json();
@@ -142,7 +161,7 @@ export default function SubmitPage() {
             handleChange={handleChange}
           />
           <SubmitAi ia={formData.ia} handleChange={handleChange} />
-          <SubmitMedia />
+          <SubmitMedia setFormData={setFormData} formData={formData} />
 
           <SubmitTeam
             collaborator={formData.collaborator}

@@ -1,7 +1,8 @@
 import { Film, Upload } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { SubmitImage } from './SubmitImage';
-
+import type { Dispatch, SetStateAction } from 'react';
+import type { Submit } from './types';
 
 const inputClasses =
   'w-full bg-[#13162A] border border-[#364153] text-white px-4 py-3 rounded-lg focus:outline-none focus:border-[#f97316] focus:ring-1 focus:ring-[#f97316] placeholder-gray-500 transition-all';
@@ -9,7 +10,8 @@ const labelClasses = 'block text-gray-400 text-sm mb-2 font-medium';
 const inputFile =
   'w-full h-30 bg-[#13162A] border border-dashed border-[#364153] text-sm text-center px-4 py-3 rounded-lg text-slate-500 hover:border-mars-orange hover:cursor-pointer file:mr-4 file: file:py-2 file:px-4 file:rounded-lg file:border file:border-[#364153] file:text-sm file:font-semibold file:bg-footer file:text-white hover:file:border-mars-orange';
 
-export default function SubmitMedia() {
+export default function SubmitMedia({ formData, setFormData}: {setFormData: Dispatch<SetStateAction<Submit>>,
+    formData: Submit}) {
   const [vignetteFile, setVignetteFile] = useState<File | null>(null);
   const [vignettePreview, setVignettePreview] = useState<string | null>(null);
 
@@ -58,13 +60,30 @@ export default function SubmitMedia() {
     };
   }, [vignettePreview]);
 
+  const handleFileVideo = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+
+    if (files && files.length > 0) {
+      const videoFile = files[0]; // C'est ici ton objet de type 'File'
+      setFormData({
+        ...formData,
+        video: {
+          ...formData.video,
+          video: videoFile, // Maintenant le type 'File' match avec ton interface
+        },
+      });
+    }
+  
+    console.log(e.currentTarget.value)
+  }
+
   const handleFileChange = (
     index: number,
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    
+
     const objectUrl = URL.createObjectURL(file);
 
     setImages(prevImages => {
@@ -116,11 +135,12 @@ export default function SubmitMedia() {
           Lien YouTube Source*
         </label>
         <input
-          type="url"
+          type="file"
           name="url"
           id="url"
           placeholder="https://www.youtube.com/watch?v=Ry8XRCS-Tyd"
           className={inputClasses}
+          onChange={handleFileVideo}
           required
         />
       </div>
