@@ -1,97 +1,82 @@
-import { useState } from 'react';
-import DashBoard from '../components/Admin/DashBoard';
-import AdminTranslations from '../components/Admin/CmsEditor'; 
-import AdminFilmList from '../components/Admin/AdminFilmList';
+
+import { NavLink, Outlet } from 'react-router-dom';
 
 export default function Admin() {
-  // État pour contrôler quel bouton est actif
-  const [activeTab, setActiveTab] = useState('traductions');
-
-  // Clases base (Ton CSS d'origine)
-  const baseBtn = "w-full text-left px-6 py-3 font-medium transition-colors border-l-4";
-  const activeBtn = "border-orange-500 text-orange-500 bg-white/5";
-  const inactiveBtn = "border-transparent text-gray-400 hover:text-white hover:bg-white/5";
-
-  // fonction Switch avec l'ajout de la traduction
-  function renderSwitch(activeTab: string) {
-    switch (activeTab) {
-      case 'dashboard': 
-        return <DashBoard />;
-      case 'traductions': 
-        return <AdminTranslations />; // intégration 
-      case 'films': 
-        return <AdminFilmList />;
-      case 'utilisateurs': 
-        return <p>Interface Utilisateurs</p>;
-      case 'statistiques': 
-        return <p>Interface Statistiques</p>;
-      case 'parametres': 
-        return <p>Interface Paramètres</p>;
-      default: 
-        return <DashBoard />;
-    }
-  }
-
   return (
-    <div className="grid grid-cols-[17%_83%] h-x-screen">
-      
-     
-      <div className="bg-[oklch(37.9% 0.146 265.522)] shadow-xl z-10">
+    <div className="grid grid-cols-[17%_83%] h-screen">
+      <div className="bg-[oklch(28.2% 0.091 267.935)]">
         <div className="flex flex-col mt-20 gap-2">
-          
-          <button
-            onClick={() => setActiveTab('dashboard')}
-            className={`${baseBtn} ${activeTab === 'dashboard' ? activeBtn : inactiveBtn}`}
+          <NavLink
+            to="/admin/dashboard"
+            className={({ isActive }) =>
+              isActive
+                ? 'block w-full text-left px-6 py-3 font-medium transition-colors border-l-4 border-orange-500 text-orange-500 bg-white/5'
+                : 'block w-full text-left px-6 py-3 font-medium transition-colors border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-white/5'
+            }
           >
             Dashboard
-          </button>
+          </NavLink>
 
-        
-          <button
-            onClick={() => setActiveTab('traductions')}
-            className={`${baseBtn} ${activeTab === 'traductions' ? activeBtn : inactiveBtn}`}
+          <NavLink
+            to="/admin/cms"
+            className={({ isActive }) =>
+              isActive
+                ? 'block w-full text-left px-6 py-3 font-medium transition-colors border-l-4 border-orange-500 text-orange-500 bg-white/5'
+                : 'block w-full text-left px-6 py-3 font-medium transition-colors border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-white/5'
+            }
           >
-            Traductions
-          </button>
+            CMS
+          </NavLink>
 
-          <button
-            onClick={() => setActiveTab('films')}
-            className={`${baseBtn} ${activeTab === 'films' ? activeBtn : inactiveBtn}`}
+          <NavLink
+            to="/admin/films"
+            className={({ isActive }) =>
+              isActive
+                ? 'block w-full text-left px-6 py-3 font-medium transition-colors border-l-4 border-orange-500 text-orange-500 bg-white/5'
+                : 'block w-full text-left px-6 py-3 font-medium transition-colors border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-white/5'
+            }
           >
             Films
-          </button>
+          </NavLink>
 
-          <button
-            onClick={() => setActiveTab('utilisateurs')}
-            className={`${baseBtn} ${activeTab === 'utilisateurs' ? activeBtn : inactiveBtn}`}
+          <NavLink
+            to="/admin/utilisateurs"
+            className={({ isActive }) =>
+              isActive
+                ? 'block w-full text-left px-6 py-3 font-medium transition-colors border-l-4 border-orange-500 text-orange-500 bg-white/5'
+                : 'block w-full text-left px-6 py-3 font-medium transition-colors border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-white/5'
+            }
           >
             Utilisateurs
-          </button>
+          </NavLink>
 
-          <button
-            onClick={() => setActiveTab('statistiques')}
-            className={`${baseBtn} ${activeTab === 'statistiques' ? activeBtn : inactiveBtn}`}
+          <NavLink
+            to="/admin/statistiques"
+            className={({ isActive }) =>
+              isActive
+                ? 'block w-full text-left px-6 py-3 font-medium transition-colors border-l-4 border-orange-500 text-orange-500 bg-white/5'
+                : 'block w-full text-left px-6 py-3 font-medium transition-colors border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-white/5'
+            }
           >
             Statistiques
-          </button>
+          </NavLink>
 
-          <button
-            onClick={() => setActiveTab('parametres')}
-            className={`${baseBtn} ${activeTab === 'parametres' ? activeBtn : inactiveBtn}`}
+          <NavLink
+            to="/admin/parametres"
+            className={({ isActive }) =>
+              isActive
+                ? 'block w-full text-left px-6 py-3 font-medium transition-colors border-l-4 border-orange-500 text-orange-500 bg-white/5'
+                : 'block w-full text-left px-6 py-3 font-medium transition-colors border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-white/5'
+            }
           >
             Paramètres
-          </button>
-
+          </NavLink>
         </div>
       </div>
 
-      
-      <div className={`${activeTab === 'traductions' || activeTab === 'films' ? 'bg-[#050505]' : 'bg-orange-500'} p-4 flex items-center justify-center overflow-y-auto transition-colors duration-300`}>
-
-        {renderSwitch(activeTab)}
-
+      <div className="bg-[oklch(28.2% 0.091 267.935)] overflow-y-auto">
+        <Outlet />
       </div>
-      
     </div>
   );
 }

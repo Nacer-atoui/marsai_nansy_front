@@ -11,9 +11,11 @@ import HomePage from './page/HomePage.tsx';
 import SubmitPage from './page/SubmitPage.tsx';
 import FilmDetail from './page/FilmDetail.tsx';
 import Admin from './page/Admin.tsx';
-
+import DashBoard from './components/Admin/DashBoard.tsx';
+import CmsEditor from './components/Admin/CmsEditor.tsx';
 import './index.css';
 import './i18n'; 
+import AdminFilmList from './components/Admin/AdminFilmList.tsx';
 
 // 1. Le Gardien : Protection des routes Admin
 const ProtectedRoute = ({ children }: { children: any }) => {
@@ -32,24 +34,24 @@ export default function App() {
 
   return (
     <Routes>
-     
-      <Route path={`/${import.meta.env.VITE_SECRET_AUTH_PATH}`} element={<Auth />} />
+    <Route path={`/${import.meta.env.VITE_SECRET_AUTH_PATH}`} element={<Auth />} />
 
-   
-      <Route 
-        path="/admin/dashboard" 
-        element={
-          <ProtectedRoute>
-            <div className="admin-container bg-midnight min-h-screen text-white">
-               <Admin /> 
-            </div>
-          </ProtectedRoute>
-        } 
-      />
-
-     
-      <Route path="*" element={<MainLayout />} />
-    </Routes>
+    <Route 
+      path="/admin" 
+      element={
+        <ProtectedRoute>
+          <Admin /> 
+        </ProtectedRoute>
+      } 
+    >
+      <Route path="dashboard" element={<DashBoard />} />
+      <Route path="cms" element={<CmsEditor/>} />
+      <Route path="films" element={<AdminFilmList />} />
+    </Route> 
+        
+    <Route path="*" element={<MainLayout />} />
+  </Routes>
+    
   );
 }
 

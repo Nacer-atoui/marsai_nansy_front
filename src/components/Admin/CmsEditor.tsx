@@ -71,10 +71,10 @@ export default function CmsEditor() {
   };
 
   return (
-    <div className="relative flex flex-col md:flex-row bg-[#050505] text-slate-200 font-display min-h-screen">
+    <div className="relative flex flex-col md:flex-row  text-slate-200 font-display min-h-screen">
       
       {/* SIDEBAR CMS */}
-      <aside className="w-full md:w-80 bg-black/40 border-r border-white/5 p-6 flex flex-col gap-8">
+      <aside className="w-full md:w-80 bg-oklch(28.2% 0.091 267.935)  border-r border-white/5 p-6 flex flex-col gap-8">
         <div>
           <div className="flex items-center gap-2 text-mars-orange mb-2">
             <Database size={16} />
@@ -218,7 +218,7 @@ export default function CmsEditor() {
         </div>
 
         {/* LA NOUVELLE BARRE COLLANTE EN BAS */}
-        <div className="absolute bottom-0 left-0 w-full bg-[#050505]/95 backdrop-blur-md border-t border-white/10 p-6 flex justify-end z-50">
+        <div className="absolute bottom-0 left-0 w-full bg-oklch(28.2% 0.091 267.935)  backdrop-blur-md border-t border-white/10 p-6 flex justify-end z-50">
           <button 
             onClick={handleSubmit}
             disabled={loading}
