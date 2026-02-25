@@ -11,7 +11,7 @@ export default function AboutEvent() {
   ];
 
   return (
-    <section className="bg-[#07091D] py-20 px-4 font-montserrat text-white">
+    <section className="bg-midnight py-20 px-4 font-montserrat text-white">
       <div className="max-w-7xl mx-auto">
         
         {/* TITRE PRINCIPAL */}
