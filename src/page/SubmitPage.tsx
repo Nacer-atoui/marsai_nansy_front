@@ -30,10 +30,15 @@ export default function SubmitPage() {
       tags: '',
     },
 
-    media: { hassubs: false, srt: '', statut: 'Draft' },
-    ia: { stack: '', method: '' },
+    media: {
+      hassubs: false,
+      srt: '',
+      statut: 'Draft',
+      cover_img: '',
+      image: {},
+    },
+    ia: { stack: 'Je suis une IA', method: true },
     collaborator: [],
-    image: { url: '' },
   });
 
   function handleChange(
@@ -77,9 +82,9 @@ export default function SubmitPage() {
     setIsLoading(true);
     setError(null);
     setData(null);
-
+    console.log(formData);
     try {
-      const response = await fetch('http://localhost:3000/api/movies', {
+      const response = await fetch('http://localhost:3000/movie', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -91,15 +96,16 @@ export default function SubmitPage() {
 
       if (!response.ok) {
         // Si le backend renvoie une erreur (400, 500, etc.)
-        throw new Error(result.message || 'Une erreur est survenue lors de la soumission.');
+        throw new Error(
+          result.message || 'Une erreur est survenue lors de la soumission.'
+        );
       }
 
       // Si tout s'est bien passé
-      setData(result); 
+      setData(result);
       console.log('Film soumis avec succès:', result);
-      
-      // Optionnel : réinitialiser le formulaire ici si besoin
 
+      // Optionnel : réinitialiser le formulaire ici si besoin
     } catch (err: any) {
       console.error('Erreur fetch:', err);
       setError(err.message);
@@ -108,8 +114,7 @@ export default function SubmitPage() {
     }
   };
 
-
-return (
+  return (
     <section className="bg-midnight py-20 px-4">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-3xl md:text-5xl font-bold text-white uppercase tracking-wider mb-10">
@@ -117,8 +122,14 @@ return (
         </h2>
 
         {/* Affichage des messages de succès ou d'erreur */}
-        {error && <div className="p-4 mb-6 text-white bg-red-600 rounded">{error}</div>}
-        {data && <div className="p-4 mb-6 text-white bg-green-600 rounded">Film soumis avec succès !</div>}
+        {error && (
+          <div className="p-4 mb-6 text-white bg-red-600 rounded">{error}</div>
+        )}
+        {data && (
+          <div className="p-4 mb-6 text-white bg-green-600 rounded">
+            Film soumis avec succès !
+          </div>
+        )}
 
         {/* On englobe tout dans un form */}
         <form onSubmit={handleSubmit}>
@@ -132,7 +143,7 @@ return (
           />
           <SubmitAi ia={formData.ia} handleChange={handleChange} />
           <SubmitMedia />
-          
+
           <SubmitTeam
             collaborator={formData.collaborator}
             setFormData={setFormData}
@@ -142,12 +153,12 @@ return (
           <button
             type="submit"
             name="btn_submit"
-            disabled={isLoading}
+            // disabled={isLoading}
             className={`mt-14 px-10 py-4 ml-250 rounded-full text-white bg-mars-orange transition-all duration-300 font-semibold uppercase tracking-widest shadow-xl hover:cursor-pointer hover:opacity-80 ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
           >
-            {isLoading ? 'Envoi en cours...' : 'Soumettre'}
+            {/* {isLoading ? 'Envoi en cours...' : 'Soumettre'} */}
+            Soumettre
           </button>
-          
         </form>
       </div>
     </section>

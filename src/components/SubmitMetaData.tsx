@@ -28,7 +28,7 @@ export default function SubmitMetaData({
 
              
                 <div className="w-full">
-                    <form className="flex flex-col gap-6 w-full">
+                    
                        
                         <div>
                             <label htmlFor="originalTitle" className={labelClasses}>
@@ -79,8 +79,6 @@ export default function SubmitMetaData({
                                 required
                             />
                         </div>
-
-                    </form>
                 </div>
             </div>
 
