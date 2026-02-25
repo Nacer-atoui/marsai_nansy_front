@@ -33,25 +33,14 @@ export default function Admin() {
 
   return (
     <div className="grid grid-cols-[17%_83%] h-screen">
-      
-     
-      <div className="bg-[oklch(37.9% 0.146 265.522)] shadow-xl z-10">
+      {/* PANEL IZQUIERDO: Corrección del color usando sintaxis de Tailwind */}
+      <div className="bg-[oklch(37.9% 0.146 265.522)]">
+        {/* CONTENEDOR DE BOTONES: Quitado el items-center y ajustado el gap */}
         <div className="flex flex-col mt-20 gap-2">
-          
           <button
             onClick={() => setActiveTab('dashboard')}
             className={`${baseBtn} ${activeTab === 'dashboard' ? activeBtn : inactiveBtn}`}
-          >
-            Dashboard
-          </button>
-
-        
-          <button
-            onClick={() => setActiveTab('traductions')}
-            className={`${baseBtn} ${activeTab === 'traductions' ? activeBtn : inactiveBtn}`}
-          >
-            Traductions
-          </button>
+          ></button>
 
           <button
             onClick={() => setActiveTab('films')}
@@ -80,7 +69,6 @@ export default function Admin() {
           >
             Paramètres
           </button>
-
         </div>
       </div>
 
@@ -88,9 +76,7 @@ export default function Admin() {
       <div className={`${activeTab === 'traductions' ? 'bg-[#050505]' : 'bg-orange-500'} p-4 flex items-center justify-center overflow-y-auto transition-colors duration-300`}>
 
         {renderSwitch(activeTab)}
-
       </div>
-      
     </div>
   );
 }
