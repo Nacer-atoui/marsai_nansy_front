@@ -56,31 +56,19 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-black/30" />
 
       <div className="relative z-10 flex h-screen items-center justify-around font-display text-white">
-        <div className='p-6 w-150'>
-          {/* LOGO */}
-          <div className="flex ml-5">
-            <h1 className="text-5xl font-normal uppercase tracking-tighter">
-              MARS
-            </h1>
-            <p
-              className="text-5xl font-normal uppercase"
-              style={{ color: primaryColor }}
-            >
-              AI
-            </p>
-          </div>
-
+        <div className='p-6 w-100'>
           <div className="space-y-5 px-4">
             <p className="text-7xl font-normal max-w-5xl leading-tight">
               {t('hero_subtitle')}
             </p>
-
+          <div className='w-130 pt-5'>
             <p
               className="text-3xl font-semibold"
               style={{ color: primaryColor }}
             >
               {t('intro_text')}
             </p>
+            </div>
           </div>
         </div>
         <div className='p-6'>

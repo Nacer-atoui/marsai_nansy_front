@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function JuryVideoDetail() {
+export default function JuryVideoDetail({ movieId }: { movieId?: string }){
   const numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   
   // 1. ESTADO DE LA NOTA (Ya lo tenías)
