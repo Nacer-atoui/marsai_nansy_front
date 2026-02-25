@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import DashBoard from '../components/Admin/DashBoard';
 import AdminTranslations from '../components/Admin/CmsEditor'; 
+import AdminFilmList from '../components/Admin/AdminFilmList';
 
 export default function Admin() {
   // État pour contrôler quel bouton est actif
@@ -19,7 +20,7 @@ export default function Admin() {
       case 'traductions': 
         return <AdminTranslations />; // intégration 
       case 'films': 
-        return <p>Interface Films</p>;
+        return <AdminFilmList />;
       case 'utilisateurs': 
         return <p>Interface Utilisateurs</p>;
       case 'statistiques': 
@@ -85,7 +86,7 @@ export default function Admin() {
       </div>
 
       
-      <div className={`${activeTab === 'traductions' ? 'bg-[#050505]' : 'bg-orange-500'} p-4 flex items-center justify-center overflow-y-auto transition-colors duration-300`}>
+      <div className={`${activeTab === 'traductions' || activeTab === 'films' ? 'bg-[#050505]' : 'bg-orange-500'} p-4 flex items-center justify-center overflow-y-auto transition-colors duration-300`}>
 
         {renderSwitch(activeTab)}
 
