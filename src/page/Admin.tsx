@@ -57,10 +57,10 @@ export default function Admin() {
           </button>
 
           <button
-            onClick={() => setActiveTab('statistiques')}
-            className={`${baseBtn} ${activeTab === 'statistiques' ? activeBtn : inactiveBtn}`}
+            onClick={() => setActiveTab('Dashboard')}
+            className={`${baseBtn} ${activeTab === 'Dashboard' ? activeBtn : inactiveBtn}`}
           >
-            Statistiques
+            Dashboard
           </button>
 
           <button
@@ -73,7 +73,7 @@ export default function Admin() {
       </div>
 
       
-      <div className={`${activeTab === 'traductions' ? 'bg-[#050505]' : 'bg-orange-500'} p-4 flex items-center justify-center overflow-y-auto transition-colors duration-300`}>
+      <div className="oklch(28.2% 0.091 267.935)">
 
         {renderSwitch(activeTab)}
       </div>
