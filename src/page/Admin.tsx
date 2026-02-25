@@ -33,7 +33,7 @@ export default function Admin() {
   }
 
   return (
-    <div className="grid grid-cols-[17%_83%] h-screen">
+    <div className="grid grid-cols-[17%_83%] h-x-screen">
       
      
       <div className="bg-[oklch(37.9% 0.146 265.522)] shadow-xl z-10">
