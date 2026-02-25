@@ -16,6 +16,8 @@ import CmsEditor from './components/Admin/CmsEditor.tsx';
 import './index.css';
 import './i18n'; 
 import AdminFilmList from './components/Admin/AdminFilmList.tsx';
+import JuryFilmList from './components/JuryFilmList.tsx';
+import JuryFilmDetail from './page/JuryFilmDetail.tsx';
 
 // 1. Le Gardien : Protection des routes Admin
 const ProtectedRoute = ({ children }: { children: any }) => {
@@ -35,7 +37,8 @@ export default function App() {
   return (
     <Routes>
     <Route path={`/${import.meta.env.VITE_SECRET_AUTH_PATH}`} element={<Auth />} />
-
+    <Route path="/test-jury-liste" element={<JuryFilmList />} />
+    <Route path="/jury/film/:id" element={<JuryFilmDetail />} />
     <Route 
       path="/admin" 
       element={

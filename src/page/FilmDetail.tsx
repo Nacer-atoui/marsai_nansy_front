@@ -1,13 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import type { MovieType } from '../components/MovieList/MovieList';
-import JuryVideoDetail from '../components/JuryVideoDetail';
 import UserDetailVideo from '../components/UserDetailVideo';
 
 export default function FilmDetails() {
   const { id } = useParams();
-  const jury = true;
 
   const [movie, setMovie] = useState<MovieType>();
   const [youtubeId, setYoutubeId] = useState<string>();
@@ -15,9 +12,7 @@ export default function FilmDetails() {
   useEffect(() => {
     fetch('http://localhost:3000/movie/' + id)
       .then(res => {
-        if (!res.ok) {
-          throw new Error('Erreur réseau ou 404');
-        }
+        if (!res.ok) throw new Error('Erreur réseau ou 404');
         return res.json();
       })
       .then(data => {
@@ -26,7 +21,8 @@ export default function FilmDetails() {
       });
   }, [id]);
 
-  if (movie == undefined) return;
+  if (movie == undefined) return <div className="min-h-screen bg-slate-950 text-white p-12 text-center">Chargement...</div>;
+
   return (
     <div className="min-h-screen bg-slate-950 text-white p-6 md:p-12">
       <div className="max-w-7xl mx-auto">
@@ -56,49 +52,30 @@ export default function FilmDetails() {
             </div>
 
             <div className="min-h-100px border border-dashed border-gray-700 p-4 rounded-xl text-gray-500 space-y-5">
-              <div className="flex flex-nowrap gap-x-30 ">
-                <div>
-                  <p className="text-xl">Reslise par: {movie.original_title}</p>
-                </div>
-                <div>
-                  <p className="text-xl">Durée: {movie.duration} </p>{' '}
-                </div>
-                <div>
-                  <p className="text-xl">Pays:</p>{' '}
-                </div>
+              <div className="flex flex-wrap gap-x-10">
+                <p className="text-xl">Réalisé par: {movie.original_title}</p> {/* Attention, ici tu affiches le titre au lieu du réalisateur ! */}
+                <p className="text-xl">Durée: {movie.duration} min</p>
+                <p className="text-xl">Pays: {movie.language}</p>
               </div>
-
               <div>
-                {' '}
                 <h2 className="text-base">{movie.original_synopsis}</h2>
               </div>
             </div>
 
-            {/* Fiche technique IA (Statique) */}
+            {/* Fiche technique IA Publique */}
             <div className="border border-orange-500/50 rounded-xl p-6 min-h-150px bg-slate-900/30">
-              <h3 className="text-orange-500 font-bold uppercase text-sm tracking-wider mb-2">
-                FICHE D'IDENTITE IA
-              </h3>
-
+              <h3 className="text-orange-500 font-bold uppercase text-sm tracking-wider mb-2">FICHE D'IDENTITE IA</h3>
               <p className="text-gray-400 text-sm mb-4">Outils IA utilisés :</p>
-
               <div className="grid grid-cols-1 md:grid-cols-2 gap-y-2 gap-x-8 text-sm font-mono text-gray-300">
-                <div>
-                  <span className="text-gray-500">IA Tool :</span>
-                  <span className="ml-2">Gemini pro</span>
-                </div>
-
-                <div className="md:col-span-2">
-                  <span className="text-gray-500">IA Post-Prod :</span>
-                  <span className="ml-2">Topaz Labs</span>
-                </div>
+                <div><span className="text-gray-500">IA Tool :</span><span className="ml-2">Gemini pro</span></div>
+                <div className="md:col-span-2"><span className="text-gray-500">IA Post-Prod :</span><span className="ml-2">Topaz Labs</span></div>
               </div>
             </div>
           </div>
 
-          {/* COLONNE DROITE (Prend 1/3 de l'espace) */}
+          {/* COLONNE DROITE (UNIQUEMENT VISITEUR) */}
           <div className="space-y-6">
-            {jury ? <JuryVideoDetail /> : <UserDetailVideo />}
+            <UserDetailVideo />
           </div>
         </div>
       </div>
