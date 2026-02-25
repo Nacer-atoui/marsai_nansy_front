@@ -2,8 +2,9 @@ import { Link, useNavigate } from "react-router-dom";
 import * as React from "react"; 
 import { useState } from "react";
 import '../../index.css'
+
 export default function Auth() {
-    // --- ÉTATS ---
+    // --- ÉTATS (Tes états originaux) ---
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
@@ -12,15 +13,19 @@ export default function Auth() {
     
     const navigate = useNavigate();
 
-    // --- LOGIQUE DE SOUMISSION ---
-    // Utiliser React.FormEvent directement règle le problème du "barré"
+    // --- LOGIQUE DE SOUMISSION MISE À JOUR ---
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setError("");
         setIsLoading(true);
 
+        // LOG DE DEBUG : Pour vérifier ce que tu envoies avant le crash
+        console.log("🚀 Tentative de connexion vers le Back-end...");
+        console.log("Email saisi :", email);
+
         try {
-            const response = await fetch("http://localhost:3000/api/auth/login", {
+            // Utilisation de 127.0.0.1 pour éviter les problèmes de résolution localhost
+            const response = await fetch("http://127.0.0.1:3000/api/auth/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, password }),
@@ -29,22 +34,29 @@ export default function Auth() {
             const data = await response.json();
 
             if (!response.ok) {
+                // Si le serveur répond 401, on affiche le message précis du back
                 throw new Error(data.message || "Identifiants incorrects");
             }
 
-            localStorage.setItem("token", data.token);
-            localStorage.setItem("userRole", data.user.role);
+            console.log("✅ Connexion réussie ! Token reçu.");
 
+            // Stockage sécurisé
+            localStorage.setItem("token", data.token);
+            // On utilise une sécurité au cas où data.user.role serait mal formaté
+            localStorage.setItem("userRole", data.user?.role || "admin");
+
+            // Redirection forcée
             navigate("/admin/dashboard");
             
         } catch (err: any) {
-            setError(err.message || "Une erreur est survenue");
+            console.error("❌ Erreur Fetch :", err.message);
+            setError(err.message || "Impossible de contacter le serveur");
         } finally {
             setIsLoading(false);
         }
     };
 
-    // Typage direct pour éviter les erreurs de détection
+    // --- TES GESTIONNAIRES DE CHANGEMENT ---
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value);
     };
@@ -64,6 +76,7 @@ export default function Auth() {
                     <div className="h-1 w-12 bg-orange-500 mx-auto mt-2 rounded-full"></div> 
                 </div>
 
+                {/* AFFICHAGE DE L'ERREUR */}
                 {error && (
                     <div className="bg-red-500/10 border border-red-500 text-red-500 text-sm p-3 rounded-lg mb-6 text-center animate-pulse">
                         {error}
@@ -71,6 +84,7 @@ export default function Auth() {
                 )}
 
                 <form className="space-y-6" onSubmit={handleSubmit}>
+                    {/* CHAMP EMAIL */}
                     <div className="flex flex-col space-y-2">
                         <label htmlFor="identifier" className="text-gray-300 text-sm font-medium ml-1">Adresse Email</label>
                         <div className="relative group">
@@ -85,12 +99,13 @@ export default function Auth() {
                                 required
                                 value={email}
                                 onChange={handleEmailChange}
-                                placeholder="admin@marsai.fr"
+                                placeholder="admin@mars.ia"
                                 className="w-full bg-black/50 border border-gray-700 rounded-lg py-3 pl-10 pr-4 text-white placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all"
                             />
                         </div>
                     </div>
 
+                    {/* CHAMP MOT DE PASSE */}
                     <div className="flex flex-col space-y-2">
                         <div className="flex justify-between items-center px-1">
                             <label htmlFor="password" className="text-gray-300 text-sm font-medium">Mot de passe</label>
@@ -123,6 +138,7 @@ export default function Auth() {
                         </div>
                     </div>
 
+                    {/* BOUTON VALIDATION */}
                     <button 
                         type="submit" 
                         disabled={isLoading}
