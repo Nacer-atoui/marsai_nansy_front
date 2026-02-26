@@ -18,18 +18,17 @@ export interface MetaData {
   original_synopsis: string;
   duration: number;
   tags: string;
+  language: string;
 }
 
+// On garde ici uniquement les métadonnées liées aux médias
 export interface Media {
-  //hassubs contient des commentaires? et srt sous titre
   hassubs: boolean;
-  srt: string;
+  srt: string; // Le nom du fichier ou le contenu du sous-titre
   statut: string;
-  cover_img:string
-  image:{}
 }
 
-export interface Collaborator{
+export interface Collaborator {
   firstname: string;
   lastname: string;
   email: string;
@@ -37,17 +36,10 @@ export interface Collaborator{
   contribution: string;
 }
 
-export interface Ia{
-  stack: string,
-  method: boolean
-}
-
-export interface Image {
-  url: string;
-}
-
-export interface Video {
-  video: File;
+export interface Ia {
+  stack: string;
+  method: boolean;
+  creative_process: string;
 }
 
 export type Submit = {
@@ -56,5 +48,8 @@ export type Submit = {
   media: Media;
   ia: Ia;
   collaborator: Collaborator[];
-  video: Video | null;
+  // FICHIERS : Ils vivent ici pour faciliter le FormData.append()
+  video: File | null;      // Directement le fichier
+  cover_img: File | null;  // L'affiche
+  image: File[];           // La galerie
 };

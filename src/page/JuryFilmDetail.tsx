@@ -8,6 +8,7 @@ export default function JuryFilmDetail() {
 
   const [movie, setMovie] = useState<MovieType>();
   const [youtubeId, setYoutubeId] = useState<string>();
+  const [youtubeUrl, setYoutubeUrl] = useState("")
 
   useEffect(() => {
     fetch('http://localhost:3000/movie/' + id)
@@ -17,6 +18,7 @@ export default function JuryFilmDetail() {
       })
       .then(data => {
         setMovie(data[0]);
+        setYoutubeUrl(data[0].youtube_url)
         setYoutubeId(data[0].youtube_url.split('v=')[1]);
       });
   }, [id]);
@@ -45,13 +47,23 @@ export default function JuryFilmDetail() {
             
             {/* Lecteur Vidéo */}
             <div className="aspect-video bg-black border border-[#364153] rounded-xl flex items-center justify-center overflow-hidden shadow-2xl">
-              <iframe
+              {/* <iframe
                 className="w-full h-full"
                 src={'https://www.youtube.com/embed/' + youtubeId}
                 title="YouTube video"
                 allow="fullscreen"
                 loading="lazy"
-              ></iframe>
+              ></iframe> */}
+              <video controls width="250">
+
+                <source src={youtubeUrl} type="video/mp4" />
+
+                Télécharger la vidéo
+                <a href="/shared-assets/videos/flower.webm">WEBM</a>
+                ou
+                <a href={youtubeUrl}>MP4</a>
+                .
+              </video>
             </div>
 
             {/* Infos techniques pour le jury (plus pro/épuré) */}
