@@ -27,7 +27,7 @@ export default function Auth() {
             });
 
             const data = await response.json();
-
+console.log("DATA CONNEXION :", data);
             if (!response.ok) {
                 throw new Error(data.message || "Identifiants incorrects");
             }
@@ -41,6 +41,7 @@ export default function Auth() {
 
             localStorage.setItem("token", data.token);
             localStorage.setItem("userRole", rawRole); // On garde la valeur d'origine pour la sidebar
+            localStorage.setItem("userId", data.user?.id);
 
             if (role === 'jury') {
                 navigate("/admin/jury");

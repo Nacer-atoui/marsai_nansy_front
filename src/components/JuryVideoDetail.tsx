@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 export default function JuryVideoDetail({ movieId }: { movieId?: string }){
   const numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   
-  // 1. ESTADO DE LA NOTA (Ya lo tenías)
+  // 1. ESTADO DE LA NOTA
   const [rating, setRating] = useState<number>(0);
   const [comment, setComment] = useState(""); 
   
@@ -11,15 +11,18 @@ export default function JuryVideoDetail({ movieId }: { movieId?: string }){
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  // LA FONCTION QUI ENVOIE LES DONNÉES
+  // LA FONCTION QUI ENVOIE LES DONNÉES AU BACKEND
   const handleVote = async () => {
-    // Sécurité : on empêche d'envoyer si le jury n'a pas cliqué sur un chiffre
+    // Sécurité : on vérifie que la note n'est pas 0
     if (rating === 0) {
       alert("Veuillez sélectionner une note avant de valider.");
       return;
     }
 
     setIsSubmitting(true);
+    
+    // ON RÉCUPÈRE LE VRAI ID DU JURY CONNECTÉ
+    const currentUserId = localStorage.getItem('userId');
 
     try {
       // Envoi de la requête POST au backend
@@ -28,7 +31,7 @@ export default function JuryVideoDetail({ movieId }: { movieId?: string }){
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           movie_id: movieId, 
-          jury_id: 1, // /!\ ID temporaire, à remplacer par le vrai ID de l'utilisateur connecté plus tard
+          jury_id: currentUserId, // <-- ON UTILISE BIEN LE VRAI ID ICI
           note: rating,
           comment: comment
         })
@@ -105,13 +108,14 @@ export default function JuryVideoDetail({ movieId }: { movieId?: string }){
 
         <div className="w-full">
           <textarea
-            value={comment} // Conectado a la memoria
-            onChange={(e) => setComment(e.target.value)} // Guarda cada letra que escribes
+            value={comment} 
+            onChange={(e) => setComment(e.target.value)} 
             className="w-full h-24 bg-slate-950/50 text-slate-300 text-sm border border-slate-700 rounded-lg p-3 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all resize-none placeholder:text-slate-600"
             placeholder="Pourquoi cette note ? (Optionnel)"
           />
         </div>
 
+        {/* SECTION "FILM SUIVANT" (Visuelle pour l'instant) */}
         <div className="w-full bg-slate-800/50 rounded-lg p-3 flex items-center gap-4 border border-slate-700/50">
            <div className="w-12 h-16 bg-slate-700 rounded flex-shrink-0 flex items-center justify-center text-slate-500">
              FILM
