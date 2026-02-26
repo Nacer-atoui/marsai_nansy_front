@@ -7,12 +7,10 @@ export function Header() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
-  // 1. On passe 'common' ici. Cela permet de ne plus écrire "common:" plus bas.
   const { t, i18n } = useTranslation('common');
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
-
 
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     e.target.value == 'fr'
@@ -49,7 +47,6 @@ export function Header() {
                   isActive ? 'text-color-mars-orange' : 'hover:text-color-mars-orange'
                 }
               >
-                {/* Plus besoin de common: devant nav.home */}
                 {t('nav.home')}
               </NavLink>
             </li>
@@ -75,17 +72,9 @@ export function Header() {
                 {t('nav.movies')}
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                to="/jury"
-                onClick={closeMenu}
-                className={({ isActive }) =>
-                  isActive ? 'text-color-mars-orange' : 'hover:text-color-mars-orange'
-                }
-              >
-                {t('nav.jury')}
-              </NavLink>
-            </li>
+            
+            {/* LE LIEN JURY A ÉTÉ SUPPRIMÉ D'ICI */}
+
             <li>
               <NavLink
                 to="/contact"
@@ -104,16 +93,11 @@ export function Header() {
         <div className="flex items-center gap-4 z-50">
           <select
             className="bg-transparent border-none focus:ring-0 cursor-pointer text-sm lg:text-base text-white outline-none"
-            /* On sécurise l'accès à split pour Firefox */
             value={(i18n.language || 'fr').split('-')[0]}
             onChange={handleLanguageChange}
           >
-            <option value="fr" className="bg-[#0B0F23]">
-              FR
-            </option>
-            <option value="en" className="bg-[#0B0F23]">
-              EN
-            </option>
+            <option value="fr" className="bg-[#0B0F23]">FR</option>
+            <option value="en" className="bg-[#0B0F23]">EN</option>
           </select>
 
           <button

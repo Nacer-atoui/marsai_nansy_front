@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next'; // 👈 Ajout
 import type { Submit } from '../components/types';
 import SubmitRealisator from '../components/SubmitRealisator';
 import SubmitAi from '../components/SubmitAi';
@@ -7,6 +8,8 @@ import SubmitTeam from '../components/SubmitTeam';
 import SubmitMedia from '../components/SubmitMedia';
 
 export default function SubmitPage() {
+  const { t } = useTranslation('submit_form'); // 👈 Ajout
+
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -42,6 +45,7 @@ export default function SubmitPage() {
     collaborator: [],
   });
 
+  // ... (Tes fonctions handleChange et handleSubmit restent inchangées)
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     section: keyof Submit
@@ -49,10 +53,7 @@ export default function SubmitPage() {
     const { name, value } = e.target;
 
     setFormData(prev => {
-      // On récupère la section spécifique (ex: prev.director)
       const currentSection = prev[section];
-
-      // Gestion des objets imbriqués comme address.city
       if (name.includes('.')) {
         const [parent, child] = name.split('.');
         return {
@@ -66,8 +67,6 @@ export default function SubmitPage() {
           },
         };
       }
-
-      // Gestion simple (ex: metadata.original_title)
       return {
         ...prev,
         [section]: {
@@ -79,28 +78,17 @@ export default function SubmitPage() {
   }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Empêche le rechargement de la page
+    e.preventDefault();
     setIsLoading(true);
     setError(null);
     setData(null);
-    console.log(formData);
     try {
       const data = new FormData();
-      console.log(JSON.stringify(formData.video));
-
-
       data.append('director', JSON.stringify(formData.director));
       data.append('metadata', JSON.stringify(formData.metadata));
       data.append('media', JSON.stringify(formData.media));
       data.append('ia', JSON.stringify(formData.ia));
       data.append('collaborator', JSON.stringify(formData.collaborator));
-
-      console.log(Array.from(data.entries()));
-
-      // Méthode 2 : Boucler dessus
-      data.forEach((value, key) => {
-        console.log(key, value);
-      });
 
       if (formData.video) {
         data.append('video', formData.video.video);
@@ -114,19 +102,12 @@ export default function SubmitPage() {
       const result = await response.json();
 
       if (!response.ok) {
-        // Si le backend renvoie une erreur (400, 500, etc.)
         throw new Error(
-          result.message || 'Une erreur est survenue lors de la soumission.'
+          result.message || t('submit_page.error_generic', 'Une erreur est survenue lors de la soumission.')
         );
       }
-
-      // Si tout s'est bien passé
       setData(result);
-      console.log('Film soumis avec succès:', result);
-
-      // Optionnel : réinitialiser le formulaire ici si besoin
     } catch (err: any) {
-      console.error('Erreur fetch:', err);
       setError(err.message);
     } finally {
       setIsLoading(false);
@@ -137,20 +118,18 @@ export default function SubmitPage() {
     <section className="bg-midnight py-20 px-4">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-3xl md:text-5xl font-bold text-white uppercase tracking-wider mb-10">
-          Soumission de film
+          {t('submit_page.main_title', 'Soumission de film')}
         </h2>
 
-        {/* Affichage des messages de succès ou d'erreur */}
         {error && (
           <div className="p-4 mb-6 text-white bg-red-600 rounded">{error}</div>
         )}
         {data && (
           <div className="p-4 mb-6 text-white bg-green-600 rounded">
-            Film soumis avec succès !
+            {t('submit_page.success', 'Film soumis avec succès !')}
           </div>
         )}
 
-        {/* On englobe tout dans un form */}
         <form onSubmit={handleSubmit}>
           <SubmitRealisator
             director={formData.director}
@@ -172,11 +151,11 @@ export default function SubmitPage() {
           <button
             type="submit"
             name="btn_submit"
-            // disabled={isLoading}
             className={`mt-14 px-10 py-4 ml-250 rounded-full text-white bg-mars-orange transition-all duration-300 font-semibold uppercase tracking-widest shadow-xl hover:cursor-pointer hover:opacity-80 ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
           >
-            {/* {isLoading ? 'Envoi en cours...' : 'Soumettre'} */}
-            Soumettre
+            {isLoading 
+              ? t('submit_page.btn_loading', 'Envoi en cours...') 
+              : t('submit_page.btn_submit', 'Soumettre')}
           </button>
         </form>
       </div>

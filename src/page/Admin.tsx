@@ -3,28 +3,40 @@ import { LogOut } from 'lucide-react';
 
 export default function Admin() {
   const navigate = useNavigate();
+  
+  // 1. On récupère le rôle et on le met EN MINUSCULES tout de suite
+  const userRole = (localStorage.getItem('userRole') || '').toLowerCase().trim(); 
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    // On redirige vers ton chemin secret défini dans le .env
+    localStorage.removeItem('userRole'); 
+    // Redirection vers la route secrète de login
     navigate(`/${import.meta.env.VITE_SECRET_AUTH_PATH}`);
   };
 
+  // 2. Configuration des liens (Rôles tous en minuscules !)
+  const navigationConfig = [
+    { to: "/admin/dashboard", label: "Dashboard", roles: ['super admin', 'admin'] },
+    { to: "/admin/jury", label: "Espace Jury", roles: ['super admin', 'admin', 'jury'] },
+    { to: "/admin/cms", label: "CMS", roles: ['super admin', 'admin'] },
+    { to: "/admin/films", label: "Films", roles: ['super admin', 'admin'] },
+    { to: "/admin/utilisateurs", label: "Utilisateurs", roles: ['super admin', 'admin'] }
+  ];
+
+  // 3. Le filtre intelligent qui vérifie si ton rôle est dans le tableau
+  const authorizedLinks = navigationConfig.filter(link => 
+    link.roles.includes(userRole)
+  );
+
   return (
-    <div className="grid grid-cols-[17%_83%] h-screen">
-      {/* SIDEBAR - Ta couleur oklch conservée */}
-      <div className="bg-[oklch(28.2% 0.091 267.935)] flex flex-col justify-between border-r border-white/5">
+    <div className="grid grid-cols-[17%_83%] h-screen overflow-hidden">
+      
+      {/* --- SIDEBAR --- */}
+      <div className="bg-[#07091D] flex flex-col justify-between border-r border-white/5">
         
-        {/* Menu Supérieur */}
         <div className="flex flex-col mt-20 gap-2">
-          {[
-            { to: "/admin/dashboard", label: "Dashboard" },
-            { to: "/admin/cms", label: "CMS" },
-            { to: "/admin/films", label: "Films" },
-            { to: "/admin/utilisateurs", label: "Utilisateurs" },
-            { to: "/admin/statistiques", label: "Statistiques" },
-            { to: "/admin/parametres", label: "Paramètres" },
-          ].map((link) => (
+          {/* Affichage automatique des liens autorisés */}
+          {authorizedLinks.map((link) => (
             <NavLink
               key={link.to}
               to={link.to}
@@ -39,7 +51,7 @@ export default function Admin() {
           ))}
         </div>
 
-        {/* SECTION DÉCONNEXION - Design "Mars AI" */}
+        {/* --- SECTION DÉCONNEXION --- */}
         <div className="p-6 mb-4">
           <button
             onClick={handleLogout}
@@ -51,10 +63,11 @@ export default function Admin() {
         </div>
       </div>
 
-      {/* ZONE DE CONTENU - Ta couleur oklch conservée */}
-      <div className="bg-[oklch(28.2% 0.091 267.935)] overflow-y-auto">
+      {/* --- ZONE DE CONTENU (Là où les pages s'affichent) --- */}
+      <div className="bg-[#0B0F23] overflow-y-auto">
         <Outlet />
       </div>
+
     </div>
   );
 }

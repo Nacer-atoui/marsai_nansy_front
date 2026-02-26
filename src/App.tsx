@@ -37,25 +37,31 @@ export default function App() {
 
   return (
     <Routes>
-    <Route path={`/${import.meta.env.VITE_SECRET_AUTH_PATH}`} element={<Auth />} />
-    <Route path="/test-jury-liste" element={<JuryFilmList />} />
-    <Route path="/jury/film/:id" element={<JuryFilmDetail />} />
-    <Route 
-      path="/admin" 
-      element={
-        <ProtectedRoute>
-          <Admin /> 
-        </ProtectedRoute>
-      } 
-    >
-      <Route path="dashboard" element={<DashBoard />} />
-      <Route path="cms" element={<CmsEditor/>} />
-      <Route path="films" element={<AdminFilmList />} />
-      <Route path="utilisateurs" element={<UserAdmin />} />
+      {/* --- ROUTE D'AUTHENTIFICATION SECRÈTE --- */}
+      <Route path={`/${import.meta.env.VITE_SECRET_AUTH_PATH}`} element={<Auth />} />
+      
+      {/* --- ESPACE ADMIN & JURY (Avec la Sidebar noire) --- */}
+      <Route 
+        path="/admin" 
+        element={
+          <ProtectedRoute>
+            <Admin /> 
+          </ProtectedRoute>
+        } 
+      >
+        <Route path="dashboard" element={<DashBoard />} />
+        <Route path="cms" element={<CmsEditor/>} />
+        <Route path="films" element={<AdminFilmList />} />
+        <Route path="utilisateurs" element={<UserAdmin />} />
+        
+        {/* L'espace Jury est maintenant imbriqué ici pour hériter du layout Admin */}
+        <Route path="jury" element={<JuryFilmList />} />
+        <Route path="jury/film/:id" element={<JuryFilmDetail />} />
       </Route> 
         
-    <Route path="*" element={<MainLayout />} />
-  </Routes>
+      {/* --- ESPACE PUBLIC (Avec Header et Footer) --- */}
+      <Route path="*" element={<MainLayout />} />
+    </Routes>
     
   );
 }
@@ -64,7 +70,6 @@ export default function App() {
 function MainLayout() {
   return (
     <>
-
       <Header />
       
       <main className="min-h-screen">

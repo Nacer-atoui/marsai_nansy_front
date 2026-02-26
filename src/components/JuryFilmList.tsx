@@ -87,9 +87,9 @@ const JuryFilmList: React.FC = () => {
                   </span>
                 )}
                 
-                {/* Bouton pour aller sur la page détail */}
+                {/* 👇 C'EST ICI QUE J'AI MODIFIÉ LE CHEMIN 👇 */}
                 <button
-                  onClick={() => navigate(`/jury/film/${film.id}`)}
+                  onClick={() => navigate(`/admin/jury/film/${film.id}`)}
                   className="px-4 py-2 bg-white/5 hover:bg-mars-orange text-white text-xs font-bold rounded-lg transition-colors uppercase tracking-wider"
                 >
                   Visionner
