@@ -1,6 +1,7 @@
 import { Film, Upload } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { SubmitImage } from './SubmitImage';
+import { useTranslation } from "react-i18next"; // 👈 IMPORT
 import type { Dispatch, SetStateAction } from 'react';
 import type { Submit } from './types';
 
@@ -12,6 +13,9 @@ const inputFile =
 
 export default function SubmitMedia({ formData, setFormData}: {setFormData: Dispatch<SetStateAction<Submit>>,
     formData: Submit}) {
+  
+  const { t } = useTranslation('submit_form'); // 👈 INITIALISATION
+
   const [vignetteFile, setVignetteFile] = useState<File | null>(null);
   const [vignettePreview, setVignettePreview] = useState<string | null>(null);
 
@@ -64,17 +68,15 @@ export default function SubmitMedia({ formData, setFormData}: {setFormData: Disp
     const files = e.target.files;
 
     if (files && files.length > 0) {
-      const videoFile = files[0]; // C'est ici ton objet de type 'File'
+      const videoFile = files[0];
       setFormData({
         ...formData,
         video: {
           ...formData.video,
-          video: videoFile, // Maintenant le type 'File' match avec ton interface
+          video: videoFile,
         },
       });
     }
-  
-    console.log(e.currentTarget.value)
   }
 
   const handleFileChange = (
@@ -128,17 +130,16 @@ export default function SubmitMedia({ formData, setFormData}: {setFormData: Disp
     <section className="border border-[#364153] rounded-2xl p-5 my-10 font-display">
       <div className="flex px-5 pb-5">
         <Film className="mx-2" />
-        <h1>Médias & Accessibilité</h1>
+        <h1 className="text-white text-xl font-bold">{t('submit_media.main_title', 'Médias & Accessibilité')}</h1>
       </div>
       <div>
         <label htmlFor="url" className={labelClasses}>
-          Lien YouTube Source*
+          {t('submit_media.video_source', 'Lien YouTube Source*')}
         </label>
         <input
           type="file"
           name="url"
           id="url"
-          placeholder="https://www.youtube.com/watch?v=Ry8XRCS-Tyd"
           className={inputClasses}
           onChange={handleFileVideo}
           required
@@ -152,11 +153,11 @@ export default function SubmitMedia({ formData, setFormData}: {setFormData: Disp
           className="h-5 w-5 mx-2 mt-1.5 cursor-pointer appearance-none rounded-xl border border-[#364153] checked:bg-mars-orange"
         />
         <label htmlFor="soustitre" className={labelClasses}>
-          <h2 className="text-white cursor-pointer">
-            Nécessite des sous-titres ?
+          <h2 className="text-white cursor-pointer font-bold">
+            {t('submit_media.subtitle_ask', 'Nécessite des sous-titres ?')}
           </h2>
           <p className="cursor-pointer">
-            Cochez cette case si votre film nécessite des sous-titres
+            {t('submit_media.subtitle_desc', 'Cochez cette case si votre film nécessite des sous-titres')}
           </p>
         </label>
       </div>
@@ -164,13 +165,13 @@ export default function SubmitMedia({ formData, setFormData}: {setFormData: Disp
         <label htmlFor="srt">
           <div className={inputFile}>
             <Upload className="text-cyan-400 mx-auto mt-6 " />
-            <p className="mt-2">Cliquez ici pour déposer votre fichier .SRT</p>
+            <p className="mt-2">{t('submit_media.srt_drop', 'Cliquez ici pour déposer votre fichier .SRT')}</p>
           </div>
           <input type="file" id="srt" accept=".srt" className="hidden" />
         </label>
       </div>
       <div className="mt-5">
-        <p className={labelClasses}>Vignette Officielle*</p>
+        <p className={labelClasses}>{t('submit_media.vignette_label', 'Vignette Officielle*')}</p>
         <div className="relative w-full aspect-video mt-2">
           <label
             htmlFor="vignette"
@@ -186,7 +187,7 @@ export default function SubmitMedia({ formData, setFormData}: {setFormData: Disp
               <>
                 <Upload className="text-cyan-400 w-10 h-10 mb-3" />
                 <p className="text-sm font-semibold">
-                  Cliquez pour ajouter la vignette
+                  {t('submit_media.vignette_add', 'Cliquez pour ajouter la vignette')}
                 </p>
               </>
             )}
@@ -206,7 +207,7 @@ export default function SubmitMedia({ formData, setFormData}: {setFormData: Disp
                 handleRemoveVignette();
               }}
               className="absolute -top-3 -right-3 bg-mars-orange hover:bg-orange-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold transition shadow-lg z-10 border-2 border-[#13162A]"
-              title="Supprimer la vignette"
+              title={t('submit_media.vignette_remove', 'Supprimer la vignette')}
             >
               ✕
             </button>
@@ -214,11 +215,11 @@ export default function SubmitMedia({ formData, setFormData}: {setFormData: Disp
         </div>
 
         <p className="mt-2 text-xs text-slate-500 text-center">
-          Format 16:9 recommandé (1920x1080px)
+          {t('submit_media.vignette_hint', 'Format 16:9 recommandé (1920x1080px)')}
         </p>
       </div>
       <p className="block mt-6 text-gray-400 text-sm mb-2 font-medium">
-        Galerie Stills (3 images max)
+        {t('submit_media.gallery_label', 'Galerie Stills (3 images max)')}
       </p>
       <div className="flex w-full gap-4 mt-1">
         {images.map((imageLot, index) => (
@@ -238,7 +239,7 @@ export default function SubmitMedia({ formData, setFormData}: {setFormData: Disp
                   handleRemoveImage(index);
                 }}
                 className="absolute -top-3 -right-3 bg-[#f97316] hover:bg-orange-600 text-white rounded-full w-7 h-7 flex items-center justify-center text-xs font-bold transition shadow-lg z-10 border-2 border-[#13162A]"
-                title="Supprimer l'image"
+                title={t('submit_media.image_remove', "Supprimer l'image")}
               >
                 X
               </button>

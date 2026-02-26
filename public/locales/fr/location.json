@@ -1,0 +1,13 @@
+{
+  "location.room.plaza.t1": "salle",
+  "location.room.plaza.t2": "plaza",
+  "location.badge": "Le Lieu",
+  "location.name.part1": "LA",
+  "location.name.part2": "PLATEFORME",
+  "location.room.sucres.t1": "salle des",
+  "location.room.sucres.t2": "sucres",
+  "location.main.desc": "4 000 m² d'espaces modulables dans le centre de Marseille, au cœur de l'écosystème numérique.",
+  "location.old.name": "(ex Dock des suds)",
+  "location.room.sucres.desc": "Futur sanctuaire des conférences et de la remise des prix de Mars.A.I. Un espace majestueux alliant patrimoine et technologie.",
+  "location.room.plaza.desc": "L'épicentre du festival : accueil, animations, workshops et restauration. Le point de rencontre de tous les participants."
+}
