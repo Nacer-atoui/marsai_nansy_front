@@ -41,25 +41,19 @@ function Movie({movies, loading, error, moviesNew}: {movies: MovieType[], loadin
             >
               {/* Image */}
 
-              {movie.cover_img ? (
-                <div
-                  className={
-                    'w-[100%] h-[300px] bg-[url(' +
-                    movie.cover_img +
-                    ')] bg-cover  bg-size[auto] bg-center bg-contain '
-                  }
-                ></div>
-              ) : (
-                // Placeholder si pas d'image
-                <div className="w-[100%] h-[300px] bg-[url(/public/Pasdimage.webp)] bg-size[auto] bg-center bg-contain"></div>
-              )}
+              <img 
+                src={movie.cover_img || "/Pasdimage.webp"} 
+                alt={movie.original_title}
+                loading="lazy"
+                className="w-full h-[300px] object-cover rounded-t-lg"
+              />
 
               {/* Titre */}
               <h3 className="m-5 text-left uppercase text-[19px]  ">
                 {movie.original_title}
               </h3>
               <p className="mx-5 text-left flex justify-between">
-                Par moi wesh • {movie.duration} sec
+                Jean Test • {movie.duration} sec
                 <span className="text-gray-400">[{movie.language}] </span>
               </p>
               {/* <p className='text-center'> {movie.submitted_at}</p> */}
