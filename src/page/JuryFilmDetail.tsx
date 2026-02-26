@@ -30,7 +30,7 @@ export default function JuryFilmDetail() {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col items-start justify-center mb-8">
           {/* Le retour renvoie vers la page liste du jury, pas vers le site public */}
-          <Link to="/jury" className="mb-1">
+          <Link to="/admin/jury" className="mb-1">
             <h3 className="underline text-mars-orange hover:text-white transition-colors duration-300 text-sm font-bold uppercase tracking-widest">
               ← RETOUR À L'ESPACE JURY
             </h3>

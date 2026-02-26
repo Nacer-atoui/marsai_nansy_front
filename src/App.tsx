@@ -19,6 +19,7 @@ import './i18n';
 import AdminFilmList from './components/Admin/AdminFilmList.tsx';
 import JuryFilmList from './components/JuryFilmList.tsx';
 import JuryFilmDetail from './page/JuryFilmDetail.tsx';
+import AdminFilmDetails from './components/Admin/AdminFilmDetail.tsx';
 
 // 1. Le Gardien : Protection des routes Admin
 const ProtectedRoute = ({ children }: { children: any }) => {
@@ -53,6 +54,7 @@ export default function App() {
         <Route path="cms" element={<CmsEditor/>} />
         <Route path="films" element={<AdminFilmList />} />
         <Route path="utilisateurs" element={<UserAdmin />} />
+        <Route path="films/:id" element={<AdminFilmDetails />} />
         
         {/* L'espace Jury est maintenant imbriqué ici pour hériter du layout Admin */}
         <Route path="jury" element={<JuryFilmList />} />

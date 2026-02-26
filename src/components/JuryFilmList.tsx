@@ -7,7 +7,6 @@ interface Film {
   author: string;
   country: string;
   cover: string;
-  // On simulera plus tard si le film a déjà été noté par ce jury
   isVoted?: boolean; 
 }
 
@@ -16,11 +15,11 @@ const JuryFilmList: React.FC = () => {
   const [films, setFilms] = useState<Film[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  useEffect(() => {
-    // On réutilise ta route existante pour l'instant
+useEffect(() => {
     const fetchFilms = async () => {
       try {
-        const response = await fetch('http://localhost:3000/movie');
+        // 1. ON AJOUTE L'ID DU JURY DANS L'URL (Ici 1 pour tester, tu mettras l'ID réel plus tard)
+        const response = await fetch('http://localhost:3000/movie?userId=1'); 
         const data = await response.json();
 
         const filmsFormates = data.map((filmBDD: any) => ({
@@ -31,7 +30,10 @@ const JuryFilmList: React.FC = () => {
           cover: filmBDD.cover_img
             ? `${filmBDD.cover_img}?w=150&q=70`
             : 'https://via.placeholder.com/80x50/1e293b/ffffff',
-          isVoted: false // Par défaut, on dira que ce n'est pas encore noté
+            
+          // 2. ON UTILISE LA DONNÉE DU BACKEND
+          // Si has_voted est 1 (vrai dans la BDD), isVoted devient true
+          isVoted: filmBDD.has_voted === 1 
         }));
 
         setFilms(filmsFormates);
@@ -86,8 +88,6 @@ const JuryFilmList: React.FC = () => {
                     À évaluer
                   </span>
                 )}
-                
-                {/* 👇 C'EST ICI QUE J'AI MODIFIÉ LE CHEMIN 👇 */}
                 <button
                   onClick={() => navigate(`/admin/jury/film/${film.id}`)}
                   className="px-4 py-2 bg-white/5 hover:bg-mars-orange text-white text-xs font-bold rounded-lg transition-colors uppercase tracking-wider"

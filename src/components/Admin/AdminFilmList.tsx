@@ -38,7 +38,13 @@ const AdminFilmList: React.FC = () => {
           tools: filmBDD.ia_tools
             ? filmBDD.ia_tools.split(',').map((t: string) => t.trim())
             : [],
-          note: null,
+
+          // ---> ON RÉCUPÈRE LA MOYENNE ICI <---
+          // Si average_note existe, on l'arrondit à 1 chiffre après la virgule, sinon on laisse null
+          note: filmBDD.average_note
+            ? parseFloat(filmBDD.average_note).toFixed(1)
+            : null,
+
           cover: filmBDD.cover_img
             ? `${filmBDD.cover_img}?w=150&q=70`
             : 'https://via.placeholder.com/80x50/1e293b/ffffff',
