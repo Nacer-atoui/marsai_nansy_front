@@ -7,7 +7,7 @@ interface Film {
   author: string;
   country: string;
   cover: string;
-  isVoted?: boolean; 
+  isVoted?: boolean;
 }
 
 const JuryFilmList: React.FC = () => {
@@ -15,13 +15,19 @@ const JuryFilmList: React.FC = () => {
   const [films, setFilms] = useState<Film[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-useEffect(() => {
+  useEffect(() => {
     const fetchFilms = async () => {
       try {
-        // 1. ON AJOUTE L'ID DU JURY DANS L'URL (Ici 1 pour tester, tu mettras l'ID réel plus tard)
-        const response = await fetch('http://localhost:3000/movie?userId=1'); 
+        // 1. ON RÉCUPÈRE LE VRAI ID DU JURY CONNECTÉ
+        const userId = localStorage.getItem('userId');
+
+        // 2. ON L'INJECTE DANS L'URL
+        const response = await fetch(
+          `http://localhost:3000/movie?userId=${userId}`
+        );
         const data = await response.json();
 
+        // 3. LE FAMEUX MAP CORRIGÉ AVEC TOUTES LES DONNÉES !
         const filmsFormates = data.map((filmBDD: any) => ({
           id: filmBDD.id,
           title: filmBDD.original_title || filmBDD.english_title,
@@ -30,10 +36,8 @@ useEffect(() => {
           cover: filmBDD.cover_img
             ? `${filmBDD.cover_img}?w=150&q=70`
             : 'https://via.placeholder.com/80x50/1e293b/ffffff',
-            
-          // 2. ON UTILISE LA DONNÉE DU BACKEND
-          // Si has_voted est 1 (vrai dans la BDD), isVoted devient true
-          isVoted: filmBDD.has_voted === 1 
+          // L'état du vote dynamique
+          isVoted: filmBDD.has_voted === 1,
         }));
 
         setFilms(filmsFormates);
@@ -47,7 +51,10 @@ useEffect(() => {
     fetchFilms();
   }, []);
 
-  if (isLoading) return <div className="p-10 text-white text-center">Chargement des films...</div>;
+  if (isLoading)
+    return (
+      <div className="p-10 text-white text-center">Chargement des films...</div>
+    );
 
   return (
     <div className="p-10 text-white font-display max-w-6xl mx-auto">
@@ -64,23 +71,42 @@ useEffect(() => {
       <div className="bg-midnight p-6 rounded-2xl shadow-lg border border-[#364153]">
         <div className="flex flex-col gap-2 overflow-y-auto h-[calc(100vh-250px)] pr-2">
           {films.map(film => (
-            <div 
-              key={film.id} 
+            <div
+              key={film.id}
               className="flex items-center justify-between p-4 bg-slate-900/50 hover:bg-slate-800 rounded-xl transition-colors border border-transparent hover:border-mars-orange/50"
             >
               <div className="flex items-center gap-4">
-                <img src={film.cover} alt={film.title} loading="lazy" className="w-16 h-10 object-cover rounded-md shadow-sm" />
+                <img
+                  src={film.cover}
+                  alt={film.title}
+                  loading="lazy"
+                  className="w-16 h-10 object-cover rounded-md shadow-sm"
+                />
                 <div>
                   <div className="font-bold text-white">{film.title}</div>
-                  <div className="text-xs text-gray-400">{film.author} • {film.country}</div>
+                  <div className="text-xs text-gray-400">
+                    {film.author} • {film.country}
+                  </div>
                 </div>
               </div>
-              
+
               <div className="flex items-center gap-4">
                 {/* Badge d'état visuel */}
                 {film.isVoted ? (
                   <span className="text-green-500 text-xs font-bold uppercase tracking-wider flex items-center gap-1">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M5 13l4 4L19 7"
+                      ></path>
+                    </svg>
                     Noté
                   </span>
                 ) : (
