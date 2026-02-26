@@ -5,9 +5,58 @@ export default function JuryVideoDetail({ movieId }: { movieId?: string }){
   
   // 1. ESTADO DE LA NOTA (Ya lo tenías)
   const [rating, setRating] = useState<number>(0);
-  
   const [comment, setComment] = useState(""); 
+  
+  // NOUVEAUX ÉTATS POUR L'ENVOI AU BACKEND
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
+  // LA FONCTION QUI ENVOIE LES DONNÉES
+  const handleVote = async () => {
+    // Sécurité : on empêche d'envoyer si le jury n'a pas cliqué sur un chiffre
+    if (rating === 0) {
+      alert("Veuillez sélectionner une note avant de valider.");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // Envoi de la requête POST au backend
+      const response = await fetch('http://localhost:3000/api/votes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          movie_id: movieId, 
+          jury_id: 1, // /!\ ID temporaire, à remplacer par le vrai ID de l'utilisateur connecté plus tard
+          note: rating,
+          comment: comment
+        })
+      });
+
+      if (response.ok) {
+        setIsSuccess(true); // Affiche l'écran de succès
+      } else {
+        alert("Erreur lors de l'enregistrement de la note.");
+      }
+    } catch (error) {
+      console.error("Erreur serveur :", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // AFFICHAGE SI LE VOTE EST RÉUSSI
+  if (isSuccess) {
+    return (
+      <div className="bg-slate-900 border border-cyan-500/50 rounded-xl p-8 min-h-[200px] w-full max-w-md mx-auto flex flex-col items-center justify-center text-center">
+        <h3 className="text-2xl font-bold text-cyan-400 mb-2 drop-shadow-[0_0_10px_rgba(34,211,238,0.4)]">Note enregistrée !</h3>
+        <p className="text-slate-400 text-sm">Merci pour votre évaluation. Les données ont été envoyées au panel administrateur.</p>
+      </div>
+    );
+  }
+
+  // AFFICHAGE NORMAL DU FORMULAIRE
   return (
     <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 min-h-[200px] w-full max-w-md mx-auto">
       
@@ -38,7 +87,7 @@ export default function JuryVideoDetail({ movieId }: { movieId?: string }){
                   transition-all duration-200
                   border
                   ${rating === numero 
-                    ? 'bg-cyan-500 text-white border-cyan-400 shadow-[0_0_10px_cyan] scale-110' // SI ES EL ELEGIDO (Sin comillas en rating!)
+                    ? 'bg-cyan-500 text-white border-cyan-400 shadow-[0_0_10px_cyan] scale-110' // SI ES EL ELEGIDO
                     : 'bg-transparent text-slate-500 border-slate-700 hover:border-cyan-500 hover:text-cyan-400' // SI NO
                   }
                 `}
@@ -65,7 +114,7 @@ export default function JuryVideoDetail({ movieId }: { movieId?: string }){
 
         <div className="w-full bg-slate-800/50 rounded-lg p-3 flex items-center gap-4 border border-slate-700/50">
            <div className="w-12 h-16 bg-slate-700 rounded flex-shrink-0 flex items-center justify-center text-slate-500">
-              FILM
+             FILM
            </div>
            
            <div className="flex flex-col text-left">
@@ -79,8 +128,9 @@ export default function JuryVideoDetail({ movieId }: { movieId?: string }){
            </div>
         </div>
 
-        
         <button 
+          onClick={handleVote}
+          disabled={isSubmitting}
           className="
             w-full bg-gradient-to-r from-orange-500 to-red-500 
             hover:from-orange-400 hover:to-red-400 
@@ -88,9 +138,10 @@ export default function JuryVideoDetail({ movieId }: { movieId?: string }){
             shadow-lg shadow-orange-500/20
             transition-all transform active:scale-95
             flex items-center justify-center gap-2
+            disabled:opacity-50 disabled:cursor-not-allowed
           "
         >
-          <span>VALIDER LA NOTE</span>
+          <span>{isSubmitting ? 'ENVOI EN COURS...' : 'VALIDER LA NOTE'}</span>
         </button>
 
       </div>

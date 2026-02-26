@@ -7,7 +7,6 @@ interface Film {
   author: string;
   country: string;
   cover: string;
-  // On simulera plus tard si le film a déjà été noté par ce jury
   isVoted?: boolean; 
 }
 
@@ -17,7 +16,6 @@ const JuryFilmList: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    // On réutilise ta route existante pour l'instant
     const fetchFilms = async () => {
       try {
         const response = await fetch('http://localhost:3000/movie');
@@ -86,8 +84,6 @@ const JuryFilmList: React.FC = () => {
                     À évaluer
                   </span>
                 )}
-                
-                {/* 👇 C'EST ICI QUE J'AI MODIFIÉ LE CHEMIN 👇 */}
                 <button
                   onClick={() => navigate(`/admin/jury/film/${film.id}`)}
                   className="px-4 py-2 bg-white/5 hover:bg-mars-orange text-white text-xs font-bold rounded-lg transition-colors uppercase tracking-wider"
