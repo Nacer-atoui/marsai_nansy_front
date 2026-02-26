@@ -54,7 +54,7 @@ export default function JuryFilmDetail() {
                 allow="fullscreen"
                 loading="lazy"
               ></iframe> */}
-              <video controls width="250">
+              <video controls width="800">
 
                 <source src={youtubeUrl} type="video/mp4" />
 
