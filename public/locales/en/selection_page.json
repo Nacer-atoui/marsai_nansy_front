@@ -1,0 +1,10 @@
+{
+  "title.part1": "The official",
+  "title.part2": " selection",
+  "description": "Discover the 50 finalist films selected by the first MarsAI Jury.",
+  "search_placeholder": "🔎   Search for a title, a director...",
+  "sort.recent": "Sort by: Newest",
+  "sort.old": "Sort by: Oldest",
+  "filter.language_all": "Filter by Language",
+  "filter.language_other": "Other"
+}

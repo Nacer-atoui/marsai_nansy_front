@@ -4,7 +4,7 @@ import { useState } from "react";
 import '../../index.css'
 
 export default function Auth() {
-    // --- ÉTATS (Tes états originaux) ---
+    // --- ÉTATS ---
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
@@ -13,18 +13,13 @@ export default function Auth() {
     
     const navigate = useNavigate();
 
-    // --- LOGIQUE DE SOUMISSION MISE À JOUR ---
+    // --- LOGIQUE DE CONNEXION ---
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setError("");
         setIsLoading(true);
 
-        // LOG DE DEBUG : Pour vérifier ce que tu envoies avant le crash
-        console.log("🚀 Tentative de connexion vers le Back-end...");
-        console.log("Email saisi :", email);
-
         try {
-            // Utilisation de 127.0.0.1 pour éviter les problèmes de résolution localhost
             const response = await fetch("http://127.0.0.1:3000/api/auth/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -34,36 +29,34 @@ export default function Auth() {
             const data = await response.json();
 
             if (!response.ok) {
-                // Si le serveur répond 401, on affiche le message précis du back
                 throw new Error(data.message || "Identifiants incorrects");
             }
 
-            console.log("✅ Connexion réussie ! Token reçu.");
+            // --- REDIRECTION INTELLIGENTE ---
+            // On vérifie 'role' ou 'job' (vu que ta colonne SQL s'appelle 'job')
+            const rawRole = data.user?.role || data.user?.job || "admin";
+            
+            // On passe tout en minuscules pour comparer sans erreur de majuscule
+            const role = rawRole.toLowerCase().trim();
 
-            // Stockage sécurisé
             localStorage.setItem("token", data.token);
-            // On utilise une sécurité au cas où data.user.role serait mal formaté
-            localStorage.setItem("userRole", data.user?.role || "admin");
+            localStorage.setItem("userRole", rawRole); // On garde la valeur d'origine pour la sidebar
 
-            // Redirection forcée
-            navigate("/admin/dashboard");
+            if (role === 'jury') {
+                navigate("/admin/jury");
+            } else {
+                navigate("/admin/dashboard");
+            }
             
         } catch (err: any) {
-            console.error("❌ Erreur Fetch :", err.message);
             setError(err.message || "Impossible de contacter le serveur");
         } finally {
             setIsLoading(false);
         }
     };
 
-    // --- TES GESTIONNAIRES DE CHANGEMENT ---
-    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEmail(e.target.value);
-    };
-
-    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword(e.target.value);
-    };
+    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value);
+    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value);
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-color-midnight p-4 font-sans">
@@ -76,7 +69,6 @@ export default function Auth() {
                     <div className="h-1 w-12 bg-orange-500 mx-auto mt-2 rounded-full"></div> 
                 </div>
 
-                {/* AFFICHAGE DE L'ERREUR */}
                 {error && (
                     <div className="bg-red-500/10 border border-red-500 text-red-500 text-sm p-3 rounded-lg mb-6 text-center animate-pulse">
                         {error}
@@ -138,7 +130,6 @@ export default function Auth() {
                         </div>
                     </div>
 
-                    {/* BOUTON VALIDATION */}
                     <button 
                         type="submit" 
                         disabled={isLoading}
