@@ -2,12 +2,10 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import type { MovieType } from '../components/MovieList/MovieList';
-import JuryVideoDetail from '../components/JuryVideoDetail';
 import UserDetailVideo from '../components/UserDetailVideo';
 
 export default function FilmDetails() {
   const { id } = useParams();
-  const jury = true;
 
   const [movie, setMovie] = useState<MovieType>();
   const [youtubeId, setYoutubeId] = useState<string>();
@@ -98,7 +96,7 @@ export default function FilmDetails() {
 
           {/* COLONNE DROITE (Prend 1/3 de l'espace) */}
           <div className="space-y-6">
-            {jury ? <JuryVideoDetail /> : <UserDetailVideo />}
+            { <UserDetailVideo />}
           </div>
         </div>
       </div>
