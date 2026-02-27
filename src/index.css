@@ -1,21 +1,23 @@
 @import "tailwindcss";
 
-
 /* 1. Tes variables de couleurs (Thème) */
 @theme {
   --color-deep-space: #050A14;  
-  --color-mars-orange: #FF6600;
+  
+  /* 👇 MODIFICATION : On lie le orange de Mars à une variable CSS dynamique */
+  --color-mars-orange: var(--primary-color, #FF6600); 
+  
   --color-cyber-teal: #00C2CB;
   --color-midnight: #07091D;    
   --color-section-light: #0B0F2E;
-  --color-midnight: #07091D;
   --color-blue-card: #15666d;    
   --color-footer: #0A0F23;    
-
   
   --font-sans: system-ui, Avenir, Helvetica, Arial, sans-serif;
   --font-display: "Montserrat", sans-serif; 
 }
+
+/* Le reste du fichier reste identique... */
 
 /* 2. Le fond global "Bleu Partout" */
 html, body {

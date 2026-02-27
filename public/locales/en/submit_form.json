@@ -61,5 +61,9 @@
   "submit_page.success": "Film submitted successfully!",
   "submit_page.btn_submit": "Submit",
   "submit_page.btn_loading": "Sending...",
-  "submit_page.error_generic": "An error occurred during submission."
+  "submit_page.error_generic": "An error occurred during submission.",
+  "submit_meta.synopsis": "Synopsis *",
+  "submit_meta.synopsis_placeholder": "Describe your film in a few lines (plot, world, characters)...",
+  "submit_meta.language": "Original Language *",
+  "submit_meta.select_lang": "-- Select a language --"
 }

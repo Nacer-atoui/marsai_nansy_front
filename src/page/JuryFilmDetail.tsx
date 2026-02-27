@@ -1,94 +1,108 @@
-import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import type { MovieType } from '../components/MovieList/MovieList';
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import JuryVideoDetail from '../components/JuryVideoDetail';
 
 export default function JuryFilmDetail() {
   const { id } = useParams();
-
-  const [movie, setMovie] = useState<MovieType>();
-  const [youtubeId, setYoutubeId] = useState<string>();
-  const [youtubeUrl, setYoutubeUrl] = useState("")
+  const navigate = useNavigate();
+  const [film, setFilm] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:3000/movie/' + id)
-      .then(res => {
-        if (!res.ok) throw new Error('Erreur réseau');
-        return res.json();
-      })
-      .then(data => {
-        setMovie(data[0]);
-        setYoutubeUrl(data[0].youtube_url)
-        setYoutubeId(data[0].youtube_url.split('v=')[1]);
-      });
+    const fetchFilm = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/movie/${id}`);
+        if (response.ok) {
+          const data = await response.json();
+          setFilm(data);
+        } else {
+          console.error("Film non trouvé");
+        }
+      } catch (error) {
+        console.error("Erreur", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    if (id) fetchFilm();
   }, [id]);
 
-  if (movie == undefined) return <div className="min-h-screen bg-slate-950 text-white p-12 text-center">Chargement...</div>;
+  // États de chargement avec la nouvelle couleur de fond
+  if (isLoading) return <div className="min-h-screen bg-[#07091D] text-cyan-500 p-10 flex items-center justify-center font-bold animate-pulse">Chargement du film...</div>;
+  if (!film) return <div className="min-h-screen bg-[#07091D] text-red-500 p-10 flex items-center justify-center">Film introuvable.</div>;
 
   return (
-    <div className="min-h-screen bg-midnight text-white p-6 md:p-12">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col items-start justify-center mb-8">
-          {/* Le retour renvoie vers la page liste du jury, pas vers le site public */}
-          <Link to="/admin/jury" className="mb-1">
-            <h3 className="underline text-mars-orange hover:text-white transition-colors duration-300 text-sm font-bold uppercase tracking-widest">
-              ← RETOUR À L'ESPACE JURY
-            </h3>
-          </Link>
+    // FOND GLOBAL EXACT (#07091D) + Centrage vertical (items-center) et horizontal (justify-center)
+    <div className="min-h-screen bg-[#07091D] p-8 text-white font-sans flex justify-center items-center">
+      <div className="max-w-[1400px] w-full flex flex-col lg:flex-row gap-8 items-stretch">
+        
+        {/* COLONNE GAUCHE (Vidéo + Infos) */}
+        <div className="flex-1 flex flex-col gap-8">
+          
+          {/* 🎬 LECTEUR VIDÉO (Pleine taille, object-cover) */}
+          <div className="bg-black border border-[#1E293B] rounded-xl overflow-hidden aspect-video shadow-2xl relative">
+            {film.youtube_url ? (
+              <video 
+                src={film.youtube_url} 
+                controls 
+                className="w-full h-full object-cover"
+                controlsList="nodownload"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center text-slate-600">
+                Vidéo non disponible
+              </div>
+            )}
+          </div>
 
-          <h1 className="text-4xl md:text-5xl font-black uppercase leading-none mt-2">
-            {movie.original_title}
-          </h1>
-          <p className="text-gray-400 mt-2 font-mono text-sm">ID Soumission: #{movie.id}</p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 space-y-6">
+          {/* 📊 BLOC INFORMATIONS AVEC TITRE */}
+          <div className="bg-[#0F1423] border border-[#1E293B] rounded-xl p-8 shadow-xl flex-1">
             
-            {/* Lecteur Vidéo */}
-            <div className="aspect-video bg-black border border-[#364153] rounded-xl flex items-center justify-center overflow-hidden shadow-2xl">
-              {/* <iframe
-                className="w-full h-full"
-                src={'https://www.youtube.com/embed/' + youtubeId}
-                title="YouTube video"
-                allow="fullscreen"
-                loading="lazy"
-              ></iframe> */}
-              <video controls width="800">
+            {/* AJOUT DU TITRE ICI */}
+            <h1 className="text-3xl font-bold text-cyan-400 uppercase mb-2 tracking-wider drop-shadow-[0_0_10px_rgba(34,211,238,0.3)]">
+              {film.original_title || "TITRE INCONNU"}
+            </h1>
+            
+            <hr className="border-[#1E293B] mb-6 opacity-50" />
 
-                <source src={youtubeUrl} type="video/mp4" />
-
-                Télécharger la vidéo
-                <a href="/shared-assets/videos/flower.webm">WEBM</a>
-                ou
-                <a href={youtubeUrl}>MP4</a>
-                .
-              </video>
+            {/* Grille des infos techniques */}
+            <div className="grid grid-cols-4 gap-6 mb-8">
+              <div className="text-center md:text-left">
+                <p className="text-xs text-slate-500 mb-1 uppercase tracking-wider">Réalisateur ID</p>
+                <p className="font-bold text-lg text-white">{film.director_id || '--'}</p>
+              </div>
+              <div className="text-center md:text-left">
+                <p className="text-xs text-slate-500 mb-1 uppercase tracking-wider">Durée</p>
+                <p className="font-bold text-lg text-white">{film.duration ? `${film.duration} min` : '--'}</p>
+              </div>
+              <div className="text-center md:text-left">
+                <p className="text-xs text-slate-500 mb-1 uppercase tracking-wider">Pays</p>
+                <p className="font-bold text-lg text-white">FR</p>
+              </div>
+              <div className="text-center md:text-left">
+                <p className="text-xs text-slate-500 mb-1 uppercase tracking-wider">Outils IA</p>
+                <span className="font-bold text-sm text-orange-500 bg-orange-500/10 px-2 py-1 rounded inline-block">
+                  [{film.ia_tools || 'Aucun'}]
+                </span>
+              </div>
             </div>
 
-            {/* Infos techniques pour le jury (plus pro/épuré) */}
-            <div className="bg-slate-900/50 border border-[#364153] p-6 rounded-xl space-y-4">
-              <h3 className="text-white font-bold uppercase tracking-wider border-b border-slate-700 pb-2">Informations Techniques</h3>
-              
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                <div><span className="block text-gray-500 text-xs">Réalisateur</span><span className="font-bold">{movie.director_id}</span></div>
-                <div><span className="block text-gray-500 text-xs">Durée</span><span className="font-bold">{movie.duration} min</span></div>
-                <div><span className="block text-gray-500 text-xs">Pays</span><span className="font-bold">{movie.language}</span></div>
-                <div><span className="block text-gray-500 text-xs">Outils IA</span><span className="font-bold text-mars-orange">{movie.ia_tools || 'Non spécifié'}</span></div>
-              </div>
-
-              <div className="pt-4">
-                <span className="block text-gray-500 text-xs mb-1">Synopsis</span>
-                <p className="text-gray-300 text-sm leading-relaxed">{movie.original_synopsis}</p>
-              </div>
+            {/* Synopsis */}
+            <div>
+              <p className="text-xs text-slate-500 mb-2 uppercase tracking-wider">Synopsis</p>
+              <p className="text-sm text-slate-300 leading-relaxed">
+                {film.original_synopsis || "Aucun synopsis fourni pour ce film."}
+              </p>
             </div>
           </div>
 
-          {/* COLONNE DROITE (UNIQUEMENT LE FORMULAIRE JURY) */}
-          <div className="space-y-6">
-            <JuryVideoDetail movieId={id} />
-          </div>
         </div>
+
+        {/* COLONNE DROITE (Composant de Vote) */}
+        <div className="shrink-0 lg:w-[400px] flex">
+          <JuryVideoDetail movieId={id} />
+        </div>
+
       </div>
     </div>
   );

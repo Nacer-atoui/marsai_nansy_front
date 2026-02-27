@@ -12,24 +12,27 @@ export function Header() {
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
 
-  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    e.target.value == 'fr'
-      ? i18n.changeLanguage('fr-FR')
+  // Détermine la langue active (fr ou en)
+  const currentLang = (i18n.language || 'fr').split('-')[0];
+
+  const changeLanguage = (lng: string) => {
+    lng === 'fr' 
+      ? i18n.changeLanguage('fr-FR') 
       : i18n.changeLanguage('en-EN');
   };
 
   return (
     <header className="ml-7 mr-7 mt-3 relative z-50 text-white">
       <nav className="mb-5 flex items-center justify-between h-12">
-        {/* LOGO */}
+        {/* LOGO - Retour à la taille et police du début */}
         <div
           onClick={() => navigate('/')}
           className="uppercase cursor-pointer font-bold text-xl z-50 relative"
         >
-          Mars<span className="text-[#FF6600] font-bold">AI</span>
+          Mars<span className="text-[var(--primary-color)] font-bold">AI</span>
         </div>
 
-        {/* NAVIGATION */}
+        {/* NAVIGATION - Remise au centre exact avec absolute left-1/2 */}
         <div
           className={`
           fixed inset-0 bg-[#0B0F23] z-40 flex flex-col justify-center items-center transition-transform duration-300 ease-in-out
@@ -44,7 +47,7 @@ export function Header() {
                 to="/"
                 onClick={closeMenu}
                 className={({ isActive }) =>
-                  isActive ? 'text-color-mars-orange' : 'hover:text-color-mars-orange'
+                  isActive ? 'text-[var(--primary-color)]' : 'hover:text-[var(--primary-color)]'
                 }
               >
                 {t('nav.home')}
@@ -55,7 +58,7 @@ export function Header() {
                 to="/about"
                 onClick={closeMenu}
                 className={({ isActive }) =>
-                  isActive ? 'text-color-mars-orange' : 'hover:text-color-mars-orange'
+                  isActive ? 'text-[var(--primary-color)]' : 'hover:text-[var(--primary-color)]'
                 }
               >
                 {t('nav.about')}
@@ -66,21 +69,18 @@ export function Header() {
                 to="/movie"
                 onClick={closeMenu}
                 className={({ isActive }) =>
-                  isActive ? 'text-color-mars-orange' : 'hover:text-color-mars-orange'
+                  isActive ? 'text-[var(--primary-color)]' : 'hover:text-[var(--primary-color)]'
                 }
               >
                 {t('nav.movies')}
               </NavLink>
             </li>
-            
-            {/* LE LIEN JURY A ÉTÉ SUPPRIMÉ D'ICI */}
-
             <li>
               <NavLink
                 to="/contact"
                 onClick={closeMenu}
                 className={({ isActive }) =>
-                  isActive ? 'text-color-mars-orange' : 'hover:text-color-mars-orange'
+                  isActive ? 'text-[var(--primary-color)]' : 'hover:text-[var(--primary-color)]'
                 }
               >
                 {t('nav.contact')}
@@ -89,16 +89,33 @@ export function Header() {
           </ul>
         </div>
 
-        {/* LANGUES */}
+        {/* BLOC LANGUES - Nouveau sélecteur visuel à droite */}
         <div className="flex items-center gap-4 z-50">
-          <select
-            className="bg-transparent border-none focus:ring-0 cursor-pointer text-sm lg:text-base text-white outline-none"
-            value={(i18n.language || 'fr').split('-')[0]}
-            onChange={handleLanguageChange}
-          >
-            <option value="fr" className="bg-[#0B0F23]">FR</option>
-            <option value="en" className="bg-[#0B0F23]">EN</option>
-          </select>
+          <div className="flex bg-white/5 border border-white/10 rounded-full p-1 shadow-2xl">
+            <button
+              onClick={() => changeLanguage('fr')}
+              className={`flex items-center gap-2 px-3 py-1 rounded-full transition-all duration-300 ${
+                currentLang === 'fr' 
+                  ? 'bg-[var(--primary-color)] text-white' 
+                  : 'text-slate-400 opacity-60'
+              }`}
+            >
+              <img src="https://flagcdn.com/w40/fr.png" className="w-4 h-3 object-cover rounded-[1px]" alt="FR" />
+              <span className="text-[10px] font-bold uppercase">FR</span>
+            </button>
+
+            <button
+              onClick={() => changeLanguage('en')}
+              className={`flex items-center gap-2 px-3 py-1 rounded-full transition-all duration-300 ${
+                currentLang === 'en' 
+                  ? 'bg-[var(--primary-color)] text-white' 
+                  : 'text-slate-400 opacity-60'
+              }`}
+            >
+              <img src="https://flagcdn.com/w40/gb.png" className="w-4 h-3 object-cover rounded-[1px]" alt="EN" />
+              <span className="text-[10px] font-bold uppercase">EN</span>
+            </button>
+          </div>
 
           <button
             onClick={toggleMenu}

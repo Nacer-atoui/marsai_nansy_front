@@ -27,7 +27,7 @@ export default function Auth() {
             });
 
             const data = await response.json();
-console.log("DATA CONNEXION :", data);
+
             if (!response.ok) {
                 throw new Error(data.message || "Identifiants incorrects");
             }
