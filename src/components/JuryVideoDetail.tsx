@@ -1,154 +1,115 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-export default function JuryVideoDetail({ movieId }: { movieId?: string }){
-  const numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  
-  // 1. ESTADO DE LA NOTA
+export default function JuryVideoDetail({ movieId }: { movieId?: string }) {
   const [rating, setRating] = useState<number>(0);
-  const [comment, setComment] = useState(""); 
-  
-  // NOUVEAUX ÉTATS POUR L'ENVOI AU BACKEND
+  const [comment, setComment] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  // LA FONCTION QUI ENVOIE LES DONNÉES AU BACKEND
+  useEffect(() => {
+    setRating(0);
+    setComment("");
+    setIsSuccess(false);
+  }, [movieId]);
+
   const handleVote = async () => {
-    // Sécurité : on vérifie que la note n'est pas 0
-    if (rating === 0) {
-      alert("Veuillez sélectionner une note avant de valider.");
-      return;
-    }
+    const currentUserId = localStorage.getItem('userId');
+    if (rating === 0) return alert("Veuillez choisir une note.");
+    if (!currentUserId || !movieId) return alert("Erreur de session.");
 
     setIsSubmitting(true);
-    
-    // ON RÉCUPÈRE LE VRAI ID DU JURY CONNECTÉ
-    const currentUserId = localStorage.getItem('userId');
-
     try {
-      // Envoi de la requête POST au backend
       const response = await fetch('http://localhost:3000/api/votes', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          movie_id: movieId, 
-          jury_id: currentUserId, // <-- ON UTILISE BIEN LE VRAI ID ICI
-          note: rating,
-          comment: comment
-        })
+        body: JSON.stringify({ movie_id: movieId, user_id: currentUserId, rate: rating, comment })
       });
 
-      if (response.ok) {
-        setIsSuccess(true); // Affiche l'écran de succès
-      } else {
-        alert("Erreur lors de l'enregistrement de la note.");
-      }
+      if (response.ok) setIsSuccess(true);
+      else alert("Erreur lors de l'envoi de la note.");
     } catch (error) {
-      console.error("Erreur serveur :", error);
+      console.error(error);
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  // AFFICHAGE SI LE VOTE EST RÉUSSI
   if (isSuccess) {
     return (
-      <div className="bg-slate-900 border border-cyan-500/50 rounded-xl p-8 min-h-[200px] w-full max-w-md mx-auto flex flex-col items-center justify-center text-center">
-        <h3 className="text-2xl font-bold text-cyan-400 mb-2 drop-shadow-[0_0_10px_rgba(34,211,238,0.4)]">Note enregistrée !</h3>
-        <p className="text-slate-400 text-sm">Merci pour votre évaluation. Les données ont été envoyées au panel administrateur.</p>
+      <div className="bg-[#0F1423] border border-[#1E293B] rounded-xl p-8 w-full lg:w-[380px] flex flex-col items-center justify-center text-center">
+        <h3 className="text-2xl font-bold text-cyan-400 drop-shadow-[0_0_10px_rgba(34,211,238,0.5)] mb-2">Note validée !</h3>
+        <p className="text-slate-400 text-sm">Merci pour votre évaluation.</p>
       </div>
     );
   }
 
-  // AFFICHAGE NORMAL DU FORMULAIRE
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 min-h-[200px] w-full max-w-md mx-auto">
+    <div className="bg-[#0F1423] border border-[#1E293B] rounded-xl p-6 w-full lg:w-[380px] flex flex-col gap-6 shadow-xl">
       
-      <div className="flex flex-col items-center gap-6">
-        
-        <div>
-          <p className="text-gray-400 text-xs font-bold uppercase tracking-widest">
-            VOTRE NOTE
-          </p>
-        </div>
-
-        <div>
-          <p className="text-6xl font-bold text-cyan-400 drop-shadow-[0_0_15px_rgba(34,211,238,0.4)] transition-all duration-300">
-            {rating === 0 ? '--' : rating}
-          </p>
-        </div>
-
-        <div className="w-full">
-          <div className="grid grid-cols-5 sm:grid-cols-10 gap-2">
-            {numeros.map((numero) => (
-              <button
-                key={numero}
-                onClick={() => setRating(numero)}
-                className={`
-                  aspect-square 
-                  flex justify-center items-center 
-                  rounded-md font-bold text-sm
-                  transition-all duration-200
-                  border
-                  ${rating === numero 
-                    ? 'bg-cyan-500 text-white border-cyan-400 shadow-[0_0_10px_cyan] scale-110' // SI ES EL ELEGIDO
-                    : 'bg-transparent text-slate-500 border-slate-700 hover:border-cyan-500 hover:text-cyan-400' // SI NO
-                  }
-                `}
-              >
-                {numero}
-              </button>
-            ))}
-          </div>
-          {/* Texto de ayuda abajo de los números */}
-          <div className="flex justify-between text-[10px] text-slate-500 mt-2 px-1 uppercase">
-             <span>Faible</span>
-             <span>Excellent</span>
-          </div>
-        </div>
-
-        <div className="w-full">
-          <textarea
-            value={comment} 
-            onChange={(e) => setComment(e.target.value)} 
-            className="w-full h-24 bg-slate-950/50 text-slate-300 text-sm border border-slate-700 rounded-lg p-3 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all resize-none placeholder:text-slate-600"
-            placeholder="Pourquoi cette note ? (Optionnel)"
-          />
-        </div>
-
-        {/* SECTION "FILM SUIVANT" (Visuelle pour l'instant) */}
-        <div className="w-full bg-slate-800/50 rounded-lg p-3 flex items-center gap-4 border border-slate-700/50">
-           <div className="w-12 h-16 bg-slate-700 rounded flex-shrink-0 flex items-center justify-center text-slate-500">
-             FILM
-           </div>
-           
-           <div className="flex flex-col text-left">
-              <span className="text-[10px] uppercase text-cyan-500 font-bold tracking-wider"> Film Suivant
-              </span>
-              <span className="text-white font-medium text-sm truncate"> soy un film 
-              </span>
-              <span className="text-slate-500 text-xs"
-              >drama
-              </span>
-           </div>
-        </div>
-
-        <button 
-          onClick={handleVote}
-          disabled={isSubmitting}
-          className="
-            w-full bg-gradient-to-r from-orange-500 to-red-500 
-            hover:from-orange-400 hover:to-red-400 
-            text-white font-bold py-3 px-4 rounded-lg 
-            shadow-lg shadow-orange-500/20
-            transition-all transform active:scale-95
-            flex items-center justify-center gap-2
-            disabled:opacity-50 disabled:cursor-not-allowed
-          "
-        >
-          <span>{isSubmitting ? 'ENVOI EN COURS...' : 'VALIDER LA NOTE'}</span>
-        </button>
-
+      {/* HEADER NOTE */}
+      <div className="text-center">
+        <p className="text-xs font-bold tracking-widest text-slate-400 uppercase mb-4">Votre note</p>
+        <p className="text-7xl font-bold text-cyan-400 drop-shadow-[0_0_20px_rgba(34,211,238,0.4)]">
+          {rating === 0 ? '--' : rating}
+        </p>
       </div>
+
+      {/* BOUTONS 1 à 10 */}
+      <div>
+        <div className="flex justify-between gap-1">
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => (
+            <button
+              key={n}
+              onClick={() => setRating(n)}
+              className={`
+                w-7 h-7 flex items-center justify-center rounded text-xs font-bold transition-all
+                ${rating === n 
+                  ? 'bg-cyan-500 text-white shadow-[0_0_10px_cyan]' 
+                  : 'bg-transparent text-slate-500 border border-[#1E293B] hover:border-cyan-500 hover:text-cyan-400'
+                }
+              `}
+            >
+              {n}
+            </button>
+          ))}
+        </div>
+        <div className="flex justify-between mt-2 text-[10px] text-slate-500 uppercase tracking-wider font-semibold">
+          <span>Faible</span>
+          <span>Excellent</span>
+        </div>
+      </div>
+
+      {/* TEXTAREA */}
+      <div>
+        <textarea
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          className="w-full bg-[#050810] border border-[#1E293B] rounded-lg p-3 text-sm text-white focus:outline-none focus:border-cyan-500 resize-none h-24 placeholder:text-slate-600"
+          placeholder="Pourquoi cette note ? (Optionnel)"
+        />
+      </div>
+
+      {/* BLOC FILM SUIVANT (Statique pour le design) */}
+      <div className="bg-[#1A2033] rounded-lg p-3 flex items-center gap-4">
+        <div className="w-12 h-16 bg-slate-700 rounded flex items-center justify-center text-[10px] text-slate-400 font-bold tracking-widest">
+          FILM
+        </div>
+        <div>
+          <p className="text-[10px] text-cyan-500 font-bold uppercase tracking-wider mb-1">Film Suivant</p>
+          <p className="text-white text-sm font-bold leading-tight">soy un film</p>
+          <p className="text-slate-500 text-xs">drama</p>
+        </div>
+      </div>
+
+      {/* BOUTON VALIDER */}
+      <button
+        onClick={handleVote}
+        disabled={isSubmitting}
+        className="w-full bg-gradient-to-r from-[#FF6600] to-[#FF3300] text-white font-bold py-4 rounded-lg shadow-[0_4px_15px_rgba(255,102,0,0.3)] hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center justify-center"
+      >
+        {isSubmitting ? 'ENVOI EN COURS...' : 'VALIDER LA NOTE'}
+      </button>
+
     </div>
   );
 }

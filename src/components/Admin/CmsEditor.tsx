@@ -42,33 +42,45 @@ export default function CmsEditor() {
   };
 
   const handleSaveGroup = async (fields: any[], groupTitle: string) => {
-    setLoadingKey(groupTitle);
-    setStatus({ type: 'info', msg: `SYNC : ${groupTitle}...` });
+  setLoadingKey(groupTitle);
+  setStatus({ type: 'info', msg: `SYNC : ${groupTitle}...` });
 
-    try {
-      for (const field of fields) {
-        const data = formData[field.key];
-        if (data?.fr) {
-          await fetch('http://localhost:3000/api/admin/update-content', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              key: field.key,
-              section: activeSectionKey, 
-              textFr: data.fr,
-              textEnManual: data.enManual || '' 
-            })
-          });
-        }
+  try {
+    for (const field of fields) {
+      const data = formData[field.key];
+      
+      // 💡 CAS SPÉCIAL : La couleur primaire
+      if (field.key === 'hero_primary_color' && data?.fr) {
+        await fetch('http://localhost:3000/api/admin/update-config', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ primary_color: data.fr }) 
+        });
+       
+        document.documentElement.style.setProperty('--primary-color', data.fr);
+      } 
+      
+      // CAS GÉNÉRAL : Les textes (Traductions)
+      else if (data?.fr) {
+        await fetch('http://localhost:3000/api/admin/update-content', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            key: field.key,
+            section: activeSectionKey, 
+            textFr: data.fr,
+            textEnManual: data.enManual || '' 
+          })
+        });
       }
-      setStatus({ type: 'success', msg: `MODIFICATIONS ENREGISTRÉES` });
-      setTimeout(() => setStatus({ type: '', msg: '' }), 4000);
-    } catch (error) {
-      setStatus({ type: 'error', msg: 'ERREUR SERVEUR' });
-    } finally {
-      setLoadingKey(null);
     }
-  };
+    setStatus({ type: 'success', msg: `MODIFICATIONS ENREGISTRÉES` });
+  } catch (error) {
+    setStatus({ type: 'error', msg: 'ERREUR SERVEUR' });
+  } finally {
+    setLoadingKey(null);
+  }
+};
 
   return (
     // RETOUR AU BACKGROUND MIDNIGHT

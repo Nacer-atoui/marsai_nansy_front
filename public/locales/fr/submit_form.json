@@ -61,5 +61,9 @@
   "submit_page.success": "Film soumis avec succès !",
   "submit_page.btn_submit": "Soumettre",
   "submit_page.btn_loading": "Envoi en cours...",
-  "submit_page.error_generic": "Une erreur est survenue lors de la soumission."
+  "submit_page.error_generic": "Une erreur est survenue lors de la soumission.",
+  "submit_meta.synopsis": "Synopsis *",
+  "submit_meta.synopsis_placeholder": "Décrivez votre film en quelques lignes (intrigue, univers, personnages)...",
+  "submit_meta.language": "Langue originale *",
+  "submit_meta.select_lang": "-- Choisir une langue --"
 }

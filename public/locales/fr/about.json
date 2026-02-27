@@ -1,4 +1,7 @@
 {
+  "about_title_part1": "Deux journées de",
+  "about_title_highlight": "conférences",
+  "about_title_part2": "gratuites",
   "about_step1": "Accès gratuit à toutes les sessions sur réservation.",
   "about_step2": "Rencontres exclusives avec les experts de l industrie.",
   "about_step3": "Découverte des dernières innovations en IA générative.",
@@ -7,8 +10,5 @@
   "about_work_title": "Workshops Interactifs",
   "about_work_desc": "Participez à des ateliers pratiques animés par des pionniers de l'IA générative visuelle.",
   "about_prize_title": "Cérémonie de Remise des Prix",
-  "about_prize_desc": "Une soirée de gala pour célébrer les lauréats et les innovations les plus marquantes du festival.",
-  "about_title_part1": "Deux journées de",
-  "about_title_highlight": "conférences",
-  "about_title_part2": "gratuites"
+  "about_prize_desc": "Une soirée de gala pour célébrer les lauréats et les innovations les plus marquantes du festival."
 }

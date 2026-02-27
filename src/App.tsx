@@ -1,3 +1,4 @@
+import { useEffect } from 'react'; // 1. On ajoute useEffect
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next'; 
 import { Header } from './components/Header.tsx';
@@ -21,27 +22,36 @@ import JuryFilmList from './components/JuryFilmList.tsx';
 import JuryFilmDetail from './page/JuryFilmDetail.tsx';
 import AdminFilmDetails from './components/Admin/AdminFilmDetail.tsx';
 
-// 1. Le Gardien : Protection des routes Admin
 const ProtectedRoute = ({ children }: { children: any }) => {
   const token = localStorage.getItem('token');
   if (!token) {
-    // Redirection vers la page de login secrète si pas de token
     return <Navigate to={`/${import.meta.env.VITE_SECRET_AUTH_PATH}`} replace />;
   }
   return children;
 };
 
 export default function App() {
-  // On initialise i18n ici au cas où on en aurait besoin plus tard, 
-  // mais le Header gère le changement de langue tout seul.
   useTranslation();
+
+  // 2. LOGIQUE DE COULEUR DYNAMIQUE
+  useEffect(() => {
+    // On appelle la route de config qu'on a créée dans le server.ts
+    fetch('http://localhost:3000/api/admin/site-config')
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.primary_color) {
+          // On injecte la couleur de la BDD dans la variable CSS racine
+          document.documentElement.style.setProperty('--primary-color', data.primary_color);
+          console.log("🎨 Couleur primaire appliquée :", data.primary_color);
+        }
+      })
+      .catch(err => console.error("❌ Erreur chargement couleur :", err));
+  }, []);
 
   return (
     <Routes>
-      {/* --- ROUTE D'AUTHENTIFICATION SECRÈTE --- */}
       <Route path={`/${import.meta.env.VITE_SECRET_AUTH_PATH}`} element={<Auth />} />
       
-      {/* --- ESPACE ADMIN & JURY (Avec la Sidebar noire) --- */}
       <Route 
         path="/admin" 
         element={
@@ -55,25 +65,19 @@ export default function App() {
         <Route path="films" element={<AdminFilmList />} />
         <Route path="utilisateurs" element={<UserAdmin />} />
         <Route path="films/:id" element={<AdminFilmDetails />} />
-        
-        {/* L'espace Jury est maintenant imbriqué ici pour hériter du layout Admin */}
         <Route path="jury" element={<JuryFilmList />} />
         <Route path="jury/film/:id" element={<JuryFilmDetail />} />
       </Route> 
         
-      {/* --- ESPACE PUBLIC (Avec Header et Footer) --- */}
       <Route path="*" element={<MainLayout />} />
     </Routes>
-    
   );
 }
-
 
 function MainLayout() {
   return (
     <>
       <Header />
-      
       <main className="min-h-screen">
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -85,7 +89,6 @@ function MainLayout() {
           <Route path="/submit" element={<SubmitPage />} />
         </Routes>
       </main>
-
       <Footer />
     </>
   );

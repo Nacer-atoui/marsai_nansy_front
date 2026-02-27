@@ -1,5 +1,8 @@
 {
   "films.title.t1": "FILMS",
   "films.title.t2": "SÉLECTIONNÉS",
-  "films.description": "Découvrez les œuvres marquantes qui repoussent les frontières de l'imagination et de la technologie."
+  "films.description": "Découvrez les œuvres exceptionnelles qui repoussent les limites de l’imagination et de la technologie.",
+  "films.link.text": "voir toute la selection →",
+  "films.labels.director": "Réalisateur",
+  "films.labels.origin": "Origine"
 }

@@ -12,10 +12,18 @@ export const pageStructure = {
         ],
       },
       {
-        groupTitle: 'Paramètres',
+        groupTitle: 'Paramètres du Site',
         fields: [
-          { key: 'event_date', label: "Date de l'événement", type: 'text' },
-          { key: 'hero_primary_color', label: 'Couleur Orange (Hex)', type: 'text' },
+          { 
+            key: 'hero_primary_color', 
+            label: 'Couleur Primaire (CMS)', 
+            type: 'color' 
+          },
+          { 
+            key: 'event_date', // 👈 C'est la clé qu'on utilise dans ton Controller/Model !
+            label: 'Date & Heure du Compteur', 
+            type: 'datetime-local' // 👈 Type spécial pour jour/heure/minute/seconde
+          },
         ],
       },
     ],
