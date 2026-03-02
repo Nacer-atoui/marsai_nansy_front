@@ -1,12 +1,12 @@
-import HeroSection from '../components/HeroSection';
-import MarsSection from '../components/MarsSection';
-import FestivalObjectif from '../components/FestivalObjectif';
-import AboutEvent from '../components/AboutEvent';
-import Sponsors from '../components/Sponsors';
-import EventFormat from '../components/EventFormat';
-import Location from '../components/Location';
-import NightEvent from '../components/NightEvent';
-import MovieSelection from '../components/MovieSelection';
+import HeroSection from '../components/HomePage/HeroSection';
+import MarsSection from '../components/HomePage/MarsSection';
+import FestivalObjectif from '../components/HomePage/FestivalObjectif';
+import AboutEvent from '../components/HomePage/AboutEvent';
+import Sponsors from '../components/HomePage/Sponsors';
+import EventFormat from '../components/HomePage/EventFormat';
+import Location from '../components/HomePage/Location';
+import NightEvent from '../components/HomePage/NightEvent';
+import MovieSelection from '../components/HomePage/MovieSelection';
 
 export default function HomePage() {
   return (

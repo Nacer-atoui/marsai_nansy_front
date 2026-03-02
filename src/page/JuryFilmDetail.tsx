@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import JuryVideoDetail from '../components/JuryVideoDetail';
+import JuryVideoDetail from '../components/Jury/JuryVideoDetail';
 
 export default function JuryFilmDetail() {
   const { id } = useParams();
