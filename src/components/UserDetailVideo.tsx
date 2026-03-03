@@ -2,7 +2,7 @@
 import type { MovieType } from './MovieList/MovieList';
 
 interface UserDetailVideoProps {
-  movie: MovieType | null;
+  movie?: MovieType | null;
 }
 
 export default function UserDetailVideo({ movie }: UserDetailVideoProps) {
