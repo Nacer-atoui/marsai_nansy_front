@@ -29,7 +29,7 @@ export function Header() {
           onClick={() => navigate('/')}
           className="uppercase cursor-pointer font-bold text-xl z-50 relative"
         >
-          Mars<span className="text-[var(--primary-color)] font-bold">AI</span>
+          Mars<span className="text-mars-orange font-bold">AI</span>
         </div>
 
         {/* NAVIGATION - Remise au centre exact avec absolute left-1/2 */}
@@ -47,7 +47,9 @@ export function Header() {
                 to="/"
                 onClick={closeMenu}
                 className={({ isActive }) =>
-                  isActive ? 'text-[var(--primary-color)]' : 'hover:text-[var(--primary-color)]'
+                  isActive
+                    ? 'text-[var(--primary-color)]'
+                    : 'hover:text-[var(--primary-color)]'
                 }
               >
                 {t('nav.home')}
@@ -58,7 +60,9 @@ export function Header() {
                 to="/about"
                 onClick={closeMenu}
                 className={({ isActive }) =>
-                  isActive ? 'text-[var(--primary-color)]' : 'hover:text-[var(--primary-color)]'
+                  isActive
+                    ? 'text-[var(--primary-color)]'
+                    : 'hover:text-[var(--primary-color)]'
                 }
               >
                 {t('nav.about')}
@@ -69,7 +73,9 @@ export function Header() {
                 to="/movie"
                 onClick={closeMenu}
                 className={({ isActive }) =>
-                  isActive ? 'text-[var(--primary-color)]' : 'hover:text-[var(--primary-color)]'
+                  isActive
+                    ? 'text-[var(--primary-color)]'
+                    : 'hover:text-[var(--primary-color)]'
                 }
               >
                 {t('nav.movies')}
@@ -80,7 +86,9 @@ export function Header() {
                 to="/contact"
                 onClick={closeMenu}
                 className={({ isActive }) =>
-                  isActive ? 'text-[var(--primary-color)]' : 'hover:text-[var(--primary-color)]'
+                  isActive
+                    ? 'text-[var(--primary-color)]'
+                    : 'hover:text-[var(--primary-color)]'
                 }
               >
                 {t('nav.contact')}
@@ -95,24 +103,32 @@ export function Header() {
             <button
               onClick={() => changeLanguage('fr')}
               className={`flex items-center gap-2 px-3 py-1 rounded-full transition-all duration-300 ${
-                currentLang === 'fr' 
-                  ? 'bg-[var(--primary-color)] text-white' 
+                currentLang === 'fr'
+                  ? 'bg-[var(--primary-color)] text-white'
                   : 'text-slate-400 opacity-60'
               }`}
             >
-              <img src="https://flagcdn.com/w40/fr.png" className="w-4 h-3 object-cover rounded-[1px]" alt="FR" />
+              <img
+                src="https://flagcdn.com/w40/fr.png"
+                className="w-4 h-3 object-cover rounded-[1px]"
+                alt="FR"
+              />
               <span className="text-[10px] font-bold uppercase">FR</span>
             </button>
 
             <button
               onClick={() => changeLanguage('en')}
               className={`flex items-center gap-2 px-3 py-1 rounded-full transition-all duration-300 ${
-                currentLang === 'en' 
-                  ? 'bg-[var(--primary-color)] text-white' 
+                currentLang === 'en'
+                  ? 'bg-[var(--primary-color)] text-white'
                   : 'text-slate-400 opacity-60'
               }`}
             >
-              <img src="https://flagcdn.com/w40/gb.png" className="w-4 h-3 object-cover rounded-[1px]" alt="EN" />
+              <img
+                src="https://flagcdn.com/w40/gb.png"
+                className="w-4 h-3 object-cover rounded-[1px]"
+                alt="EN"
+              />
               <span className="text-[10px] font-bold uppercase">EN</span>
             </button>
           </div>
