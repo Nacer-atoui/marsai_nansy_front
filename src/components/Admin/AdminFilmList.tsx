@@ -9,6 +9,7 @@ interface Film {
   tools: string[];
   note: number | null;
   cover: string;
+  status: string;
 }
 
 const AdminFilmList: React.FC = () => {
@@ -48,6 +49,7 @@ const AdminFilmList: React.FC = () => {
           cover: filmBDD.cover_img
             ? `${filmBDD.cover_img}?w=150&q=70`
             : 'https://via.placeholder.com/80x50/1e293b/ffffff',
+          status: filmBDD.status || 'Pending',
         }));
 
         setFilms(filmsFormates);
@@ -63,6 +65,59 @@ const AdminFilmList: React.FC = () => {
 
     fetchFilms();
   }, []);
+
+  // --- ACTIONS ADMIN ---
+  const handleUpdateStatus = async (id: number, newStatus: string) => {
+    if (
+      !window.confirm(
+        `Voulez-vous vraiment passer ce film en statut : ${newStatus} ?`
+      )
+    )
+      return;
+
+    try {
+      const response = await fetch(`http://localhost:3000/movie/${id}/status`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: newStatus }),
+      });
+
+      if (response.ok) {
+        // Mise à jour de l'affichage local sans recharger la page
+        setFilms(
+          films.map(f => (f.id === id ? { ...f, status: newStatus } : f))
+        );
+      } else {
+        alert('Erreur lors de la mise à jour du statut');
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleDelete = async (id: number) => {
+    if (
+      !window.confirm(
+        'Êtes-vous sûr de vouloir supprimer définitivement ce film ? Cette action est irréversible.'
+      )
+    )
+      return;
+
+    try {
+      const response = await fetch(`http://localhost:3000/movie/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        // Supprime le film de la liste locale
+        setFilms(films.filter(f => f.id !== id));
+      } else {
+        alert('Erreur lors de la suppression');
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const filmsEnAttente = films.filter(
     f => f.note === null || f.note === undefined
@@ -158,10 +213,25 @@ const AdminFilmList: React.FC = () => {
                     loading="lazy"
                     className="w-14 h-9 object-cover rounded-md shadow-sm"
                   />
-                  <div className="flex flex-col justify-center">
-                    <div className="font-bold text-white text-xs leading-tight">
-                      {film.title}
+                  <div className="flex flex-col justify-center gap-1">
+                    <div className="font-bold text-white text-xs leading-tight flex items-center gap-2">
+                      <span className="truncate max-w-[150px]">
+                        {film.title}
+                      </span>
+
+                      {/* --- BADGE DE STATUT --- */}
+                      {film.status === 'Accepted' && (
+                        <span className="bg-green-500/10 text-green-400 border border-green-500/20 text-[8px] px-1.5 py-0.5 rounded uppercase tracking-wider">
+                          Validé
+                        </span>
+                      )}
+                      {film.status === 'Pending' && (
+                        <span className="bg-mars-orange/10 text-mars-orange border border-mars-orange/20 text-[8px] px-1.5 py-0.5 rounded uppercase tracking-wider">
+                          À traiter
+                        </span>
+                      )}
                     </div>
+
                     <div className="text-[10px] text-blue-card font-medium">
                       {film.author}
                     </div>
@@ -196,9 +266,53 @@ const AdminFilmList: React.FC = () => {
                     ))}
                 </div>
 
-                <div className="col-span-1 flex justify-end">
+                <div className="col-span-1 flex justify-end gap-1">
+                  {/* Bouton Accepter */}
+                  <button
+                    onClick={() => handleUpdateStatus(film.id, 'Accepted')}
+                    title="Accepter le film"
+                    className="w-8 h-8 flex items-center justify-center bg-[#1e293b] hover:bg-green-600 text-gray-300 hover:text-white rounded-full transition-colors"
+                  >
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M5 13l4 4L19 7"
+                      ></path>
+                    </svg>
+                  </button>
+
+                  {/* Bouton Supprimer */}
+                  <button
+                    onClick={() => handleDelete(film.id)}
+                    title="Supprimer le film"
+                    className="w-8 h-8 flex items-center justify-center bg-[#1e293b] hover:bg-red-600 text-gray-300 hover:text-white rounded-full transition-colors"
+                  >
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M6 18L18 6M6 6l12 12"
+                      ></path>
+                    </svg>
+                  </button>
+
+                  {/* Ton bouton original pour voir les détails */}
                   <button
                     onClick={() => navigate(`/admin/films/${film.id}`)}
+                    title="Voir les détails"
                     className="w-8 h-8 flex items-center justify-center bg-[#1e293b] hover:bg-mars-orange text-gray-300 hover:text-white rounded-full transition-colors"
                   >
                     <svg
