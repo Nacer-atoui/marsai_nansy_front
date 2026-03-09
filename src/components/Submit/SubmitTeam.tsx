@@ -49,15 +49,19 @@ export default function SubmitTeam({
       !collab.contribution.trim() ||
       !collab.email.trim()
     ) {
-      alert(
-        t(
-          'submit_team.alert_empty',
-          "Veuillez remplir tous les champs avant d'ajouter le collaborateur."
-        )
-      );
-      return;
+      // alert(
+      //   t(
+      //     'submit_team.alert_empty',
+      //     "Veuillez remplir tous les champs avant d'ajouter le collaborateur."
+      //   )
+      // );
+      // return;
     }
 
+    if (/\S+@\S+\.\S+/.test(collab.email.trim()) == false) {
+      alert('email non valide pour le collaborateur');
+      return;
+    }
     setFormData(prevData => ({
       ...prevData,
       collaborator: [...prevData.collaborator, { ...collab }],

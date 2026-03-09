@@ -123,6 +123,10 @@ export default function SubmitPage() {
         throw new Error(result.error || t('submit_page.error_generic'));
 
       console.log('✅ TERMINÉ :', result);
+
+      if (result.length > 0){
+        alert(result[0].value);
+      }
       setSuccess(true);
     } catch (err: any) {
       console.error('❌ ERREUR :', err.message);
