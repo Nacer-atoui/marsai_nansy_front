@@ -8,7 +8,7 @@ export default function SubmitRealisator({
 }: {
   director: Director;
   handleChange: (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
     section: keyof Submit
   ) => void;
 }) {
@@ -18,7 +18,7 @@ export default function SubmitRealisator({
   const inputStyle =
     'w-full bg-[#13162A] border border-[#364153] focus:outline-none focus:border-mars-orange focus:ring-1 focus:ring-[#f97316] text-sm text-center px-4 py-3 rounded-lg text-slate-500 hover:border-mars-orange file:mr-4 file: file:py-2 file:px-4 file:rounded-lg file:border file:border-[#364153] file:text-sm file:font-semibold file:bg-footer file:text-white hover:file:border-mars-orange';
   const rowClass = 'mt-5 flex flex-wrap md:flex-nowrap gap-5';
-  const colClass = 'w-full md:w-1/2';
+  const colClass = 'w-full text md:w-1/2';
   const labelClasses = 'block text-gray-400 text-sm mb-2 font-medium';
 
   return (
@@ -32,17 +32,16 @@ export default function SubmitRealisator({
           <label className={labelClasses}>
             {t('submit_director.civility', 'Civilité*')}
           </label>
-          <input
-            type="text"
+          <select
             name="civility"
             value={director.civility || ''}
             onChange={e => handleChange(e, 'director')}
             className={inputStyle}
-            placeholder={t(
-              'submit_director.civility_placeholder',
-              'Mr / Mme / Autre'
-            )}
-          />
+          >
+            <option value="Mr">Mr</option>
+            <option value="Mme">Mme</option>
+            <option value="Autre">Autre</option>
+          </select>
         </div>
         <div className={colClass}>
           <label className={labelClasses}>
@@ -77,7 +76,7 @@ export default function SubmitRealisator({
           <label className={labelClasses}>
             {t('submit_director.dob', 'Date de naissance*')}
           </label>
-          <input
+          <input 
             type="date"
             name="birthday"
             value={director.birthday}
@@ -106,8 +105,9 @@ export default function SubmitRealisator({
             {t('submit_director.phone', 'Téléphone*')}
           </label>
           <input
-            type="text"
+            type="tel"
             name="phone"
+            pattern='[0-9]{10}'
             value={director.phone}
             onChange={e => handleChange(e, 'director')}
             className={inputStyle}
